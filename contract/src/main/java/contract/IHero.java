@@ -1,7 +1,7 @@
 package contract;
 
 /**
- *@author LANGLOIS Theo
+ *@author LANGLOIS Theo 
  * Interface Hero
  */
 
