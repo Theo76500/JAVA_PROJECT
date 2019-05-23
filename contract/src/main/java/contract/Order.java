@@ -1,7 +1,7 @@
 package contract;
 
 /**
- * @author LAGNLOIS Theo 
+ * @author LAGNLOIS Theo  
  * Enumeration of all the order can be send to the controller by the view
  */
 
