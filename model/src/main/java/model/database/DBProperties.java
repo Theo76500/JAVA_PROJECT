@@ -1,4 +1,4 @@
-package model;
+package model.database;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +7,7 @@ import java.util.Properties;
 /**
  * The Class DBProperties.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo
  */
 class DBProperties extends Properties {
 

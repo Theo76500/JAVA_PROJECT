@@ -5,11 +5,12 @@ import java.util.Observable;
 
 import contract.IModel;
 import entity.HelloWorld;
+import model.database.DBConnection;
 
 /**
  * The Class Model.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo
  */
 public final class Model extends Observable implements IModel {
 
