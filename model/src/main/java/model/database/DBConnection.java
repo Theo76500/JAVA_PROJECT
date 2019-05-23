@@ -9,7 +9,7 @@ import java.sql.SQLException;
  *
  * @author LANGLOIS Theo
  */
-final class DBConnection {
+public final class DBConnection {
 	/** The instance. */
 	private static DBConnection	INSTANCE	= null;
 

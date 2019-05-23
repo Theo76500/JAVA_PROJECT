@@ -2,9 +2,9 @@ package model;
 
 import java.sql.SQLException;
 import java.util.Observable;
+import java.util.logging.Level;
 
-import contract.IModel;
-import entity.HelloWorld;
+import contract.*;
 import model.database.DBConnection;
 
 /**
@@ -14,15 +14,12 @@ import model.database.DBConnection;
  */
 public final class Model extends Observable implements IModel {
 
-	/** The helloWorld. */
-	private HelloWorld helloWorld;
+	/** The level. */
+	private Level level;
 
-	/**
-	 * Instantiates a new model.
-	 */
-	public Model() {
-		this.helloWorld = new HelloWorld();
-	}
+	/** The main character. */
+	private Hero hero;
+	
 
 	/**
      * Gets the hello world.

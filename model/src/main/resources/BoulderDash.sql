@@ -17,11 +17,11 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `jpublankproject`
+-- Base de données :  `BoulderDash`
 --
-CREATE DATABASE `jpublankproject` ;
+CREATE DATABASE `BoulderDash` ;
 
-USE `jpublankproject` ;
+USE `BoulderDash` ;
 
 DELIMITER $$
 --
@@ -33,7 +33,7 @@ SELECT * FROM helloworld WHERE id = p_id$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `HelloworldByCode` (IN `p_code` VARCHAR(2))  READS SQL DATA
     SQL SECURITY INVOKER
-SELECT * FROM jpublankproject.helloworld where `code`=p_code$$
+SELECT * FROM BoulderDash.helloworld where `code`=p_code$$
 
 DELIMITER ;
 
