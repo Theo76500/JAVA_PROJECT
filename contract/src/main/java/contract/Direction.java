@@ -1,7 +1,7 @@
 package contract;
 
 /**
- * @author LANGLOIS Theo 
+ * @author LANGLOIS Theo
  * enums all possible direction
  */
 

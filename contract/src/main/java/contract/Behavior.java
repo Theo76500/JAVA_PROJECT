@@ -1,7 +1,7 @@
 package contract;
 
 /**
- * @author LAGNLOIS Theo 
+ * @author LAGNLOIS Theo
  * enums of type of behavior
  */
 
