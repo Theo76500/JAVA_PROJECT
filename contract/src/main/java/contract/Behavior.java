@@ -9,5 +9,6 @@ package contract;
 public enum Behavior {
 		DEATH,
 		MOREPOINT,
+		SPAWN,
 		END
 }

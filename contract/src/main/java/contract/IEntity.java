@@ -1,7 +1,7 @@
 package contract;
 
 /**
- * @author LAGNLOIS Theo
+ * @author LAGNLOIS Theo 
  * Interface  that represents the entities of the level
  */
 

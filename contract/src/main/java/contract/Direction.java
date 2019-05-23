@@ -13,6 +13,5 @@ public enum Direction {
 		RIGHT, 
 		BOTTOMLEFT,
 		BOTTOMRIGHT,
-		UNDEFINED,
-		FOLLOW;
+		UNDEFINED;
 }
