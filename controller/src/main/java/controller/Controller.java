@@ -11,7 +11,7 @@ import contract.IView;
 public final class Controller implements IController {
 
 	/** The view. */
-	private IView		view;
+	private IView	view;
 
 	/** The model. */
 	private IModel	model;
@@ -30,15 +30,10 @@ public final class Controller implements IController {
 	}
 
 	/**
-     * Control.
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IController#control()
+     * Start the game
 	 */
-	public void control() {
-		this.view.printMessage("Appuyer sur les touches 'E', 'F', 'D' ou 'I', pour afficher Hello world dans la langue d votre choix.");
+	public void start(){
+		
 	}
 
 	/**
@@ -47,7 +42,7 @@ public final class Controller implements IController {
      * @param pview
      *            the new view
      */
-	private void setView(final IView pview) {
+	public void setView(final IView pview) {
 		this.view = pview;
 	}
 
@@ -57,38 +52,19 @@ public final class Controller implements IController {
 	 * @param model
 	 *          the new model
 	 */
-	private void setModel(final IModel model) {
+	public void setModel(final IModel model) {
 		this.model = model;
 	}
 
 	/**
-     * Order perform.
-     *
-     * @param controllerOrder
-     *            the controller order
-     */
-	/*
-	 * (non-Javadoc)
+	 * Perform an order to the controller
 	 *
-	 * @see contract.IController#orderPerform(contract.ControllerOrder)
-	 */
-	public void orderPerform(final ControllerOrder controllerOrder) {
-		switch (controllerOrder) {
-			case English:
-				this.model.loadHelloWorld("GB");
-				break;
-			case Francais:
-				this.model.loadHelloWorld("FR");
-				break;
-			case Deutsch:
-				this.model.loadHelloWorld("DE");
-				break;
-			case Indonesia:
-				this.model.loadHelloWorld("ID");
-				break;
-			default:
-				break;
-		}
-	}
+	 * @param order
+	 * The order to perform
+     */
+	public void orderPerform(ControllerOrder controllerOrder) {
 
+	}
+	
+	
 }

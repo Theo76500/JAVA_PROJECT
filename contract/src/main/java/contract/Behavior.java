@@ -10,5 +10,6 @@ public enum Behavior {
 		DEATH,
 		MOREPOINT,
 		SPAWN,
+		PUSHED,
 		END
 }

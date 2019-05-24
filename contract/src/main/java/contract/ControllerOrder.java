@@ -3,16 +3,13 @@ package contract;
 /**
  * The Enum ControllerOrder.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo
  */
 public enum ControllerOrder {
 
-	/** The English. */
-	English,
-	/** The French. */
-	Francais,
-	/** The Deutch. */
-	Deutsch,
-	/** The Indonesia. */
-	Indonesia
+	CHARACTER_UP,
+	CHARACTER_DOWN,
+	CHARACTER_LEFT,
+	CHARACTER_RIGHT,
+	RETRY,
 }

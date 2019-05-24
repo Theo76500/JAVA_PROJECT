@@ -3,14 +3,9 @@ package contract;
 /**
  * The Interface IController.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo
  */
 public interface IController {
-
-	/**
-	 * Control.
-	 */
-	public void control();
 
 	/**
 	 * Order perform.
@@ -19,4 +14,21 @@ public interface IController {
 	 *          the controller order
 	 */
 	public void orderPerform(ControllerOrder controllerOrder);
+	
+	
+	/**
+	 * Set the model of the controller
+	 *
+	 * @param model
+	 * The model of the controller
+     */
+	public void setModel(IModel model);
+	
+	
+	/**
+	 * Start the game
+	 */
+	public void start();
+	
+	
 }
