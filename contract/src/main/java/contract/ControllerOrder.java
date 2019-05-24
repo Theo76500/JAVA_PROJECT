@@ -11,5 +11,5 @@ public enum ControllerOrder {
 	CHARACTER_DOWN,
 	CHARACTER_LEFT,
 	CHARACTER_RIGHT,
-	RETRY,
+	RETRY;
 }

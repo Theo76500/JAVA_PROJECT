@@ -13,7 +13,7 @@ public interface IHero extends IEntity{
      * @return
      * Get the score of the hero
      */
-	Integer Score();
+	Integer getScore();
 	
 	/**
      * A Setter for the score

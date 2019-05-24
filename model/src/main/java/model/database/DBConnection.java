@@ -14,7 +14,7 @@ public final class DBConnection {
 	private static DBConnection	INSTANCE	= null;
 
 	/** The connection. */
-	private Connection					connection;
+	private Connection	connection;
 
 	/**
 	 * Instantiates a new DB connection.

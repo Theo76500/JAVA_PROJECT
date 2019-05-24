@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.logging.Level;
 
@@ -20,7 +21,16 @@ public final class Model extends Observable implements IModel {
 	/** The main character. */
 	private Hero hero;
 	
+	/**
+	 * The IDs of the levels
+	 */
+	private ArrayList<Integer> levelsId;
 
+	/** Instantiates a new model. */
+	public Model() {
+		this.hero = new Hero(1,1);
+	}
+	
 
 	//public HelloWorld getHelloWorld() {
 	//	return this.helloWorld;
