@@ -15,7 +15,16 @@ public final class Controller implements IController {
 
 	/** The model. */
 	private IModel	model;
+	
+	/** The thread of the clock */
+	private Thread clockThread;
+	
+	/** The clock */
+	private Clock clock;
 
+	public static int LEVELID = 1;
+	
+	
 	/**
 	 * Instantiates a new controller.
 	 *
@@ -33,7 +42,17 @@ public final class Controller implements IController {
      * Start the game
 	 */
 	public void start(){
-		
+		if(this.model.loadlevel(1)){
+			this.view.openFrame();
+			this.model.flush();
+			
+			this.clock = new Clock();
+			this.clockThread = new Thread(this.clock);
+			this.clockThread.start();
+			
+		} else {
+			System.out.println("ERROR : Can't load level : "+LEVELID);
+		}
 	}
 
 	/**

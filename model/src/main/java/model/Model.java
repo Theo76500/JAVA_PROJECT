@@ -21,31 +21,17 @@ public final class Model extends Observable implements IModel {
 	private Hero hero;
 	
 
-	/**
-     * Gets the hello world.
-     *
-     * @return the hello world
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage()
-	 */
-	public HelloWorld getHelloWorld() {
-		return this.helloWorld;
-	}
 
-	/**
-     * Sets the hello world.
-     *
-     * @param helloWorld
-     *            the new hello world
-     */
-	private void setHelloWorld(final HelloWorld helloWorld) {
-		this.helloWorld = helloWorld;
-		this.setChanged();
-		this.notifyObservers();
-	}
+	//public HelloWorld getHelloWorld() {
+	//	return this.helloWorld;
+	//}
+
+
+	//private void setHelloWorld(final HelloWorld helloWorld) {
+	//	this.helloWorld = helloWorld;
+	//	this.setChanged();
+	//	this.notifyObservers();
+	//}
 
 	/**
      * Load hello world.
@@ -67,6 +53,24 @@ public final class Model extends Observable implements IModel {
 		}
 	}
 
+	
+	public boolean loadLevel(Integer Id) {
+		return true;
+	}
+	
+	public boolean saveLevel(){
+		return true;
+	}
+	
+	public Level getLevel(){
+		
+	}
+	
+	public void flush()
+	{
+		
+	}
+	
 	/**
      * Gets the observable.
      *
