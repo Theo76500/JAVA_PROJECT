@@ -1,0 +1,40 @@
+package entity;
+
+/**
+ * The Class Entity.
+ *
+ * @author Valentin Pain
+ */
+public abstract class Entity {
+
+	protected char keyboardCode;
+	protected boolean move;
+	
+	public Entity() {
+		
+		this.keyboardCode = 'a';
+		this.move = false;
+	}
+	
+	public abstract void behaviorEntity(boolean move);
+	
+	public char getKeyboardCode() {
+		
+		return this.keyboardCode;
+	}
+	
+	public void setKeyboardMove(char keyboardCode) {
+		
+		this.keyboardCode = keyboardCode;
+	}
+	
+	public boolean getMove() {
+		
+		return this.move;
+	}
+	
+	public void setMove(boolean move) {
+		
+		this.move = move;
+	}
+}

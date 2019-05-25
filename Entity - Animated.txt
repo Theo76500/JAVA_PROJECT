@@ -1,0 +1,32 @@
+package entity;
+
+public abstract class Animated extends Entity{
+
+	public Animated() {
+		
+		this.keyboardCode = 'a';
+		this.move = true;
+	}
+	
+	public abstract void behaviorEntity(boolean move);
+	
+	public char getKeyboardCode() {
+		
+		return this.keyboardCode;
+	}
+	
+	public void setKeyboardMove(char keyboardCode) {
+		
+		this.keyboardCode = keyboardCode;
+	}
+	
+	public boolean getMove() {
+		
+		return this.move;
+	}
+	
+	public void setMove(boolean move) {
+		
+		this.move = move;
+	}
+}
