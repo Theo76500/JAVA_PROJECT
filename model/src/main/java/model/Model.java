@@ -18,7 +18,7 @@ public final class Model extends Observable implements IModel {
 	private Level level;
 
 	/** The main character. */
-	private Hero hero;
+	private Player player;
 	
 
 	/**
