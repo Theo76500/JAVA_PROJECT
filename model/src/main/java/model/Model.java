@@ -29,40 +29,9 @@ public final class Model extends Observable implements IModel {
 
 	/** Instantiates a new model. */
 	public Model() {
-		this.hero = new Hero(1,1);
+		this.player = new Player();
 	}
 	
-
-	//public HelloWorld getHelloWorld() {
-	//	return this.helloWorld;
-	//}
-
-
-	//private void setHelloWorld(final HelloWorld helloWorld) {
-	//	this.helloWorld = helloWorld;
-	//	this.setChanged();
-	//	this.notifyObservers();
-	//}
-
-	/**
-     * Load hello world.
-     *
-     * @param code
-     *            the code
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage(java.lang.String)
-	 */
-	public void loadHelloWorld(final String code) {
-		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setHelloWorld(daoHelloWorld.find(code));
-		} catch (final SQLException e) {
-			e.printStackTrace();
-		}
-	}
 
 	
 	public boolean loadLevel(Integer Id) {
