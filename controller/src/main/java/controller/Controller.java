@@ -33,27 +33,10 @@ public final class Controller implements IController {
 	 * @param model
 	 *          the model
 	 */
-	public Controller(final IView view, final IModel model) {
-		this.setView(view);
-		this.setModel(model);
+	public Controller(IModel model) {
+		this.model = model;
 	}
 
-	/**
-     * Start the game
-	 */
-	public void start(){
-		if(this.model.loadlevel(1)){
-			this.view.openFrame();
-			this.model.flush();
-			
-			this.clock = new Clock();
-			this.clockThread = new Thread(this.clock);
-			this.clockThread.start();
-			
-		} else {
-			System.out.println("ERROR : Can't load level : "+LEVELID);
-		}
-	}
 
 	/**
      * Sets the view.
@@ -82,7 +65,30 @@ public final class Controller implements IController {
 	 * The order to perform
      */
 	public void orderPerform(ControllerOrder controllerOrder) {
-
+		System.out.println(controllerOrder);
+		switch (controllerOrder) {
+		case CHARACTER_UP:
+			this.mouvement.movePlayer("UP");
+			break;
+			
+		case CHARACTER_DOWN:
+			this.mouvement.movePlayer("DOWN");
+			break;
+			
+		case CHARACTER_LEFT:
+			this.model.mouvement("LEFT");
+			break;
+			
+		case CHARACTER_RIGHT:
+			this.model.mouvement("RIGHT");
+			break;
+			
+		case RETRY:
+			System.exit(0);
+			break;
+		}
+		model.getUser().setDirection(direction);
+		//model.collision();
 	}
 	
 	

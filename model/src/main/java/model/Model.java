@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.logging.Level;
 
 import contract.*;
+import entity.Player;
 import model.database.DBConnection;
 
 /**
@@ -19,7 +20,7 @@ public final class Model extends Observable implements IModel {
 	private Level level;
 
 	/** The main character. */
-	private Hero hero;
+	private Player player;
 	
 	/**
 	 * The IDs of the levels
