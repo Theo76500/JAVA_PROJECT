@@ -230,12 +230,15 @@ public final class Model extends Observable implements IModel   {
 		{
 		  i = 0;
 		  for(String str : subTab)
-		  {     
-		    if(levelTab[j][i] != null && levelTab[j][i].equals("Boulder") && levelTab[j][i+1].equals("DirtAfterHero")) {
-		    	
-		    	levelTab[j][i] = "DirtAfterHero";
-		    	levelTab[j][i+1] = "Boulder";
-		    }
+		  {
+			  if(levelTab[j][i] != null && levelTab[j][i].equals("Boulder") && levelTab[j][i+1].equals("DirtAfterHero")) {
+				  //Si la boule est juste au dessus du joueur 
+				  if(levelTab[j][i] != null && levelTab[j][i].equals("Boulder") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i+1)) {}
+				  else {
+					  levelTab[j][i] = "DirtAfterHero";
+					  levelTab[j][i+1] = "Boulder";
+				  }
+			  }
 
 		    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
 		    	levelTab[j][i] = "DirtAfterHero";
@@ -255,6 +258,8 @@ public final class Model extends Observable implements IModel   {
 		    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
                 levelTab[j][i] = "DirtAfterHero";
             }
+
+
 
 
 		     
