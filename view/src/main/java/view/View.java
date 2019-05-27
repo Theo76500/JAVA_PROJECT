@@ -12,12 +12,13 @@ import contract.IView;
 /**
  * The Class View.
  *
- * @author PAIN Valentin
+ * @author Jean-Aymeric Diet
  */
 public final class View implements IView, Runnable {
 
 	/** The frame. */
 	private final ViewFrame viewFrame;
+	
 
 	/**
 	 * Instantiates a new view.
@@ -39,17 +40,16 @@ public final class View implements IView, Runnable {
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
-		case KeyEvent.VK_UP:
-			return ControllerOrder.CHARACTER_UP;
-		case KeyEvent.VK_DOWN:
-			return ControllerOrder.CHARACTER_DOWN;
-		case KeyEvent.VK_LEFT:
-			return ControllerOrder.CHARACTER_LEFT;
-		case KeyEvent.VK_RIGHT:
-			return ControllerOrder.CHARACTER_RIGHT;
-		
-		default : 
-			return ControllerOrder.RETRY;
+			case KeyEvent.VK_LEFT:
+				return ControllerOrder.LEFT;
+			case KeyEvent.VK_RIGHT:
+				return ControllerOrder.RIGHT;
+			case KeyEvent.VK_UP:
+				return ControllerOrder.UP;
+			case KeyEvent.VK_DOWN:
+				return ControllerOrder.DOWN;
+			default:
+				return ControllerOrder.NOTHING;
 		}
 	}
 
@@ -58,8 +58,8 @@ public final class View implements IView, Runnable {
 	 *
 	 * @see contract.IView#printMessage(java.lang.String)
 	 */
-	public void printMessage(final String message) {
-		this.viewFrame.printMessage(message);
+	public void printLevel() {
+		this.viewFrame.printLevel();
 	}
 
 	/*

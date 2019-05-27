@@ -5,14 +5,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import entity.HelloWorld;
+import entity.Level;
+import entity.RowLevel;
+
 
 /**
  * The Class DAOHelloWorld.
  *
  * @author Jean-Aymeric Diet
  */
-class DAOHelloWorld extends DAOEntity<HelloWorld> {
+class DAOHelloWorld extends DAOEntity<RowLevel> {
 
 	/**
 	 * Instantiates a new DAO hello world.
@@ -32,7 +34,7 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 	 * @see model.DAOEntity#create(model.Entity)
 	 */
 	@Override
-	public boolean create(final HelloWorld entity) {
+	public boolean create(final RowLevel level) {
 		// Not implemented
 		return false;
 	}
@@ -43,7 +45,7 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 	 * @see model.DAOEntity#delete(model.Entity)
 	 */
 	@Override
-	public boolean delete(final HelloWorld entity) {
+	public boolean delete(final RowLevel level) {
 		// Not implemented
 		return false;
 	}
@@ -54,17 +56,18 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 	 * @see model.DAOEntity#update(model.Entity)
 	 */
 	@Override
-	public boolean update(final HelloWorld entity) {
+	public boolean update(final RowLevel level) {
 		// Not implemented
 		return false;
 	}
+
 
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see model.DAOEntity#find(int)
 	 */
-	@Override
+	/*@Override
 	public HelloWorld find(final int id) {
 		HelloWorld helloWorld = new HelloWorld();
 
@@ -82,14 +85,14 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
 
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see model.DAOEntity#find(java.lang.String)
 	 */
-	@Override
+	/*@Override
 	public HelloWorld find(final String code) {
 		HelloWorld helloWorld = new HelloWorld();
 
@@ -107,6 +110,48 @@ class DAOHelloWorld extends DAOEntity<HelloWorld> {
 			e.printStackTrace();
 		}
 		return null;
-	}
+	}*/
+	
+	@Override
+	public Level find() {
+		int blocksId = 1;
+		RowLevel rowLevel = new RowLevel();
+		Level level = new Level();
 
+		try {
+			final String sql = "{call level1ById(?)}";
+			final CallableStatement call = this.getConnection().prepareCall(sql);
+			call.setInt(1, blocksId);
+			call.execute();
+			ResultSet resultSet = call.getResultSet();
+			
+				if (blocksId == 1 && resultSet.first()) {
+						rowLevel = new RowLevel(blocksId, resultSet.getString("blocksType"), resultSet.getInt("blocksX"), resultSet.getInt("blocksY"), resultSet.getString("blocksDirection"), resultSet.getInt("levelNumber"));
+						
+						//System.out.println("blocksId = " +blocksId);
+						//System.out.println("blocksType = " +resultSet.getString("blocksType"));
+						Level.getLevel().add(rowLevel);
+						blocksId++;
+				}
+				
+				call.setInt(1, blocksId);
+				call.execute();
+				resultSet = call.getResultSet();
+				
+				while(resultSet.next() && blocksId < 422) {
+					rowLevel = new RowLevel(blocksId, resultSet.getString("blocksType"), resultSet.getInt("blocksX"), resultSet.getInt("blocksY"), resultSet.getString("blocksDirection"), resultSet.getInt("levelNumber"));
+					Level.getLevel().add(rowLevel);
+					blocksId++;
+					call.setInt(1, blocksId);
+					call.execute();
+					resultSet.close();
+					resultSet = call.getResultSet();
+				}
+			
+			return level;
+		} catch (final SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

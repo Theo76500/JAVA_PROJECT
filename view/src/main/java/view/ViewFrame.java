@@ -6,10 +6,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import contract.IController;
 import contract.IModel;
+import entity.Level;
+import entity.RowLevel;
 
 /**
  * The Class ViewFrame.
@@ -26,6 +27,32 @@ class ViewFrame extends JFrame implements KeyListener {
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
 
+	
+	/** The X max coord. */
+	protected final int xMax = 16;
+
+	/** The Y max coord. */
+	protected final int yMax = 15;
+	
+	protected String[][] levelTab = new String[20][20];
+	
+	public int getXMax() {
+		return xMax;
+	}
+
+	public int getYMax() {
+		return yMax;
+	}
+	
+	public String[][] getLevelTab() {
+		return levelTab;
+	}
+
+	public void setLevelTab(String[][] levelTab) {
+		this.levelTab = levelTab;
+	}
+	
+	
 	/**
 	 * Instantiates a new view frame.
 	 *
@@ -127,11 +154,12 @@ class ViewFrame extends JFrame implements KeyListener {
 	 */
 	private void buildViewFrame(final IModel model) {
 		this.setModel(model);
+		this.setTitle("Boulder Dash");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
-		this.setSize(400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom);
+		this.setSize(500 + this.getInsets().left + this.getInsets().right, 530 + this.getInsets().top + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
 	}
 
@@ -141,9 +169,33 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @param message
 	 *          the message
 	 */
-	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, message);
+	public void printLevel() {
+		
+		model.getLevel();
+		for(RowLevel elem: Level.getLevel())
+	       {
+	       	 //System.out.println(elem.getBlocksType());
+	       	 
+	       	 //levelTab[1][1] = "ok";
+	       	// System.out.println(levelTab[0][0]);
+	       	 
+	       	 levelTab[elem.getBlocksX()][elem.getBlocksY()] = elem.getBlocksType();
+	       	 
+	       	/*int i = 0, j = 0;
+	        
+	       	for(String sousTab[] : levelTab)
+	       	{
+	       	  i = 0;
+	       	  for(String str : sousTab)
+	       	  {     
+	       	    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTab[j][i]);
+	       	    i++;
+	       	  }
+	       	  j++;
+	       	}*/
+	       }
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -171,4 +223,5 @@ class ViewFrame extends JFrame implements KeyListener {
 	public void keyReleased(final KeyEvent e) {
 
 	}
+
 }
