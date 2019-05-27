@@ -12,7 +12,7 @@ import view.View;
 /**
  * The Class Main.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo
  */
 public abstract class Main {
 

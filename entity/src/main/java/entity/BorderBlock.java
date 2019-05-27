@@ -6,6 +6,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 public class BorderBlock extends Inanimated{
 
 	public BorderBlock(String stringCode, boolean move, int coordX, int coordY) {

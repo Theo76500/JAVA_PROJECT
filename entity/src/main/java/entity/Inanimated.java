@@ -2,6 +2,12 @@ package entity;
 
 import java.awt.Image;
 
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 public abstract class Inanimated extends Entity{
 
 	public Inanimated(String stringCode, boolean move, int coordX, int coordY) {

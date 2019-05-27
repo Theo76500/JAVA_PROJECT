@@ -5,6 +5,12 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 
 public class Diamond extends Animated{
 

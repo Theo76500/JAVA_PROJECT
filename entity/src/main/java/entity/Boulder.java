@@ -6,6 +6,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 public class Boulder extends Animated{
 
 	public Boulder(String stringCode, boolean move, int coordX, int coordY) {

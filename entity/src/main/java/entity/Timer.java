@@ -6,6 +6,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author LANGLOIS Theo
+ *
+ */
+
 public class Timer extends Inanimated{
 
 	public Timer(String stringCode, boolean move, int coordX, int coordY) {

@@ -11,7 +11,7 @@ import entity.RowLevel;
 /**
  * The Class Model.
  *
- * @author Jean-Aymeric Diet
+ * @author PAIN Valentin & LANGLOIS Theo & FORQUES Pierre & LALISSE Adrien
  */
 public final class Model extends Observable implements IModel   {
 
@@ -200,7 +200,7 @@ public final class Model extends Observable implements IModel   {
 	 */
 	public void loadLevel() {
 		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
+			final DAOLevel1 daoHelloWorld = new DAOLevel1(DBConnection.getInstance().getConnection());
 			this.setLevel(daoHelloWorld.find());
 		} catch (final SQLException e) {
 			e.printStackTrace();

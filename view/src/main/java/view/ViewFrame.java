@@ -15,7 +15,7 @@ import entity.RowLevel;
 /**
  * The Class ViewFrame.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo & PAIN Valentin
  */
 class ViewFrame extends JFrame implements KeyListener {
 

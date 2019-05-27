@@ -13,7 +13,7 @@ import entity.RowLevel;
 /**
  * The Class DAOEntity.
  *
- * @author Jean-Aymeric Diet
+ * @author PAIN Valentin
  *
  * @param <E>
  *          the element type

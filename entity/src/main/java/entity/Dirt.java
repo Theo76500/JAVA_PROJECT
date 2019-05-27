@@ -6,6 +6,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 public class Dirt extends Inanimated{
 
 	public Dirt(String stringCode, boolean move, int coordX, int coordY) {

@@ -12,9 +12,9 @@ import entity.RowLevel;
 /**
  * The Class DAOHelloWorld.
  *
- * @author Jean-Aymeric Diet
+ * @author PAIN Valentin
  */
-class DAOHelloWorld extends DAOEntity<RowLevel> {
+class DAOLevel1 extends DAOEntity<RowLevel> {
 
 	/**
 	 * Instantiates a new DAO hello world.
@@ -24,7 +24,7 @@ class DAOHelloWorld extends DAOEntity<RowLevel> {
 	 * @throws SQLException
 	 *           the SQL exception
 	 */
-	public DAOHelloWorld(final Connection connection) throws SQLException {
+	public DAOLevel1(final Connection connection) throws SQLException {
 		super(connection);
 	}
 

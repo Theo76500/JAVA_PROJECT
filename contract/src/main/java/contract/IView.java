@@ -3,7 +3,7 @@ package contract;
 /**
  * The Interface IView.
  *
- * @author Jean-Aymeric Diet
+ * @author PAIN Valentin
  */
 public interface IView {
 	

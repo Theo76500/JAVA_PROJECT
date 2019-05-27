@@ -8,7 +8,7 @@ import entity.RowLevel;
 /**
  * The Interface IModel.
  *
- * @author Jean-Aymeric Diet
+ * @author PAIN Valentin & LANGLOIS Theo
  */
 public interface IModel {
 

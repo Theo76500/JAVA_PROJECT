@@ -2,6 +2,12 @@ package entity;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 public class Level {
 
 	private static ArrayList<RowLevel> level = new ArrayList<RowLevel>();

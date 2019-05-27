@@ -2,6 +2,12 @@ package entity;
 
 import java.awt.Image;
 
+/**
+ * 
+ * @author LANGLOIS Theo
+ *
+ */
+
 public abstract class Animated extends Entity{
 
 	public Animated(String stringCode, boolean move, int coordX, int coordY) {

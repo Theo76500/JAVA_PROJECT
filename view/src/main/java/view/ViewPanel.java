@@ -22,7 +22,7 @@ import entity.Hero;
 /**
  * The Class ViewPanel.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo & PAIN Valentin
  */
 class ViewPanel extends JPanel implements Observer {
 

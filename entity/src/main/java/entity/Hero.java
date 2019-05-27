@@ -6,6 +6,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 public class Hero extends Animated{
 
 	public Hero(String stringCode, boolean move, int coordX, int coordY) {

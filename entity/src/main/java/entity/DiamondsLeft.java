@@ -6,6 +6,12 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * 
+ * @author PAIN Valentin
+ *
+ */
+
 public class DiamondsLeft extends Inanimated{
 
 	public DiamondsLeft(String stringCode, boolean move, int coordX, int coordY) {
