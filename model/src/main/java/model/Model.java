@@ -13,7 +13,7 @@ import entity.RowLevel;
  *
  * @author Jean-Aymeric Diet
  */
-public final class Model extends Observable implements IModel  {
+public final class Model extends Observable implements IModel   {
 
 	/** The levels. */
 	private Level level;
