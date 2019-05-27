@@ -1,5 +1,6 @@
 package contract;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.logging.Level;
 
@@ -12,10 +13,15 @@ import java.util.logging.Level;
 public interface IModel {
 
 	boolean loadLevel(int id);
-	Level getLevel();
+	ILevel getLevel();
+	
+	IElement getElement(int x, int y);
+	IElement[][] getElements();
 	
 	boolean saveLevel();
 	void flush();
+	
+	
 	
 
 	/**
@@ -24,4 +30,10 @@ public interface IModel {
 	 * @return the observable
 	 */
 	Observable getObservable();
+	
+	boolean loadAllLevels();
+	
+	boolean loadNextLevel();
+	
+	ArrayList<Integer> getLevelsId();
 }

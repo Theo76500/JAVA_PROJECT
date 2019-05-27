@@ -1,5 +1,7 @@
 package contract;
 
+import java.awt.Image;
+
 /**
  * @author LANGLOIS Theo 
  * configure the element

@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
@@ -8,167 +9,117 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 
 /**
- * The Class ViewFrame.
+ * Class ViewFrame.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo
  */
 class ViewFrame extends JFrame implements KeyListener {
+	
 
-	/** The model. */
-	private IModel						model;
+		private int width = 655;
+		
+		private int height = 465;
+		
+		private IController controller;
+		
+		private ViewPanel panel;
+		
+		ViewFrame()
+		{
+			this.setTitle("Boulder Dash");
+			this.setSize(width, height);
+			this.setLocationRelativeTo(null);
+			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			this.panel = new ViewPanel();
+			this.panel.setBackground(Color.BLACK);
+			this.setContentPane(this.panel);
+			this.setResizable(false);
+			
+			this.addKeyListener(this);
+		}
+		
+		public void repaint()
+		{
+			this.panel.repaint();
+		}
+		
+		public int getWidth()
+		{
+			return width;
+		}
+		
+		public int getHeight()
+		{
+			return height;
+		}
+		
+		public IController getController()
+		{
+			return controller;
+		}
+		
+		public void setController(IController controller)
+		{
+			this.controller = controller;
+		}
+		
+		
+		public void keyPressed(KeyEvent e) 
+		{
+			switch(e.getKeyCode())
+			{
+				case KeyEvent.VK_Z: 
+				case KeyEvent.VK_W:
+				case KeyEvent.VK_UP:
+				this.controller.orderPerform(ControllerOrder.CHARACTER_UP);
+				break;
+				
+				
+				case KeyEvent.VK_S:
+				case KeyEvent.VK_DOWN:
+				this.controller.orderPerform(ControllerOrder.CHARACTER_DOWN);
+				break;
+				
+				
+				case KeyEvent.VK_Q:
+				case KeyEvent.VK_LEFT:
+				this.controller.orderPerform(ControllerOrder.CHARACTER_LEFT);
+				break;
+				
+				
+				case KeyEvent.VK_D:
+				case KeyEvent.VK_RIGHT:
+				this.controller.orderPerform(ControllerOrder.CHARACTER_RIGHT);
+				break;
+				
 
-	/** The controller. */
-	private IController				controller;
-	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= -697358409737458175L;
+				case KeyEvent.VK_R:
+					this.controller.orderPerform(ControllerOrder.RETRY);
+					break;
+					
+			}
+		}
+		
+		public void keyReleased(KeyEvent e)
+		{
+			
+		}
+		
+		public void KeyTyped(KeyEvent e)
+		{
+			
+		}
 
-	/**
-	 * Instantiates a new view frame.
-	 *
-	 * @param model
-	 *          the model
-	 * @throws HeadlessException
-	 *           the headless exception
-	 */
-	public ViewFrame(final IModel model) throws HeadlessException {
-		this.buildViewFrame(model);
-	}
-
-	/**
-	 * Instantiates a new view frame.
-	 *
-	 * @param model
-	 *          the model
-	 * @param gc
-	 *          the gc
-	 */
-	public ViewFrame(final IModel model, final GraphicsConfiguration gc) {
-		super(gc);
-		this.buildViewFrame(model);
-	}
-
-	/**
-	 * Instantiates a new view frame.
-	 *
-	 * @param model
-	 *          the model
-	 * @param title
-	 *          the title
-	 * @throws HeadlessException
-	 *           the headless exception
-	 */
-	public ViewFrame(final IModel model, final String title) throws HeadlessException {
-		super(title);
-		this.buildViewFrame(model);
-	}
-
-	/**
-	 * Instantiates a new view frame.
-	 *
-	 * @param model
-	 *          the model
-	 * @param title
-	 *          the title
-	 * @param gc
-	 *          the gc
-	 */
-	public ViewFrame(final IModel model, final String title, final GraphicsConfiguration gc) {
-		super(title, gc);
-		this.buildViewFrame(model);
-	}
-
-	/**
-	 * Gets the controller.
-	 *
-	 * @return the controller
-	 */
-	private IController getController() {
-		return this.controller;
-	}
-
-	/**
-	 * Sets the controller.
-	 *
-	 * @param controller
-	 *          the new controller
-	 */
-	protected void setController(final IController controller) {
-		this.controller = controller;
-	}
-
-	/**
-	 * Gets the model.
-	 *
-	 * @return the model
-	 */
-	protected IModel getModel() {
-		return this.model;
-	}
-
-	/**
-	 * Sets the model.
-	 *
-	 * @param model
-	 *          the new model
-	 */
-	private void setModel(final IModel model) {
-		this.model = model;
-	}
-
-	/**
-	 * Builds the view frame.
-	 *
-	 * @param model
-	 *          the model
-	 */
-	private void buildViewFrame(final IModel model) {
-		this.setModel(model);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
-		this.addKeyListener(this);
-		this.setContentPane(new ViewPanel(this));
-		this.setSize(400 + this.getInsets().left + this.getInsets().right, 60 + this.getInsets().top + this.getInsets().bottom);
-		this.setLocationRelativeTo(null);
-	}
-
-	/**
-	 * Prints the message.
-	 *
-	 * @param message
-	 *          the message
-	 */
-	public void printMessage(final String message) {
-		JOptionPane.showMessageDialog(null, message);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
-	 */
-	public void keyTyped(final KeyEvent e) {
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
-	 */
-	public void keyPressed(final KeyEvent e) {
-		this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
-	}
-
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.awt.event.KeyListener#keyReleased(java.awt.event.KeyEvent)
-	 */
-	public void keyReleased(final KeyEvent e) {
-
-	}
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+		
 }
