@@ -23,7 +23,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="/contract"/>
-	<classpathentry kind="src" path="/entity"/>
+	<classpathentry exported="true" kind="src" path="/entity"/>
 	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar" sourcepath="M2_REPO/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/junit/junit/4.12/junit-4.12.jar" sourcepath="M2_REPO/junit/junit/4.12/junit-4.12-sources.jar">
 		<attributes>

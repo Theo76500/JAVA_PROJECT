@@ -1,11 +1,18 @@
 package contract;
 
+import entity.RowLevel;
+
 /**
  * The Interface IController.
  *
- * @author LANGLOIS Theo
+ * @author Jean-Aymeric Diet
  */
 public interface IController {
+
+	/**
+	 * Control.
+	 */
+	public void control();
 
 	/**
 	 * Order perform.
@@ -14,21 +21,4 @@ public interface IController {
 	 *          the controller order
 	 */
 	public void orderPerform(ControllerOrder controllerOrder);
-	
-	
-	/**
-	 * Set the model of the controller
-	 *
-	 * @param model
-	 * The model of the controller
-     */
-	public void setModel(IModel model);
-	
-	
-	/**
-	 * Start the game
-	 */
-	public void start();
-	
-	
 }

@@ -1,34 +1,19 @@
 package contract;
 
-import java.util.Observable;
-
 /**
  * The Interface IView.
  *
- * @author LANGLOIS Theo
+ * @author Jean-Aymeric Diet
  */
 public interface IView {
-
-	/**
-	 update the screen
-	 */
-	void repaint();
 	
 	/**
-	 * Open the frame
-	 */
-	void openFrame();
-	
-	/**
-	 * Gets the observable.
+	 * Prints the message.
 	 *
-	 * @return the observable
+	 * @param message
+	 *          the message
 	 */
-	Observable getObservable();
-	
-	/**
-	 * Set the controller of the view
-	 */
-	void setController(IController controller);
-	
+	void printLevel();
+
+	//ViewFrame getViewFrame();
 }

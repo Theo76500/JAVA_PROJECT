@@ -11,20 +11,11 @@ import contract.IView;
 public final class Controller implements IController {
 
 	/** The view. */
-	private IView	view;
+	private IView		view;
 
 	/** The model. */
 	private IModel	model;
-	
-	/** The thread of the clock */
-	private Thread clockThread;
-	
-	/** The clock */
-	private Clock clock;
 
-	public static int LEVELID = 1;
-	
-	
 	/**
 	 * Instantiates a new controller.
 	 *
@@ -33,18 +24,36 @@ public final class Controller implements IController {
 	 * @param model
 	 *          the model
 	 */
-	public Controller(IModel model) {
-		this.model = model;
+	public Controller(final IView view, final IModel model) {
+		this.setView(view);
+		this.setModel(model);
 	}
 
+	/**
+     * Control.
+     */
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see contract.IController#control()
+	 */
+	public void control() {
+		
+		model.loadLevel();
+		view.printLevel();
+	}
 
+	public IView getView() {
+		return view;
+	}
+	
 	/**
      * Sets the view.
      *
      * @param pview
      *            the new view
      */
-	public void setView(final IView pview) {
+	private void setView(final IView pview) {
 		this.view = pview;
 	}
 
@@ -54,42 +63,42 @@ public final class Controller implements IController {
 	 * @param model
 	 *          the new model
 	 */
-	public void setModel(final IModel model) {
+	private void setModel(final IModel model) {
 		this.model = model;
 	}
 
 	/**
-	 * Perform an order to the controller
-	 *
-	 * @param order
-	 * The order to perform
+     * Order perform.
+     *
+     * @param controllerOrder
+     *            the controller order
      */
-	public void orderPerform(ControllerOrder controllerOrder) {
-		System.out.println(controllerOrder);
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see contract.IController#orderPerform(contract.ControllerOrder)
+	 */
+	public void orderPerform(final ControllerOrder controllerOrder) {
 		switch (controllerOrder) {
-		case CHARACTER_UP:
-			this.mouvement.movePlayer("UP");
-			break;
-			
-		case CHARACTER_DOWN:
-			this.mouvement.movePlayer("DOWN");
-			break;
-			
-		case CHARACTER_LEFT:
-			this.model.mouvement("LEFT");
-			break;
-			
-		case CHARACTER_RIGHT:
-			this.model.mouvement("RIGHT");
-			break;
-			
-		case RETRY:
-			System.exit(0);
-			break;
+			case LEFT:
+				model.setCoordXHero(model.getCoordXHero() - 1);
+				System.out.println("left");
+				break;
+			case RIGHT:
+				model.setCoordXHero(model.getCoordXHero() + 1);
+				System.out.println("right");
+				break;
+			case UP:
+				model.setCoordYHero(model.getCoordYHero() - 1);
+				System.out.println("up");
+				break;
+			case DOWN:
+				model.setCoordYHero(model.getCoordYHero() + 1);
+				System.out.println("down");
+				break;
+			default:
+				break;
 		}
-		model.getUser().setDirection(direction);
-		//model.collision();
 	}
-	
-	
+
 }

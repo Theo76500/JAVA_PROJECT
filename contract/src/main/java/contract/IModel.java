@@ -1,29 +1,72 @@
 package contract;
 
-import java.util.ArrayList;
 import java.util.Observable;
-import java.util.logging.Level;
 
+import entity.Level;
+import entity.RowLevel;
 
 /**
  * The Interface IModel.
  *
- * @author LANGLOIS Theo
+ * @author Jean-Aymeric Diet
  */
 public interface IModel {
 
-	boolean loadLevel(int id);
-	ILevel getLevel();
-	
-	IElement getElement(int x, int y);
-	IElement[][] getElements();
-	
-	boolean saveLevel();
-	void flush();
-	
-	
-	
+	public Level getLevel();
 
+	public void setLevel(Level level);
+	
+	/**
+	 * Gets the first level.
+	 *
+	 * @return the level1 entity
+	 */
+	Level getLevel1();
+	
+	/**
+	 * Gets the second level.
+	 *
+	 * @return the level2 entity
+	 */
+	Level getLevel2();
+	
+	/**
+	 * Gets the third level.
+	 *
+	 * @return the level3 entity
+	 */
+	Level getLevel3();
+	
+	/**
+	 * Gets the fourth level.
+	 *
+	 * @return the level4 entity
+	 */
+	Level getLevel4();
+	
+	/**
+	 * Gets the fifth level.
+	 *
+	 * @return the level5 entity
+	 */
+	Level getLevel5();
+
+	/**
+	 * Load the message.
+	 *
+	 * @param code
+	 *          the code
+	 */
+	void loadLevel();
+
+	public int getCoordXHero();
+	
+	public void setCoordXHero(int coordX);
+	
+	public int getCoordYHero();
+	
+	public void setCoordYHero(int coordY);
+	
 	/**
 	 * Gets the observable.
 	 *
@@ -31,9 +74,11 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
-	boolean loadAllLevels();
+	String[][] levelBehavior(String[][] levelTab);
 	
-	boolean loadNextLevel();
-	
-	ArrayList<Integer> getLevelsId();
+	void SetCharacterCoords(int coord);
+
+	public int getDiamond();
+
+	public int getTimeLeft();
 }

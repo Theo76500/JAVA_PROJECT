@@ -1,9 +1,14 @@
+
 package model;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import entity.Entity;
+import entity.Level;
+import entity.RowLevel;
+
+
+
 
 /**
  * The Class DAOEntity.
@@ -13,7 +18,7 @@ import entity.Entity;
  * @param <E>
  *          the element type
  */
-abstract class DAOEntity<E extends Entity> {
+abstract class DAOEntity<E extends RowLevel> {
 
 	/** The connection. */
 	private final Connection connection;
@@ -46,7 +51,7 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the entity
 	 * @return true, if successful
 	 */
-	public abstract boolean create(E entity);
+	public abstract boolean create(E level);
 
 	/**
 	 * Delete.
@@ -55,7 +60,7 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the entity
 	 * @return true, if successful
 	 */
-	public abstract boolean delete(E entity);
+	public abstract boolean delete(E level);
 
 	/**
 	 * Update.
@@ -64,7 +69,7 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the entity
 	 * @return true, if successful
 	 */
-	public abstract boolean update(E entity);
+	public abstract boolean update(E level);
 
 	/**
 	 * Find.
@@ -73,7 +78,7 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the id
 	 * @return the e
 	 */
-	public abstract E find(int id);
+	//public abstract E find(int id);
 
 	/**
 	 * Find.
@@ -82,6 +87,6 @@ abstract class DAOEntity<E extends Entity> {
 	 *          the code
 	 * @return the e
 	 */
-	public abstract E find(String code);
+	public abstract Level find();
 
 }
