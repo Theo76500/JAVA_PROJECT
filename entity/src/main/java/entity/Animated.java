@@ -1,6 +1,6 @@
 package entity;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public abstract class Animated extends Entity{
 
@@ -15,12 +15,13 @@ public abstract class Animated extends Entity{
 		this("", true, 0, 0);
 	}
 	
-	public abstract Image loadImage(int levelNumber);
-	public abstract Image loadImage(int levelNumber, String fileName);
-	
 	public void setStringCode(String stringCode) {
 		this.stringCode = stringCode;
 	}
+	
+	public abstract BufferedImage loadImage(int levelNumber);
+	public abstract BufferedImage loadImage(int levelNumber, String fileName);
+	public abstract BufferedImage loadImage(String direction);
 
 	public int getCoordX() {
 		return coordX;

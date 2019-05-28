@@ -1,12 +1,20 @@
 package model;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
 
 import contract.IModel;
+import entity.BorderBlock;
+import entity.Boulder;
+import entity.Diamond;
+import entity.Dirt;
+import entity.DirtAfterHero;
+import entity.Enemy;
+import entity.Entity;
+import entity.ExitDoor;
 import entity.Hero;
 import entity.Level;
-import entity.RowLevel;
 
 /**
  * The Class Model.
@@ -15,14 +23,20 @@ import entity.RowLevel;
  */
 public final class Model extends Observable implements IModel {
 
+	private String[][] levelTab = new String[20][20];
+	private String direction;
+	
+	
+	public String getDirection() {
+		return direction;
+	}
+
+	public void setDirection(String direction) {
+		this.direction = direction;
+	}
+
 	/** The levels. */
 	private Level level;
-	
-	private Level level1;
-	private Level level2;
-	private Level level3;
-	private Level level4;
-	private Level level5;
 	
 	/** The character */
 	private Hero hero = new Hero();
@@ -33,12 +47,14 @@ public final class Model extends Observable implements IModel {
 	 */
 	public Model() {
 		this.level = new Level();
-		
-		this.level1 = new Level();
-		this.level2 = new Level();
-		this.level3 = new Level();
-		this.level4 = new Level();
-		this.level5 = new Level();
+	}
+	
+	public String[][] getLevelTab() {
+		return levelTab;
+	}
+
+	public void setLevelTab(String[][] levelTab) {
+		this.levelTab = levelTab;
 	}
 
 	/**
@@ -61,10 +77,6 @@ public final class Model extends Observable implements IModel {
 		this.setChanged();
 		this.notifyObservers();
 	}
-	
-	public Level getLevel1() {
-		return this.level1;
-	}
 
 
 	/**
@@ -73,102 +85,7 @@ public final class Model extends Observable implements IModel {
      * @param level1
      *            the new first level.
      */
-	public void setLevel1(final RowLevel level) {
-		this.level1 = level1;
-		this.setChanged();
-		this.notifyObservers();
-	}
-	
-	
-	/**
-     * Gets the second level.
-     *
-     * @return the second level.
-     */
-	public Level getLevel2() {
-		return this.level2;
-	}
-	
-	
-	/**
-     * Sets the second level.
-     *
-     * @param level2
-     *            the new second level.
-     */
-	public void setLevel2(final Level level2) {
-		this.level2 = level2;
-		this.setChanged();
-		this.notifyObservers();
-	}
-	
-	
-	/**
-     * Gets the third level.
-     *
-     * @return the third level.
-     */
-	public Level getLevel3() {
-		return this.level3;
-	}
-	
-	
-	/**
-     * Sets the third level.
-     *
-     * @param level3
-     *            the new third level.
-     */
-	public void setLevel3(final Level level3) {
-		this.level3 = level3;
-		this.setChanged();
-		this.notifyObservers();
-	}
-	
-	
-	/**
-     * Gets the fourth level.
-     *
-     * @return the fourth level.
-     */
-	public Level getLevel4() {
-		return this.level4;
-	}
-	
-	
-	/**
-     * Sets the fourth level.
-     *
-     * @param level4
-     *            the new fourth level.
-     */
-	public void setLevel4(final Level level4) {
-		this.level4 = level4;
-		this.setChanged();
-		this.notifyObservers();
-	}
-	
-	
-	/**
-     * Gets the fifth level.
-     *
-     * @return the fifth level.
-     */
-	public Level getLevel5() {
-		return this.level5;
-	}
-	
-	/**
-     * Sets the fifth level.
-     *
-     * @param level5
-     *            the new fifth level.
-     */
-	public void setLevel5(final Level level5) {
-		this.level5 = level5;
-		this.setChanged();
-		this.notifyObservers();
-	}
+
 	
 	public int getCoordXHero() {
 		return hero.getCoordX();
@@ -231,17 +148,98 @@ public final class Model extends Observable implements IModel {
 		  i = 0;
 		  for(String str : subTab)
 		  {     
-		    if(levelTab[i][j] != null && levelTab[i][j].equals("Boulder") && levelTab[i][j-1].equals("DirtAfterHero")) {
+		    if(levelTab[j][i] != null && levelTab[j][i].equals("Boulder") && levelTab[j][i+1].equals("DirtAfterHero")) {
 		    	
-		    	levelTab[i][j] = "DirtAfterHero";
-		    	levelTab[i][j-1] = "Boulder";
+		    	levelTab[j][i] = "DirtAfterHero";
+		    	levelTab[j][i+1] = "Boulder";
 		    }
 		    
+		    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && levelTab[j][i+1].equals("DirtAfterHero")) {
+		    	
+		    	levelTab[j][i] = "DirtAfterHero";
+		    	levelTab[j][i+1] = "Diamond";
+		    }
+		    
+		    if(levelTab[j][i] != null && levelTab[j][i].equals("Dirt") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)){
+                levelTab[j][i] = "DirtAfterHero";
+            }
+		    
+		    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
+                levelTab[j][i] = "DirtAfterHero";
+            }
+		     
 		    i++;
 		  }
 		  j++;
 		}
 		
 		return levelTab;
+	}
+	
+	public void setCharacterCoords(int coordX, int coordY) {
+		
+		this.setCoordXHero(coordX);
+		this.setCoordYHero(coordY);
+		
+		this.setChanged();
+		this.notifyObservers();
+	}
+	
+	public boolean checkCollision(int coordX, int coordY) {
+		
+		String levelTab[][] = this.getLevelTab();
+		
+		if(levelTab[coordX][coordY].equals("Boulder") || levelTab[coordX][coordY].equals("BorderBlock")) {
+			
+			return false;
+		}
+			
+			return true;
+		
+	}
+	
+	public void avoidLatency() {
+		
+		try {
+			Entity borderBlock = new BorderBlock();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity boulder = new Boulder();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity diamond = new Diamond();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity dirt = new Dirt();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity dirtafterhero = new DirtAfterHero();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity enemy = new Enemy();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity exitdoor = new ExitDoor();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

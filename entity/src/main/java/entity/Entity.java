@@ -1,6 +1,6 @@
 package entity;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 /**
  * The Class Entity.
@@ -25,10 +25,9 @@ public abstract class Entity {
 		this("", false, 0, 0);
 	}
 	
-	//public abstract void behaviorEntity(boolean move);
-	public abstract Image loadImage(int levelNumber);
-	public abstract Image loadImage(int levelNumber, String fileName);
-	
+	public abstract BufferedImage loadImage(int levelNumber);
+	public abstract BufferedImage loadImage(int levelNumber, String fileName);
+	public abstract BufferedImage loadImage(String direction);
 	
 	public String getStringCode() {
 		return stringCode;

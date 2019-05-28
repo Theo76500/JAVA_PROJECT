@@ -16,10 +16,12 @@ import contract.IView;
  */
 public final class View implements IView, Runnable {
 
+	/** The levelTab */
+	//private String[][] levelTab = new String[20][20];
+	
 	/** The frame. */
 	private final ViewFrame viewFrame;
 	
-
 	/**
 	 * Instantiates a new view.
 	 *
@@ -30,6 +32,10 @@ public final class View implements IView, Runnable {
 		this.viewFrame = new ViewFrame(model);
 		SwingUtilities.invokeLater(this);
 	}
+	
+	//public ViewFrame getViewFrame() {
+		//return viewFrame;
+	//}
 
 	/**
 	 * Key code to controller order.
@@ -37,16 +43,25 @@ public final class View implements IView, Runnable {
 	 * @param keyCode
 	 *          the key code
 	 * @return the controller order
+	 * @throws InterruptedException 
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
 			case KeyEvent.VK_LEFT:
 				return ControllerOrder.LEFT;
+			case KeyEvent.VK_Q:
+				return ControllerOrder.LEFT;
 			case KeyEvent.VK_RIGHT:
+				return ControllerOrder.RIGHT;
+			case KeyEvent.VK_D:
 				return ControllerOrder.RIGHT;
 			case KeyEvent.VK_UP:
 				return ControllerOrder.UP;
+			case KeyEvent.VK_Z:
+				return ControllerOrder.UP;
 			case KeyEvent.VK_DOWN:
+				return ControllerOrder.DOWN;
+			case KeyEvent.VK_S:
 				return ControllerOrder.DOWN;
 			default:
 				return ControllerOrder.NOTHING;

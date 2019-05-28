@@ -1,7 +1,8 @@
 package view;
 
 import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -22,13 +23,13 @@ import entity.Hero;
  *
  * @author Jean-Aymeric Diet
  */
-class ViewPanel extends JPanel implements Observer {
-
+class ViewPanel extends JPanel implements Observer{
+	
 	/** The view frame. */
 	private ViewFrame					viewFrame;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
-
+	
 	/**
 	 * Instantiates a new view panel.
 	 *
@@ -75,74 +76,71 @@ class ViewPanel extends JPanel implements Observer {
 	 */
 	@Override
 	protected void paintComponent(final Graphics graphics) {
-		graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-		//graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);
+		
+		Toolkit.getDefaultToolkit().sync();
 		
 		String[][] levelTab = new String[20][20];
-		levelTab = this.getViewFrame().getLevelTab();
+		levelTab = this.getViewFrame().getModel().getLevelTab();
 		levelTab = this.getViewFrame().getModel().levelBehavior(levelTab);
 		
-		Image img = null;
 		
-		int i = 0, j = 0;
-		 
+		BufferedImage img = null;
+		
+		int i = 0;
+		int j = 0;
+		
 		for(String subTab[] : levelTab)
 		{
 		  i = 0;
 		  int dimensionX = this.getWidth() / 16;
 		  int dimensionY = this.getHeight() / 16;
+		  
 		  for(String str : subTab)
 		  {     
-		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTab[j][i]);
+		    //System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTab[j][i]);
 		    if(levelTab[j][i] != null) {
+		    	
 				  
-				  if(levelTab[j][i].equals("BorderBlock")){
-				    	Entity borderBlock = new BorderBlock("BorderBlock", false, j, i);
-				    	img = borderBlock.loadImage(1);
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				 if(levelTab[j][i].equals("BorderBlock")){
+					  img = BorderBlock.getImg();
+				      graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				  }
 				    	
 				  if(levelTab[j][i].equals("Diamond")) {
-				    	Entity diamond = new Diamond("Diamond", false, j, i);
-				    	img = diamond.loadImage(1);
+					    img = Diamond.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Dirt")) {
-				    	Entity dirt = new Dirt("Dirt", false, j, i);
-				    	img = dirt.loadImage(1);
+					    img = Dirt.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("DirtAfterHero")) {
-				    	Entity dirtafterhero = new DirtAfterHero("DirtAfterHero", false, j, i);
-				    	img = dirtafterhero.loadImage(1);
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
-				    }
-				  
-				  if(levelTab[j][i].equals("Hero")) {
-				    	Entity hero = new Hero("Hero", false, j, i);
-				    	img = hero.loadImage(1);
+					    img = DirtAfterHero.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Boulder")) {
-				    	Entity boulder = new Boulder("Boulder", false, j, i);
-				    	img = boulder.loadImage(1);
+					    img = Boulder.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("ExitDoor")) {
-				    	Entity exitdoor = new ExitDoor("ExitDoor", false, j, i);
-				    	img = exitdoor.loadImage(1);
+					    img = ExitDoor.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Enemy")) {
-				    	Entity enemy = new Enemy("Enemy", false, j, i);
-				    	img = enemy.loadImage(1);
+					    img = Enemy.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
+				  
+				
+				  Entity hero = new Hero();
+			      img = hero.loadImage(1);
+			      graphics.drawImage(img, this.getViewFrame().getModel().getCoordXHero() * dimensionX, this.getViewFrame().getModel().getCoordYHero() * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+			      
 		    }
 		    i++;
 		  }

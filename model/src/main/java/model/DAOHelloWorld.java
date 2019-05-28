@@ -128,8 +128,6 @@ class DAOHelloWorld extends DAOEntity<RowLevel> {
 				if (blocksId == 1 && resultSet.first()) {
 						rowLevel = new RowLevel(blocksId, resultSet.getString("blocksType"), resultSet.getInt("blocksX"), resultSet.getInt("blocksY"), resultSet.getString("blocksDirection"), resultSet.getInt("levelNumber"));
 						
-						//System.out.println("blocksId = " +blocksId);
-						//System.out.println("blocksType = " +resultSet.getString("blocksType"));
 						Level.getLevel().add(rowLevel);
 						blocksId++;
 				}

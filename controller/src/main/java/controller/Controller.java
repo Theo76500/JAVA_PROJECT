@@ -43,6 +43,10 @@ public final class Controller implements IController {
 		view.printLevel();
 	}
 
+	public IView getView() {
+		return view;
+	}
+	
 	/**
      * Sets the view.
      *
@@ -75,20 +79,54 @@ public final class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
+		
+		boolean isCheckGood = true;
+		
 		switch (controllerOrder) {
+		
 			case LEFT:
-				this.model.setCoordXHero(model.getCoordXHero() - 1);
+				isCheckGood = model.checkCollision(model.getCoordXHero() - 1, model.getCoordYHero());
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
+					model.setDirection("left");
+					System.out.println("left");
+				}
 				break;
+				
 			case RIGHT:
-				this.model.setCoordXHero(model.getCoordXHero() + 1);
+				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero() 	+ 1, model.getCoordYHero());
+					model.setDirection("right");
+					System.out.println("right");
+				}
 				break;
+				
 			case UP:
-				this.model.setCoordXHero(model.getCoordYHero() + 1);
+				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
+					model.setDirection("up");
+					System.out.println("up");
+				}
 				break;
+				
 			case DOWN:
-				this.model.setCoordXHero(model.getCoordYHero() - 1);
+				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
+					model.setDirection("down");
+					System.out.println("down");
+				}
 				break;
+				
 			default:
+				model.setDirection("nothing");
+				System.out.println("nothing");
 				break;
 		}
 	}
