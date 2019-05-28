@@ -232,7 +232,8 @@ public final class Model extends Observable implements IModel {
 
 	public void Timer()
 	{
-
+		this.setChanged();
+		this.notifyObservers();
 		for(timeLeft=120; timeLeft>0; timeLeft--)
 		{
 			try {
