@@ -153,6 +153,17 @@ class ViewPanel extends JPanel implements Observer{
 					}
 				}
 
+				if (this.getViewFrame().getModel().getGameWin() == true)
+				{
+					try {
+						img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\GameWin.png"));
+						graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+
+
 				try {
 					img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\clockBoard.png"));
 					graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
@@ -182,10 +193,37 @@ class ViewPanel extends JPanel implements Observer{
 
 
 				String timeleft = String.valueOf(this.getViewFrame().getModel().getTimeLeft());
-				Font fonte = new Font("TimesRoman", Font.BOLD, 42);
-				graphics.setFont(fonte);
+				graphics.setFont(font);
 				graphics.setColor(Color.white);
-				graphics.drawString(timeleft, 110, 137);
+				if(this.getViewFrame().getModel().getGameWin() == false)
+				{
+					graphics.drawString(timeleft, 110, 137);
+				}
+
+				String finalTimeLeft = String.valueOf(this.getViewFrame().getModel().getFinalTime());
+				graphics.setFont(font);
+				graphics.setColor(Color.white);
+				if(this.getViewFrame().getModel().getGameWin() == true)
+				{
+					graphics.drawString(finalTimeLeft, 110, 137);
+				}
+
+				String score = String.valueOf(this.getViewFrame().getModel().getScore());
+				graphics.setFont(font);
+				graphics.setColor(Color.white);
+				if(this.getViewFrame().getModel().getGameWin() == false)
+				{
+					graphics.drawString(score, 385, 53);
+				}
+
+				String finalScore = String.valueOf(this.getViewFrame().getModel().getFinalScore());
+				graphics.setFont(font);
+				graphics.setColor(Color.white);
+				if(this.getViewFrame().getModel().getGameWin() == true)
+				{
+					graphics.drawString(finalScore, 385, 53);
+				}
+
 
 			}
 		    i++;

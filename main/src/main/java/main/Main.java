@@ -36,6 +36,5 @@ public abstract class Main {
         controller.control();
         controller.orderPerform(ControllerOrder.NOTHING);
         model.Timer();
-        model.GameOver();
     }
 }

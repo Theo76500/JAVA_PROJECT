@@ -59,12 +59,7 @@ public final class Model extends Observable implements IModel {
 	}
 
 
-	/**
-     * Sets the first level.
-     *
-     * @param level1
-     *            the new first level.
-     */
+
 
 	
 	public int getCoordXHero() {
@@ -84,17 +79,7 @@ public final class Model extends Observable implements IModel {
 	}
 	
 
-	/**
-     * Load hello world.
-     *
-     * @param code
-     *            the code
-     */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IModel#getMessage(java.lang.String)
-	 */
+
 	public void loadLevel() {
 		try {
 			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
@@ -137,6 +122,7 @@ public final class Model extends Observable implements IModel {
 			  if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
 				  levelTab[j][i] = "DirtAfterHero";
 				  setDiamond(getDiamond() - 1);
+				  setScore(getScore() + 15);
 			  }
 		    
 		    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && levelTab[j][i+1].equals("DirtAfterHero")) {
@@ -152,6 +138,26 @@ public final class Model extends Observable implements IModel {
 		    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
                 levelTab[j][i] = "DirtAfterHero";
             }
+
+		    if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy"))
+			{
+				GameOver();
+			}
+
+		    if (levelTab[j][i] != null && getTimeLeft() == 1)
+			{
+				GameOver();
+			}
+
+			  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor"))
+			  {
+				  GameWin();
+			  }
+
+			  if(levelTab[j][i] != null && getDiamond()==9)
+			  {
+			  	GameWin();
+			  }
 
 
 		     
@@ -227,14 +233,15 @@ public final class Model extends Observable implements IModel {
 	}
 
 
-
+	private boolean timerOn = true;
 	private int timeLeft;
-
 	public void Timer()
 	{
-
-		for(timeLeft=120; timeLeft>0; timeLeft--)
+		for(timeLeft=120; timerOn && timeLeft>0; timeLeft--)
 		{
+
+			this.setChanged();
+			this.notifyObservers();
 			try {
 				Thread.sleep (1000);
 			}
@@ -248,31 +255,72 @@ public final class Model extends Observable implements IModel {
 	{
 		return timeLeft;
 	}
-
 	public void setTimeLeft(int timeLeft)
 	{
 		this.timeLeft = timeLeft;
 	}
 
+
 	public boolean gameOver = false;
 	public void GameOver()
 	{
-		boolean i = true;
-		while (i == true){
-			if(getTimeLeft() == 0) {
-				gameOver = true;
-				i = false;
-			}
-		}
-
+		gameOver = true;
+		timerOn = false;
 	}
-
 	public boolean getGameOver() {
 		return gameOver;
 	}
-
 	public void setGameOver(boolean gameOver) {
 		this.gameOver = gameOver;
+	}
+
+	public int finalScore;
+	public int finalTime;
+	public boolean gameWin = false;
+	public void GameWin()
+	{
+		gameWin = true;
+		timerOn = false;
+		finalScore = getScore() + getTimeLeft();
+		finalTime = 0;
+
+	}
+
+	public boolean getGameWin() {
+		return gameWin;
+	}
+	public void setGameWin(boolean gameWin) {
+		this.gameWin= gameWin;
+	}
+
+
+	public int getFinalScore()
+	{
+		return finalScore;
+	}
+
+	public void setFinalScore(int finalScore)
+	{
+		this.finalScore = finalScore;
+	}
+
+	public int getFinalTime()
+	{
+		return finalTime;
+	}
+
+	public void setFinalTime(int finalTime)
+	{
+		this.finalTime = finalTime;
+	}
+
+	private int score = 0;
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
 	}
 }
 

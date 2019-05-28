@@ -42,6 +42,13 @@ public interface IModel {
 
 	public boolean getGameOver();
 
+	public boolean getGameWin();
+
 	public void setCharacterCoords(int coordX, int coordY);
 
+	public int getScore();
+
+    public int getFinalScore();
+
+    public int getFinalTime();
 }
