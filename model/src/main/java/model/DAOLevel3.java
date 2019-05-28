@@ -1,20 +1,20 @@
 package model;
 
+import entity.Level;
+import entity.RowLevel;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import entity.Level;
-import entity.RowLevel;
-
 
 /**
  * The Class DAOLevel1.
  *
- * @author Jean-Aymeric Diet
+ * @author LANGLOIS Theo
  */
-class DAOLevel1 extends DAOEntity<RowLevel> {
+class DAOLevel3 extends DAOEntity<RowLevel> {
 
 	/**
 	 * Instantiates a new DAO hello world.
@@ -24,7 +24,7 @@ class DAOLevel1 extends DAOEntity<RowLevel> {
 	 * @throws SQLException
 	 *           the SQL exception
 	 */
-	public DAOLevel1(final Connection connection) throws SQLException {
+	public DAOLevel3(final Connection connection) throws SQLException {
 		super(connection);
 	}
 
@@ -119,7 +119,7 @@ class DAOLevel1 extends DAOEntity<RowLevel> {
 		Level level = new Level();
 
 		try {
-			final String sql = "{call level1ById(?)}";
+			final String sql = "{call level3ById(?)}";
 			final CallableStatement call = this.getConnection().prepareCall(sql);
 			call.setInt(1, blocksId);
 			call.execute();

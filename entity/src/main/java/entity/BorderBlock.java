@@ -34,7 +34,7 @@ public class BorderBlock extends Inanimated{
 	}
 	
 	public BorderBlock() throws IOException {
-		this("BorderBlock", true, 0, 0, ImageIO.read(new File("model\\src\\main\\resources\\sprites\\borderblock.png")));
+		this("BorderBlock", true, 0, 0, ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\borderblock.png")));
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class BorderBlock extends Inanimated{
 			case 1 :
 			    
 			    try {
-			    	img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\borderblock.png"));
+			    	img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\borderblock.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -114,6 +114,12 @@ public class BorderBlock extends Inanimated{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	

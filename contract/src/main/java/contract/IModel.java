@@ -16,7 +16,15 @@ public interface IModel {
 
 	public void setLevel(Level level);
 
-	void loadLevel();
+	void loadLevel(int lvl);
+	
+	public String[][] getLevelTab();
+
+	public void setLevelTab(String[][] levelTab);
+	
+	public String getDirection();
+
+	public void setDirection(String direction);
 
 	public int getCoordXHero();
 	
@@ -34,8 +42,11 @@ public interface IModel {
 	Observable getObservable();
 	
 	String[][] levelBehavior(String[][] levelTab);
-
-
+	
+	void setCharacterCoords(int coordX, int coordY);
+	
+	boolean checkCollision(int coordX, int coordY);
+	
 	public int getDiamond();
 
 	public int getTimeLeft();
@@ -44,11 +55,10 @@ public interface IModel {
 
 	public boolean getGameWin();
 
-	public void setCharacterCoords(int coordX, int coordY);
-
 	public int getScore();
 
     public int getFinalScore();
 
     public int getFinalTime();
+
 }

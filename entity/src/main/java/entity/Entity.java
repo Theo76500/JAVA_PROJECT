@@ -27,6 +27,7 @@ public abstract class Entity {
 	
 	public abstract BufferedImage loadImage(int levelNumber);
 	public abstract BufferedImage loadImage(int levelNumber, String fileName);
+	public abstract BufferedImage loadImage(String direction);
 	
 	public String getStringCode() {
 		return stringCode;

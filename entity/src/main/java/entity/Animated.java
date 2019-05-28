@@ -21,6 +21,7 @@ public abstract class Animated extends Entity{
 	
 	public abstract BufferedImage loadImage(int levelNumber);
 	public abstract BufferedImage loadImage(int levelNumber, String fileName);
+	public abstract BufferedImage loadImage(String direction);
 
 	public int getCoordX() {
 		return coordX;

@@ -1,6 +1,9 @@
 package view;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -82,7 +85,7 @@ class ViewPanel extends JPanel implements Observer{
 		Toolkit.getDefaultToolkit().sync();
 		
 		String[][] levelTab = new String[20][20];
-		levelTab = this.getViewFrame().getLevelTab();
+		levelTab = this.getViewFrame().getModel().getLevelTab();
 		levelTab = this.getViewFrame().getModel().levelBehavior(levelTab);
 		
 		
@@ -128,7 +131,7 @@ class ViewPanel extends JPanel implements Observer{
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
-				  if(levelTab[j][i].equals("ExitDoor")) {
+				  if(levelTab[j][i].equals("ExitDoor") && this.getViewFrame().getModel().getDiamond() == 0) {
 					    img = ExitDoor.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
@@ -142,90 +145,91 @@ class ViewPanel extends JPanel implements Observer{
 				  Entity hero = new Hero();
 			      img = hero.loadImage(1);
 			      graphics.drawImage(img, this.getViewFrame().getModel().getCoordXHero() * dimensionX, this.getViewFrame().getModel().getCoordYHero() * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+			      
+			      
+			      if (this.getViewFrame().getModel().getGameOver() == true)
+					{
+						try {
+							img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\GameOver.png"));
+							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
 
-				if (this.getViewFrame().getModel().getGameOver() == true)
-				{
+					if (this.getViewFrame().getModel().getGameWin() == true)
+					{
+						try {
+							img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\GameWin.png"));
+							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+
+
+
+
 					try {
-						img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\GameOver.png"));
-						graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+						img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\clockBoard.png"));
+						graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-				}
 
-				if (this.getViewFrame().getModel().getGameWin() == true)
-				{
 					try {
-						img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\GameWin.png"));
-						graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+						img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\DiamondBoard.png"));
+						graphics.drawImage(img, 20, 40, this.getWidth() /4, this.getHeight() /13, this);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
-				}
+
+					try {
+						img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\ScoreBoard.png"));
+						graphics.drawImage(img, 270, 10, this.getWidth() /3, this.getHeight() /13, this);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+
+					String diamond = String.valueOf(this.getViewFrame().getModel().getDiamond());
+					Font font = new Font("TimesRoman", Font.BOLD, 42);
+					graphics.setFont(font);
+					graphics.setColor(Color.white);
+					graphics.drawString(diamond, 132, 82);
 
 
-				try {
-					img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\clockBoard.png"));
-					graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+					String timeleft = String.valueOf(this.getViewFrame().getModel().getTimeLeft());
+					graphics.setFont(font);
+					graphics.setColor(Color.white);
+					if(this.getViewFrame().getModel().getGameWin() == false)
+					{
+						graphics.drawString(timeleft, 110, 137);
+					}
 
-				try {
-					img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\DiamondBoard.png"));
-					graphics.drawImage(img, 20, 40, this.getWidth() /4, this.getHeight() /13, this);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+					String finalTimeLeft = String.valueOf(this.getViewFrame().getModel().getFinalTime());
+					graphics.setFont(font);
+					graphics.setColor(Color.white);
+					if(this.getViewFrame().getModel().getGameWin() == true)
+					{
+						graphics.drawString(finalTimeLeft, 110, 137);
+					}
 
-				try {
-					img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\ScoreBoard.png"));
-					graphics.drawImage(img, 270, 10, this.getWidth() /3, this.getHeight() /13, this);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+					String score = String.valueOf(this.getViewFrame().getModel().getScore());
+					graphics.setFont(font);
+					graphics.setColor(Color.white);
+					if(this.getViewFrame().getModel().getGameWin() == false)
+					{
+						graphics.drawString(score, 385, 53);
+					}
 
-				String diamond = String.valueOf(this.getViewFrame().getModel().getDiamond());
-				Font font = new Font("TimesRoman", Font.BOLD, 42);
-				graphics.setFont(font);
-				graphics.setColor(Color.white);
-				graphics.drawString(diamond, 132, 82);
-
-
-				String timeleft = String.valueOf(this.getViewFrame().getModel().getTimeLeft());
-				graphics.setFont(font);
-				graphics.setColor(Color.white);
-				if(this.getViewFrame().getModel().getGameWin() == false)
-				{
-					graphics.drawString(timeleft, 110, 137);
-				}
-
-				String finalTimeLeft = String.valueOf(this.getViewFrame().getModel().getFinalTime());
-				graphics.setFont(font);
-				graphics.setColor(Color.white);
-				if(this.getViewFrame().getModel().getGameWin() == true)
-				{
-					graphics.drawString(finalTimeLeft, 110, 137);
-				}
-
-				String score = String.valueOf(this.getViewFrame().getModel().getScore());
-				graphics.setFont(font);
-				graphics.setColor(Color.white);
-				if(this.getViewFrame().getModel().getGameWin() == false)
-				{
-					graphics.drawString(score, 385, 53);
-				}
-
-				String finalScore = String.valueOf(this.getViewFrame().getModel().getFinalScore());
-				graphics.setFont(font);
-				graphics.setColor(Color.white);
-				if(this.getViewFrame().getModel().getGameWin() == true)
-				{
-					graphics.drawString(finalScore, 385, 53);
-				}
-
-
-			}
+					String finalScore = String.valueOf(this.getViewFrame().getModel().getFinalScore());
+					graphics.setFont(font);
+					graphics.setColor(Color.white);
+					if(this.getViewFrame().getModel().getGameWin() == true)
+					{
+						graphics.drawString(finalScore, 385, 53);
+					}
+		    }
 		    i++;
 		  }
 		  j++;

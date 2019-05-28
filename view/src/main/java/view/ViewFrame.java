@@ -2,10 +2,12 @@ package view;
 
 import java.awt.GraphicsConfiguration;
 import java.awt.HeadlessException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 import contract.IController;
 import contract.IModel;
@@ -19,11 +21,21 @@ import entity.RowLevel;
  */
 class ViewFrame extends JFrame implements KeyListener {
 
+	/** MENU */
+
+	private JMenuBar menuBar = new JMenuBar();
+	private JMenu menu1 = new JMenu("Map");
+	private JMenuItem map1 = new JMenuItem("MAP 1");
+	private JMenuItem map2 = new JMenuItem("MAP 2");
+	private JMenuItem map3 = new JMenuItem("MAP 3");
+	private JMenuItem map4 = new JMenuItem("MAP 4");
+	private JMenuItem map5 = new JMenuItem("MAP 5");
+
 	/** The model. */
-	private IModel						model;
+	private IModel model;
 
 	/** The controller. */
-	private IController				controller;
+	private IController controller;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -697358409737458175L;
 
@@ -34,22 +46,12 @@ class ViewFrame extends JFrame implements KeyListener {
 	/** The Y max coord. */
 	protected final int yMax = 15;
 	
-	protected String[][] levelTab = new String[20][20];
-	
 	public int getXMax() {
 		return xMax;
 	}
 
 	public int getYMax() {
 		return yMax;
-	}
-	
-	public String[][] getLevelTab() {
-		return levelTab;
-	}
-
-	public void setLevelTab(String[][] levelTab) {
-		this.levelTab = levelTab;
 	}
 	
 	
@@ -156,11 +158,60 @@ class ViewFrame extends JFrame implements KeyListener {
 		this.setModel(model);
 		this.setTitle("Boulder Dash");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
 		this.setSize(700 + this.getInsets().left + this.getInsets().right, 750 + this.getInsets().top + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
+
+		menuBar.add(menu1);
+
+		menu1.add(map1);
+		map1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(1);
+				printLevel();
+			}
+		});
+
+		menu1.add(map2);
+		map2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(2);
+				printLevel();
+			}
+		});
+
+		menu1.add(map3);
+		map3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(3);
+				printLevel();
+			}
+		});
+
+		menu1.add(map4);
+		map4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(4);
+				printLevel();
+			}
+		});
+
+		menu1.add(map5);
+		map5.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(5);
+				printLevel();
+			}
+		});
+
+		setJMenuBar(menuBar);
 	}
 
 	/**
@@ -172,6 +223,8 @@ class ViewFrame extends JFrame implements KeyListener {
 	public void printLevel() {
 		
 		model.getLevel();
+		String[][] levelTab = model.getLevelTab();
+		
 		for(RowLevel elem: Level.getLevel())
 	       {
 	       	 

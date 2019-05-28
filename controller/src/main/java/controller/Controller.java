@@ -39,7 +39,7 @@ public final class Controller implements IController {
 	 */
 	public void control() {
 		
-		model.loadLevel();
+		model.loadLevel(1);
 		view.printLevel();
 	}
 
@@ -80,29 +80,48 @@ public final class Controller implements IController {
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		
+		boolean isCheckGood = true;
+		
 		switch (controllerOrder) {
 		
 			case LEFT:
-				model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
-				System.out.println("left");
+				isCheckGood = model.checkCollision(model.getCoordXHero() - 1, model.getCoordYHero());
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
+					model.setDirection("left");
+				}
 				break;
 				
 			case RIGHT:
-				model.setCharacterCoords(model.getCoordXHero() 	+ 1, model.getCoordYHero());
-				System.out.println("right");
+				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero() 	+ 1, model.getCoordYHero());
+					model.setDirection("right");
+				}
 				break;
 				
 			case UP:
-				model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
-				System.out.println("up");
+				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
+					model.setDirection("up");
+				}
 				break;
 				
-			case DOWN:;
-			model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
-				System.out.println("down");
+			case DOWN:
+				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
+				
+				if(isCheckGood) {
+					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
+					model.setDirection("down");
+				}
 				break;
 				
 			default:
+				model.setDirection("nothing");
 				break;
 		}
 	}

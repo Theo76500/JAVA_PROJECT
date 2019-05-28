@@ -34,7 +34,7 @@ public class Diamond extends Animated{
 	}
 	
 	public Diamond() throws IOException {
-		this("Diamond", true, 0, 0, ImageIO.read(new File("model\\src\\main\\resources\\sprites\\diamond.png")));
+		this("Diamond", true, 0, 0, ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\diamond.png")));
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class Diamond extends Animated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\diamond.png"));
+			    	img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\diamond.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -113,6 +113,12 @@ public class Diamond extends Animated{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
