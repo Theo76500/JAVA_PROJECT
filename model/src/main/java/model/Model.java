@@ -237,13 +237,7 @@ public final class Model extends Observable implements IModel {
 	private int timeLeft;
 	public void Timer()
 	{
-<<<<<<< HEAD
 		for(timeLeft=120; timerOn && timeLeft>0; timeLeft--)
-=======
-		this.setChanged();
-		this.notifyObservers();
-		for(timeLeft=120; timeLeft>0; timeLeft--)
->>>>>>> branch 'first' of https://github.com/Theo76500/JAVA_PROJECT
 		{
 
 			this.setChanged();

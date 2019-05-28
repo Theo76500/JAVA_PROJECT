@@ -2,24 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3b7b370b-5919-4bd0-b3c8-152e69db6876" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contract/src/main/java/contract/IModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/contract/src/main/java/contract/IModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/src/main/java/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/main/src/main/java/main/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/src/main/java/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/model/src/main/java/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/ClockBoard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/DiamondBoard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/GameOver.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/ScoreBoard.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/borderblock.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/boulder.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/diamond.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/dirt.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/dirtafterhero.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/enemy.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/exitdoor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/ressource/hero.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/src/main/resources/sprites/GameWin.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/view/src/main/java/view/ViewPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/view/src/main/java/view/ViewPanel.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/classes/" />
     <ignored path="$PROJECT_DIR$/main/target/" />
@@ -40,11 +23,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/src/main/java/model/Model.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="307" column="5" lean-forward="true" selection-start-line="307" selection-start-column="5" selection-end-line="307" selection-end-column="5" />
+            <state relative-caret-position="293">
+              <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
               <folding>
                 <element signature="e#641#642#0" expanded="true" />
                 <element signature="e#672#673#0" expanded="true" />
@@ -74,6 +57,7 @@
                 <element signature="e#5667#5668#0" expanded="true" />
                 <element signature="e#5715#5716#0" expanded="true" />
                 <element signature="e#5749#5750#0" expanded="true" />
+                <element signature="e#5781#5782#0" expanded="true" />
                 <element signature="e#5803#5804#0" expanded="true" />
                 <element signature="e#5850#5851#0" expanded="true" />
                 <element signature="e#5882#5883#0" expanded="true" />
@@ -84,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/src/main/java/view/ViewPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="194" column="95" selection-start-line="194" selection-start-column="95" selection-end-line="194" selection-end-column="95" />
+            <state relative-caret-position="-849">
+              <caret line="155" column="48" lean-forward="true" selection-start-line="155" selection-start-column="48" selection-end-line="155" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -121,15 +105,15 @@
         <option value="$PROJECT_DIR$/entity/src/main/java/entity/Boulder.java" />
         <option value="$PROJECT_DIR$/view/src/main/java/view/ViewFrame.java" />
         <option value="$PROJECT_DIR$/main/src/main/java/main/Main.java" />
-        <option value="$PROJECT_DIR$/model/src/main/java/model/Model.java" />
         <option value="$PROJECT_DIR$/contract/src/main/java/contract/IModel.java" />
         <option value="$PROJECT_DIR$/view/src/main/java/view/ViewPanel.java" />
+        <option value="$PROJECT_DIR$/model/src/main/java/model/Model.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="492" />
-    <option name="y" value="-8" />
+    <option name="x" value="-1462" />
+    <option name="y" value="-128" />
     <option name="width" value="1347" />
     <option name="height" value="763" />
   </component>
@@ -293,18 +277,18 @@
       <option name="presentableId" value="Default" />
       <updated>1559023740463</updated>
       <workItem from="1559023743554" duration="1904000" />
-      <workItem from="1559026263381" duration="6457000" />
+      <workItem from="1559026263381" duration="6912000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8361000" />
+    <option name="totallyTimeSpent" value="8816000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="916" extended-state="6" />
+    <frame x="-1928" y="-120" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16666667" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
@@ -313,7 +297,7 @@
       <window_info id="Image Layers" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.41242236" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33705583" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -441,10 +425,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/contract/src/main/java/contract/IModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="233">
+          <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/src/main/java/view/ViewPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-849">
+          <caret line="155" column="48" lean-forward="true" selection-start-line="155" selection-start-column="48" selection-end-line="155" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/src/main/java/model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="307" column="5" lean-forward="true" selection-start-line="307" selection-start-column="5" selection-end-line="307" selection-end-column="5" />
+        <state relative-caret-position="293">
+          <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
           <folding>
             <element signature="e#641#642#0" expanded="true" />
             <element signature="e#672#673#0" expanded="true" />
@@ -474,26 +472,13 @@
             <element signature="e#5667#5668#0" expanded="true" />
             <element signature="e#5715#5716#0" expanded="true" />
             <element signature="e#5749#5750#0" expanded="true" />
+            <element signature="e#5781#5782#0" expanded="true" />
             <element signature="e#5803#5804#0" expanded="true" />
             <element signature="e#5850#5851#0" expanded="true" />
             <element signature="e#5882#5883#0" expanded="true" />
             <element signature="e#5950#5951#0" expanded="true" />
             <element signature="e#6011#6012#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/contract/src/main/java/contract/IModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="52" column="25" lean-forward="true" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/src/main/java/view/ViewPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="194" column="95" selection-start-line="194" selection-start-column="95" selection-end-line="194" selection-end-column="95" />
         </state>
       </provider>
     </entry>
