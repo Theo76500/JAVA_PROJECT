@@ -15,7 +15,7 @@ import entity.RowLevel;
 /**
  * The Class ViewFrame.
  *
- * @author LANGLOIS Theo & PAIN Valentin
+ * @author Jean-Aymeric Diet
  */
 class ViewFrame extends JFrame implements KeyListener {
 
@@ -196,7 +196,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
 	 */
 	public void keyPressed(final KeyEvent e) {
-		this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
+			this.getController().orderPerform(View.keyCodeToControllerOrder(e.getKeyCode()));
 	}
 
 	/*

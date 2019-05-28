@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Observable;
@@ -22,15 +23,15 @@ import entity.Hero;
 /**
  * The Class ViewPanel.
  *
- * @author LANGLOIS Theo & PAIN Valentin
+ * @author Jean-Aymeric Diet
  */
-class ViewPanel extends JPanel implements Observer {
-
+class ViewPanel extends JPanel implements Observer{
+	
 	/** The view frame. */
 	private ViewFrame					viewFrame;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
-
+	
 	/**
 	 * Instantiates a new view panel.
 	 *
@@ -77,21 +78,18 @@ class ViewPanel extends JPanel implements Observer {
 	 */
 	@Override
 	protected void paintComponent(final Graphics graphics) {
-		//graphics.clearRect(0, 0, this.getWidth(), this.getHeight());
-		//graphics.drawString(this.getViewFrame().getModel().getHelloWorld().getMessage(), 10, 20);
+		
+		Toolkit.getDefaultToolkit().sync();
 		
 		String[][] levelTab = new String[20][20];
 		levelTab = this.getViewFrame().getLevelTab();
 		levelTab = this.getViewFrame().getModel().levelBehavior(levelTab);
 		
-		Image img = null;
+		
+		BufferedImage img = null;
 		
 		int i = 0;
 		int j = 0;
-		 
-		//this.removeAll();
-		this.repaint();
-		this.removeAll();
 		
 		for(String subTab[] : levelTab)
 		{
@@ -101,79 +99,86 @@ class ViewPanel extends JPanel implements Observer {
 		  
 		  for(String str : subTab)
 		  {     
-		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTab[j][i]);
+		    //System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTab[j][i]);
 		    if(levelTab[j][i] != null) {
+		    	
 				  
-				  if(levelTab[j][i].equals("BorderBlock")){
-				    	Entity borderBlock = new BorderBlock("BorderBlock", false, j, i);
-				    	img = borderBlock.loadImage(1);
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				 if(levelTab[j][i].equals("BorderBlock")){
+					  img = BorderBlock.getImg();
+				      graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				  }
 				    	
 				  if(levelTab[j][i].equals("Diamond")) {
-				    	Entity diamond = new Diamond("Diamond", false, j, i);
-				    	img = diamond.loadImage(1);
+					    img = Diamond.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Dirt")) {
-				    	Entity dirt = new Dirt("Dirt", false, j, i);
-				    	img = dirt.loadImage(1);
+					    img = Dirt.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("DirtAfterHero")) {
-				    	Entity dirtafterhero = new DirtAfterHero("DirtAfterHero", false, j, i);
-				    	img = dirtafterhero.loadImage(1);
+					    img = DirtAfterHero.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Boulder")) {
-				    	Entity boulder = new Boulder("Boulder", false, j, i);
-				    	img = boulder.loadImage(1);
+					    img = Boulder.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("ExitDoor")) {
-				    	Entity exitdoor = new ExitDoor("ExitDoor", false, j, i);
-				    	img = exitdoor.loadImage(1);
+					    img = ExitDoor.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Enemy")) {
-				    	Entity enemy = new Enemy("Enemy", false, j, i);
-				    	img = enemy.loadImage(1);
+					    img = Enemy.getImg();
 				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 				    }
+				  
+				
+				  Entity hero = new Hero();
+			      img = hero.loadImage(1);
+			      graphics.drawImage(img, this.getViewFrame().getModel().getCoordXHero() * dimensionX, this.getViewFrame().getModel().getCoordYHero() * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+
+				if (this.getViewFrame().getModel().getGameOver() == true)
+				{
+					try {
+						img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\GameOver.png"));
+						graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 
 				try {
-					img = ImageIO.read(new File("entity\\ressource\\clockBoard.png"));
+					img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\clockBoard.png"));
 					graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				try {
-					img = ImageIO.read(new File("entity\\ressource\\DiamondBoard.png"));
+					img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\DiamondBoard.png"));
 					graphics.drawImage(img, 20, 40, this.getWidth() /4, this.getHeight() /13, this);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
 				try {
-					img = ImageIO.read(new File("entity\\ressource\\ScoreBoard.png"));
+					img = ImageIO.read(new File("model\\src\\main\\resources\\sprites\\ScoreBoard.png"));
 					graphics.drawImage(img, 270, 10, this.getWidth() /3, this.getHeight() /13, this);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
-
-
 				String diamond = String.valueOf(this.getViewFrame().getModel().getDiamond());
 				Font font = new Font("TimesRoman", Font.BOLD, 42);
 				graphics.setFont(font);
 				graphics.setColor(Color.white);
-				graphics.drawString(diamond, 150, 82);
+				graphics.drawString(diamond, 132, 82);
 
 
 				String timeleft = String.valueOf(this.getViewFrame().getModel().getTimeLeft());
@@ -181,11 +186,8 @@ class ViewPanel extends JPanel implements Observer {
 				graphics.setFont(fonte);
 				graphics.setColor(Color.white);
 				graphics.drawString(timeleft, 110, 137);
-				  
-				  Entity hero = new Hero();
-			      img = hero.loadImage(1);
-			      graphics.drawImage(img, this.getViewFrame().getModel().getCoordXHero() * dimensionX, this.getViewFrame().getModel().getCoordYHero() * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
-		    }
+
+			}
 		    i++;
 		  }
 		  j++;

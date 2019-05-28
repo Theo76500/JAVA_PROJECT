@@ -1,19 +1,23 @@
 package entity;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-/**
- * 
- * @author PAIN Valentin
- *
- */
-
 public class Enemy extends Animated{
 
+	private static BufferedImage img;
+	
+	public static BufferedImage getImg() {
+		return img;
+	}
+
+	public static void setImg(BufferedImage img) {
+		Enemy.img = img;
+	}
+	
 	public Enemy(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Enemy";
 		this.move = true;
@@ -21,19 +25,27 @@ public class Enemy extends Animated{
 		this.coordY = 0;
 	}
 	
-	public Enemy() {
-		this("Enemy", true, 0, 0);
+	public Enemy(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
+		this.stringCode = "Enemy";
+		this.move = true;
+		this.coordX = 0;
+		this.coordY = 0;
+		Enemy.img = this.loadImage(1);
+	}
+	
+	public Enemy() throws IOException {
+		this("Enemy", true, 0, 0, ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\enemy.png")));
 	}
 	
 	@Override
-	public Image loadImage(int levelNumber) {
+	public BufferedImage loadImage(int levelNumber) {
 		try {
-			Image img = null;
+			BufferedImage img = null;
 			
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("entity\\ressource\\enemy.png"));
+			    	img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\enemy.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -67,37 +79,37 @@ public class Enemy extends Animated{
 	}
 	
 	@Override
-	public Image loadImage(int levelNumber, String fileName) {
+	public BufferedImage loadImage(int levelNumber, String fileName) {
 		// TODO Auto-generated method stub
 		
 		try {
-			Image imgSasukeNormal = null;
+			BufferedImage img = null;
 			
 			switch(levelNumber) {
 			case 1 :
-			    imgSasukeNormal = ImageIO.read(new File(fileName));
+			    img = ImageIO.read(new File(fileName));
 				break;
 			
 			case 2 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 				
 			case 3 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 			
 			case 4 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 				
 			case 5 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 			
 			default :
 				break;
 		}
-			return imgSasukeNormal;
+			return img;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

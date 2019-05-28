@@ -12,7 +12,7 @@ import contract.IView;
 /**
  * The Class View.
  *
- * @author PAIN Valentin & LANGLOIS Theo
+ * @author Jean-Aymeric Diet
  */
 public final class View implements IView, Runnable {
 
@@ -43,16 +43,25 @@ public final class View implements IView, Runnable {
 	 * @param keyCode
 	 *          the key code
 	 * @return the controller order
+	 * @throws InterruptedException 
 	 */
 	protected static ControllerOrder keyCodeToControllerOrder(final int keyCode) {
 		switch (keyCode) {
 			case KeyEvent.VK_LEFT:
 				return ControllerOrder.LEFT;
+			case KeyEvent.VK_Q:
+				return ControllerOrder.LEFT;
 			case KeyEvent.VK_RIGHT:
+				return ControllerOrder.RIGHT;
+			case KeyEvent.VK_D:
 				return ControllerOrder.RIGHT;
 			case KeyEvent.VK_UP:
 				return ControllerOrder.UP;
+			case KeyEvent.VK_Z:
+				return ControllerOrder.UP;
 			case KeyEvent.VK_DOWN:
+				return ControllerOrder.DOWN;
+			case KeyEvent.VK_S:
 				return ControllerOrder.DOWN;
 			default:
 				return ControllerOrder.NOTHING;

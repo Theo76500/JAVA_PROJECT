@@ -6,13 +6,14 @@ package main;
 
 import contract.ControllerOrder;
 import controller.Controller;
+import entity.BorderBlock;
 import model.Model;
 import view.View;
 
 /**
  * The Class Main.
  *
- * @author LANGLOIS Theo
+ * @author Jean-Aymeric Diet
  */
 public abstract class Main {
 
@@ -23,14 +24,18 @@ public abstract class Main {
      *            the arguments
      */
     public static void main(final String[] args) {
+    	
         final Model model = new Model();
         final View view = new View(model);
         final Controller controller = new Controller(view, model);
+        
+        model.avoidLatency();
         
         view.setController(controller);
 
         controller.control();
         controller.orderPerform(ControllerOrder.NOTHING);
         model.Timer();
+        model.GameOver();
     }
 }

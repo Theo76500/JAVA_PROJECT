@@ -5,7 +5,7 @@ import entity.RowLevel;
 /**
  * The Interface IController.
  *
- * @author LANGLOIS Theo
+ * @author Jean-Aymeric Diet
  */
 public interface IController {
 

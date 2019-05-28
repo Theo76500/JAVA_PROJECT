@@ -7,7 +7,6 @@ import contract.IView;
 
 /**
  * The Class Controller.
- * @author LANGLOIS Theo & PAIN Valentin
  */
 public final class Controller implements IController {
 
@@ -80,23 +79,29 @@ public final class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
+		
 		switch (controllerOrder) {
+		
 			case LEFT:
-				model.setCoordXHero(model.getCoordXHero() - 1);
+				model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
 				System.out.println("left");
 				break;
+				
 			case RIGHT:
-				model.setCoordXHero(model.getCoordXHero() + 1);
+				model.setCharacterCoords(model.getCoordXHero() 	+ 1, model.getCoordYHero());
 				System.out.println("right");
 				break;
+				
 			case UP:
-				model.setCoordYHero(model.getCoordYHero() - 1);
+				model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
 				System.out.println("up");
 				break;
-			case DOWN:
-				model.setCoordYHero(model.getCoordYHero() + 1);
+				
+			case DOWN:;
+			model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
 				System.out.println("down");
 				break;
+				
 			default:
 				break;
 		}
