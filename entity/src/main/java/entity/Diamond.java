@@ -116,6 +116,12 @@ public class Diamond extends Animated{
 		return null;
 	}
 	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	public void setStringCode(String stringCode) {
 		this.stringCode = stringCode;
 	}

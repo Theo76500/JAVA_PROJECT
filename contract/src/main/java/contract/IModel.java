@@ -46,5 +46,21 @@ public interface IModel {
 	void setCharacterCoords(int coordX, int coordY);
 	
 	boolean checkCollision(int coordX, int coordY);
+	
+	public int getDiamond();
+
+	public int getTimeLeft();
+
+	public boolean getGameOver();
+
+	public boolean getGameWin();
+
+	public int getScore();
+
+    public int getFinalScore();
+
+    public int getFinalTime();
+    
+    public String[][] levelCamera(String[][] levelTab);
 
 }

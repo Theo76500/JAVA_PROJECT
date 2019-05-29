@@ -17,31 +17,15 @@ import entity.RowLevel;
  *
  * @author Jean-Aymeric Diet
  */
-class ViewFrame extends JFrame implements KeyListener {
-
+class ViewFrame extends JFrame implements KeyListener{
+	
 	/** The model. */
 	private IModel model;
 
 	/** The controller. */
 	private IController controller;
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= -697358409737458175L;
-
-	
-	/** The X max coord. */
-	protected final int xMax = 16;
-
-	/** The Y max coord. */
-	protected final int yMax = 15;
-	
-	public int getXMax() {
-		return xMax;
-	}
-
-	public int getYMax() {
-		return yMax;
-	}
-	
+	private static final long serialVersionUID = -697358409737458175L;
 	
 	/**
 	 * Instantiates a new view frame.
@@ -143,13 +127,13 @@ class ViewFrame extends JFrame implements KeyListener {
 	 *          the model
 	 */
 	private void buildViewFrame(final IModel model) {
-		this.setModel(model);
+		this.setModel(model);	
 		this.setTitle("Boulder Dash");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
-		this.setSize(500 + this.getInsets().left + this.getInsets().right, 530 + this.getInsets().top + this.getInsets().bottom);
+		this.setSize(700 + this.getInsets().left + this.getInsets().right, 750 + this.getInsets().top + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
 	}
 
@@ -164,10 +148,9 @@ class ViewFrame extends JFrame implements KeyListener {
 		model.getLevel();
 		String[][] levelTab = model.getLevelTab();
 		
-		for(RowLevel elem: Level.getLevel())
-	       {
+		for(RowLevel entity: Level.getLevel()){
 	       	 
-	       	 levelTab[elem.getBlocksX()][elem.getBlocksY()] = elem.getBlocksType();
+	       	 levelTab[entity.getBlocksX()][entity.getBlocksY()] = entity.getBlocksType();
 	       	 
 	       }
 	}

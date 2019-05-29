@@ -20,14 +20,14 @@ public class ExitDoor extends Inanimated{
 	
 	public ExitDoor(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "ExitDoor";
-		this.move = true;
+		this.move = false;
 		this.coordX = 0;
 		this.coordY = 0;
 	}
 	
 	public ExitDoor(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
 		this.stringCode = "ExitDoor";
-		this.move = true;
+		this.move = false;
 		this.coordX = 0;
 		this.coordY = 0;
 		ExitDoor.img = this.loadImage(1);
@@ -113,6 +113,12 @@ public class ExitDoor extends Inanimated{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

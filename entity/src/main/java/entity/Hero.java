@@ -11,12 +11,12 @@ public class Hero extends Animated{
 	public Hero(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Hero";
 		this.move = true;
-		this.coordX = 8;
-		this.coordY = 3;
+		this.coordX = 5;
+		this.coordY = 5;
 	}
 	
 	public Hero() {
-		this("Hero", true, 8, 3);
+		this("Hero", true, 5, 5);
 	}
 	
 	@Override
@@ -95,6 +95,12 @@ public class Hero extends Animated{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

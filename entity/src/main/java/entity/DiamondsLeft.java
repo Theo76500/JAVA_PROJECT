@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 
 public class DiamondsLeft extends Inanimated{
 
+	public static BufferedImage img;
+	
 	public DiamondsLeft(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "DiamondsLeft";
 		this.move = false;
@@ -15,45 +17,30 @@ public class DiamondsLeft extends Inanimated{
 		this.coordY = 0;
 	}
 	
-	public DiamondsLeft() {
-		this("DiamondsLeft", false, 0, 0);
+	public DiamondsLeft(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
+		this.stringCode = "DiamondsLeft";
+		this.move = false;
+		this.coordX = 0;
+		this.coordY = 0;
+		DiamondsLeft.img = this.loadImage(1);
 	}
 	
+	public DiamondsLeft() throws IOException {
+		this("DiamondsLeft", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\diamondsleft.png")));
+	}
+
 	@Override
 	public BufferedImage loadImage(int levelNumber) {
-		try {
-			BufferedImage img = null;
-			
-			switch(levelNumber) {
-			case 1 :
-			    img = ImageIO.read(new File(""));
-				break;
-			
-			case 2 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(""));
-				break;
-			
-			case 4 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(""));
-				break;
-			
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
 		
+		BufferedImage img = null;
+		    
+		    try {
+		    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\diamondsleft.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		    
+		return img;
 	}
 	
 	@Override
@@ -91,6 +78,12 @@ public class DiamondsLeft extends Inanimated{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

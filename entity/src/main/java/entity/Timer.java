@@ -8,89 +8,47 @@ import javax.imageio.ImageIO;
 
 public class Timer extends Inanimated{
 
-	public Timer(String stringCode, boolean move, int coordX, int coordY) {
-		this.stringCode = "Timer";
+	public static BufferedImage img;
+	public static boolean timerOn;
+
+	public Timer(String stringCode, boolean move, int coordX, int coordY, boolean timerOn) {
+		this.stringCode = "";
 		this.move = false;
 		this.coordX = 0;
 		this.coordY = 0;
+		Timer.timerOn = true;
 	}
 	
-	public Timer() {
-		this("Timer", false, 0, 0);
+	public Timer(String stringCode, boolean move, int coordX, int coordY, BufferedImage img, boolean gameState) {
+		this.stringCode = "";
+		this.move = false;
+		this.coordX = 0;
+		this.coordY = 0;
+		Timer.img = this.loadImage(1);
+		Timer.timerOn = true;
 	}
 	
+	public Timer() throws IOException {
+		this("Timer", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\timer.png")), true);
+	}
+
 	@Override
 	public BufferedImage loadImage(int levelNumber) {
-		try {
-			BufferedImage img = null;
-			
-			switch(levelNumber) {
-			case 1 :
-			    img = ImageIO.read(new File(""));
-				break;
-			
-			case 2 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(""));
-				break;
-			
-			case 4 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(""));
-				break;
-			
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
 		
+		BufferedImage img = null;
+		    
+		    try {
+		    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\timer.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		    
+		return img;
 	}
 	
 	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
+	public BufferedImage loadImage(String direction) {
 		// TODO Auto-generated method stub
-		
-		try {
-			BufferedImage img = null;
-			
-			switch(levelNumber) {
-			case 1 :
-			    img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 2 :
-				img= ImageIO.read(new File(fileName));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 4 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		return null;
 	}
 
@@ -114,14 +72,10 @@ public class Timer extends Inanimated{
 		this.coordY = coordY;
 	}
 
-	public boolean getMove() {
-		
-		return this.move;
-	}
-	
-	public void setMove(boolean move) {
-		
-		this.move = move;
+	@Override
+	public BufferedImage loadImage(int levelNumber, String fileName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
