@@ -150,7 +150,7 @@ class ViewPanel extends JPanel implements Observer{
 			      if (this.getViewFrame().getModel().getGameOver() == true)
 					{
 						try {
-							img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\GameOver.png"));
+							img = ImageIO.read(new File("Sprites\\GameOver.png"));
 							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -160,7 +160,7 @@ class ViewPanel extends JPanel implements Observer{
 					if (this.getViewFrame().getModel().getGameWin() == true)
 					{
 						try {
-							img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\GameWin.png"));
+							img = ImageIO.read(new File("Sprites\\GameWin.png"));
 							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -171,21 +171,21 @@ class ViewPanel extends JPanel implements Observer{
 
 
 					try {
-						img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\clockBoard.png"));
+						img = ImageIO.read(new File("Sprites\\clockBoard.png"));
 						graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 
 					try {
-						img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\DiamondBoard.png"));
+						img = ImageIO.read(new File("Sprites\\DiamondBoard.png"));
 						graphics.drawImage(img, 20, 40, this.getWidth() /4, this.getHeight() /13, this);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 
 					try {
-						img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\ScoreBoard.png"));
+						img = ImageIO.read(new File("Sprites\\ScoreBoard.png"));
 						graphics.drawImage(img, 270, 10, this.getWidth() /3, this.getHeight() /13, this);
 					} catch (IOException e) {
 						e.printStackTrace();

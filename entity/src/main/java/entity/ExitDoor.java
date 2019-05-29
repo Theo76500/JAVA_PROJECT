@@ -34,7 +34,7 @@ public class ExitDoor extends Inanimated{
 	}
 	
 	public ExitDoor() throws IOException {
-		this("ExitDoor", true, 0, 0, ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\exitdoor.png")));
+		this("ExitDoor", true, 0, 0, ImageIO.read(new File("Sprites\\exitdoor.png")));
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class ExitDoor extends Inanimated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\exitdoor.png"));
+			    	img = ImageIO.read(new File("Sprites\\exitdoor.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

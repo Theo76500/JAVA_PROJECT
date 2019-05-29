@@ -27,7 +27,7 @@ public class Hero extends Animated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("model\\src\\main\\resources\\Sprites\\hero.png"));
+			    	img = ImageIO.read(new File("Sprites\\hero.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
