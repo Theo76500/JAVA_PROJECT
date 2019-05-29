@@ -1,6 +1,6 @@
 package entity;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 
 public abstract class Inanimated extends Entity{
 
@@ -15,8 +15,9 @@ public abstract class Inanimated extends Entity{
 		this("", false, 0, 0);
 	}
 	
-	public abstract Image loadImage(int levelNumber);
-	public abstract Image loadImage(int levelNumber, String fileName);
+	public abstract BufferedImage loadImage(int levelNumber);
+	public abstract BufferedImage loadImage(int levelNumber, String fileName);
+	public abstract BufferedImage loadImage(String direction);
 	
 	public void setStringCode(String stringCode) {
 		this.stringCode = stringCode;

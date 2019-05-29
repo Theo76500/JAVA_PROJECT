@@ -15,49 +15,16 @@ public interface IModel {
 	public Level getLevel();
 
 	public void setLevel(Level level);
-	
-	/**
-	 * Gets the first level.
-	 *
-	 * @return the level1 entity
-	 */
-	Level getLevel1();
-	
-	/**
-	 * Gets the second level.
-	 *
-	 * @return the level2 entity
-	 */
-	Level getLevel2();
-	
-	/**
-	 * Gets the third level.
-	 *
-	 * @return the level3 entity
-	 */
-	Level getLevel3();
-	
-	/**
-	 * Gets the fourth level.
-	 *
-	 * @return the level4 entity
-	 */
-	Level getLevel4();
-	
-	/**
-	 * Gets the fifth level.
-	 *
-	 * @return the level5 entity
-	 */
-	Level getLevel5();
 
-	/**
-	 * Load the message.
-	 *
-	 * @param code
-	 *          the code
-	 */
 	void loadLevel();
+	
+	public String[][] getLevelTab();
+
+	public void setLevelTab(String[][] levelTab);
+	
+	public String getDirection();
+
+	public void setDirection(String direction);
 
 	public int getCoordXHero();
 	
@@ -75,5 +42,27 @@ public interface IModel {
 	Observable getObservable();
 	
 	String[][] levelBehavior(String[][] levelTab);
+	
+	void setCharacterCoords(int coordX, int coordY);
+	
+	boolean checkCollision(int coordX, int coordY);
+	
+	public int getDiamond();
+
+	public int getTimeLeft();
+
+	public boolean getGameOver();
+
+	public boolean getGameWin();
+
+	public int getScore();
+
+    public int getFinalScore();
+
+    public int getFinalTime();
+
+	public void setBoulderRight(boolean b);
+
+	public void setBoulderLeft(boolean b);
 
 }

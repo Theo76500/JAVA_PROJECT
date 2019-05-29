@@ -1,6 +1,6 @@
 package entity;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -16,18 +16,18 @@ public class Hero extends Animated{
 	}
 	
 	public Hero() {
-		this("Hero", true, 0, 0);
+		this("Hero", true, 8, 3);
 	}
 	
 	@Override
-	public Image loadImage(int levelNumber) {
+	public BufferedImage loadImage(int levelNumber) {
 		try {
-			Image img = null;
+			BufferedImage img = null;
 			
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("C:\\Users\\Perso Pierre\\Desktop\\Workspace_Git\\JPU-BlankProject\\JPU-BlankProject\\Sprites\\hero.png"));
+			    	img = ImageIO.read(new File("C:\\Users\\Perso Pierre\\Desktop\\Sprites\\hero.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -61,40 +61,46 @@ public class Hero extends Animated{
 	}
 	
 	@Override
-	public Image loadImage(int levelNumber, String fileName) {
+	public BufferedImage loadImage(int levelNumber, String fileName) {
 		// TODO Auto-generated method stub
 		
 		try {
-			Image imgSasukeNormal = null;
+			BufferedImage img = null;
 			
 			switch(levelNumber) {
 			case 1 :
-			    imgSasukeNormal = ImageIO.read(new File(fileName));
+			    img = ImageIO.read(new File(fileName));
 				break;
 			
 			case 2 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img= ImageIO.read(new File(fileName));
 				break;
 				
 			case 3 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 			
 			case 4 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 				
 			case 5 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 			
 			default :
 				break;
 		}
-			return imgSasukeNormal;
+			return img;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

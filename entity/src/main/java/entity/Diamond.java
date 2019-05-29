@@ -1,6 +1,6 @@
 package entity;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -8,6 +8,16 @@ import javax.imageio.ImageIO;
 
 public class Diamond extends Animated{
 
+	private static BufferedImage img;
+	
+	public static BufferedImage getImg() {
+		return img;
+	}
+
+	public static void setImg(BufferedImage img) {
+		Diamond.img = img;
+	}
+	
 	public Diamond(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Diamond";
 		this.move = true;
@@ -15,19 +25,27 @@ public class Diamond extends Animated{
 		this.coordY = 0;
 	}
 	
-	public Diamond() {
-		this("Diamond", true, 0, 0);
+	public Diamond(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
+		this.stringCode = "Diamond";
+		this.move = true;
+		this.coordX = 0;
+		this.coordY = 0;
+		Diamond.img = this.loadImage(1);
+	}
+	
+	public Diamond() throws IOException {
+		this("Diamond", true, 0, 0, ImageIO.read(new File("C:\\Users\\Perso Pierre\\Desktop\\Sprites\\diamond.png")));
 	}
 	
 	@Override
-	public Image loadImage(int levelNumber) {
+	public BufferedImage loadImage(int levelNumber) {
 		try {
-			Image img = null;
+			BufferedImage img = null;
 			
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("C:\\Users\\Perso Pierre\\Desktop\\Workspace_Git\\JPU-BlankProject\\JPU-BlankProject\\Sprites\\diamond.png"));
+			    	img = ImageIO.read(new File("C:\\Users\\Perso Pierre\\Desktop\\Sprites\\diamond.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -61,40 +79,46 @@ public class Diamond extends Animated{
 	}
 	
 	@Override
-	public Image loadImage(int levelNumber, String fileName) {
+	public BufferedImage loadImage(int levelNumber, String fileName) {
 		// TODO Auto-generated method stub
 		
 		try {
-			Image imgSasukeNormal = null;
+			BufferedImage img = null;
 			
 			switch(levelNumber) {
 			case 1 :
-			    imgSasukeNormal = ImageIO.read(new File(fileName));
+			    img = ImageIO.read(new File(fileName));
 				break;
 			
 			case 2 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 				
 			case 3 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 			
 			case 4 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 				
 			case 5 :
-				imgSasukeNormal = ImageIO.read(new File(fileName));
+				img = ImageIO.read(new File(fileName));
 				break;
 			
 			default :
 				break;
 		}
-			return imgSasukeNormal;
+			return img;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
+	}
+	
+	@Override
+	public BufferedImage loadImage(String direction) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 	
