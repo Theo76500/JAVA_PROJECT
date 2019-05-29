@@ -34,7 +34,7 @@ public class Enemy extends Animated{
 	}
 	
 	public Enemy() throws IOException {
-		this("Enemy", true, 0, 0, ImageIO.read(new File("Sprites\\enemy.png")));
+		this("Enemy", true, 0, 0, ImageIO.read(new File("main\\Sprites\\enemy.png")));
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class Enemy extends Animated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("Sprites\\enemy.png"));
+			    	img = ImageIO.read(new File("main\\Sprites\\enemy.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

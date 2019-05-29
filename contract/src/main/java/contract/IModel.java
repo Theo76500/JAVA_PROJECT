@@ -1,9 +1,8 @@
 package contract;
 
-import java.util.Observable;
-
 import entity.Level;
-import entity.RowLevel;
+
+import java.util.Observable;
 
 /**
  * The Interface IModel.
@@ -60,5 +59,10 @@ public interface IModel {
     public int getFinalScore();
 
     public int getFinalTime();
+    
+    public String[][] levelCamera(String[][] levelTab);
 
+	void Timer();
+
+    public void setScore(int score);
 }

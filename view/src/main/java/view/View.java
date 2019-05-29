@@ -1,13 +1,12 @@
 package view;
 
-import java.awt.event.KeyEvent;
-
-import javax.swing.SwingUtilities;
-
 import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
+
+import javax.swing.*;
+import java.awt.event.KeyEvent;
 
 /**
  * The Class View.
@@ -63,6 +62,9 @@ public final class View implements IView, Runnable {
 				return ControllerOrder.DOWN;
 			case KeyEvent.VK_S:
 				return ControllerOrder.DOWN;
+			case KeyEvent.VK_R:
+				return ControllerOrder.RETRY;
+
 			default:
 				return ControllerOrder.NOTHING;
 		}

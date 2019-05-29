@@ -6,7 +6,6 @@ package main;
 
 import contract.ControllerOrder;
 import controller.Controller;
-import entity.BorderBlock;
 import model.Model;
 import view.View;
 

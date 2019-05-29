@@ -1,25 +1,23 @@
 package view;
 
-import java.awt.GraphicsConfiguration;
-import java.awt.HeadlessException;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import javax.swing.*;
-
 import contract.IController;
 import contract.IModel;
 import entity.Level;
 import entity.RowLevel;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 /**
  * The Class ViewFrame.
  *
  * @author Jean-Aymeric Diet
  */
-class ViewFrame extends JFrame implements KeyListener {
+class ViewFrame extends JFrame implements KeyListener, ActionListener{
 
 	/** MENU */
 
@@ -37,23 +35,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	/** The controller. */
 	private IController controller;
 	/** The Constant serialVersionUID. */
-	private static final long	serialVersionUID	= -697358409737458175L;
-
-	
-	/** The X max coord. */
-	protected final int xMax = 16;
-
-	/** The Y max coord. */
-	protected final int yMax = 15;
-	
-	public int getXMax() {
-		return xMax;
-	}
-
-	public int getYMax() {
-		return yMax;
-	}
-	
+	private static final long serialVersionUID = -697358409737458175L;
 	
 	/**
 	 * Instantiates a new view frame.
@@ -155,7 +137,7 @@ class ViewFrame extends JFrame implements KeyListener {
 	 *          the model
 	 */
 	private void buildViewFrame(final IModel model) {
-		this.setModel(model);
+		this.setModel(model);	
 		this.setTitle("Boulder Dash");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -214,6 +196,11 @@ class ViewFrame extends JFrame implements KeyListener {
 		setJMenuBar(menuBar);
 	}
 
+
+
+
+
+
 	/**
 	 * Prints the message.
 	 *
@@ -225,10 +212,9 @@ class ViewFrame extends JFrame implements KeyListener {
 		model.getLevel();
 		String[][] levelTab = model.getLevelTab();
 		
-		for(RowLevel elem: Level.getLevel())
-	       {
+		for(RowLevel entity: Level.getLevel()){
 	       	 
-	       	 levelTab[elem.getBlocksX()][elem.getBlocksY()] = elem.getBlocksType();
+	       	 levelTab[entity.getBlocksX()][entity.getBlocksY()] = entity.getBlocksType();
 	       	 
 	       }
 	}
@@ -261,4 +247,8 @@ class ViewFrame extends JFrame implements KeyListener {
 
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
+	}
 }

@@ -20,21 +20,21 @@ public class ExitDoor extends Inanimated{
 	
 	public ExitDoor(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "ExitDoor";
-		this.move = true;
+		this.move = false;
 		this.coordX = 0;
 		this.coordY = 0;
 	}
 	
 	public ExitDoor(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
 		this.stringCode = "ExitDoor";
-		this.move = true;
+		this.move = false;
 		this.coordX = 0;
 		this.coordY = 0;
 		ExitDoor.img = this.loadImage(1);
 	}
 	
 	public ExitDoor() throws IOException {
-		this("ExitDoor", true, 0, 0, ImageIO.read(new File("Sprites\\exitdoor.png")));
+		this("ExitDoor", true, 0, 0, ImageIO.read(new File("main\\Sprites\\exitdoor.png")));
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class ExitDoor extends Inanimated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("Sprites\\exitdoor.png"));
+			    	img = ImageIO.read(new File("main\\Sprites\\exitdoor.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

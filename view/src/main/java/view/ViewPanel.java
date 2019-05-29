@@ -1,27 +1,13 @@
 package view;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import entity.Timer;
+import entity.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
-
-import entity.BorderBlock;
-import entity.Boulder;
-import entity.Diamond;
-import entity.Dirt;
-import entity.DirtAfterHero;
-import entity.Enemy;
-import entity.Entity;
-import entity.ExitDoor;
-import entity.Hero;
 
 /**
  * The Class ViewPanel.
@@ -31,7 +17,7 @@ import entity.Hero;
 class ViewPanel extends JPanel implements Observer{
 	
 	/** The view frame. */
-	private ViewFrame					viewFrame;
+	private ViewFrame viewFrame;
 	/** The Constant serialVersionUID. */
 	private static final long	serialVersionUID	= -998294702363713521L;
 	
@@ -74,71 +60,79 @@ class ViewPanel extends JPanel implements Observer{
 		this.repaint();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	 */
+	boolean diamondSprite = true;
+
 	@Override
 	protected void paintComponent(final Graphics graphics) {
 		
 		Toolkit.getDefaultToolkit().sync();
 		
-		String[][] levelTab = new String[20][20];
-		levelTab = this.getViewFrame().getModel().getLevelTab();
-		levelTab = this.getViewFrame().getModel().levelBehavior(levelTab);
+		String[][] levelTab = this.getViewFrame().getModel().levelBehavior(this.getViewFrame().getModel().getLevelTab());
+		levelTab = this.getViewFrame().getModel().levelCamera(levelTab);
 		
 		
 		BufferedImage img = null;
+		BufferedImage img2 = null;
 		
 		int i = 0;
 		int j = 0;
 		
+		int dimensionX = this.getWidth() / 16;
+		int dimensionY = this.getHeight() / 16;
+		
 		for(String subTab[] : levelTab)
 		{
 		  i = 0;
-		  int dimensionX = this.getWidth() / 16;
-		  int dimensionY = this.getHeight() / 16;
-		  
 		  for(String str : subTab)
 		  {     
 		    //System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTab[j][i]);
 		    if(levelTab[j][i] != null) {
 		    	
-				  
 				 if(levelTab[j][i].equals("BorderBlock")){
 					  img = BorderBlock.getImg();
-				      graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				      graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
 				  }
 				    	
 				  if(levelTab[j][i].equals("Diamond")) {
-					    img = Diamond.getImg();
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				  		if (diamondSprite == true)
+						{
+							img = Diamond.getImg();
+							graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+							diamondSprite = false;
+						}
+				  		if (diamondSprite == false)
+						{
+							img2 = Diamond.getImg2();
+							graphics.drawImage(img2, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+							diamondSprite = true;
+						}
+
+
 				    }
 				  
 				  if(levelTab[j][i].equals("Dirt")) {
 					    img = Dirt.getImg();
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("DirtAfterHero")) {
 					    img = DirtAfterHero.getImg();
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Boulder")) {
 					    img = Boulder.getImg();
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
 				    }
 				  
-				  if(levelTab[j][i].equals("ExitDoor") && this.getViewFrame().getModel().getDiamond() == 0) {
+				  if(levelTab[j][i].equals("ExitDoor")) {
 					    img = ExitDoor.getImg();
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
 				    }
 				  
 				  if(levelTab[j][i].equals("Enemy")) {
 					    img = Enemy.getImg();
-				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
+				    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
 				    }
 				  
 				
@@ -147,87 +141,44 @@ class ViewPanel extends JPanel implements Observer{
 			      graphics.drawImage(img, this.getViewFrame().getModel().getCoordXHero() * dimensionX, this.getViewFrame().getModel().getCoordYHero() * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
 			      
 			      
-			      if (this.getViewFrame().getModel().getGameOver() == true)
-					{
-						try {
-							img = ImageIO.read(new File("Sprites\\GameOver.png"));
-							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
+			      if (GameOver.gameState == true){
+			      	  img = GameOver.img;
+			    	  graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			    	}
 
-					if (this.getViewFrame().getModel().getGameWin() == true)
-					{
-						try {
-							img = ImageIO.read(new File("Sprites\\GameWin.png"));
-							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
+				  if (GameWin.gameState == true){
+						img = GameWin.img;
+				    	graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+				    }
+				
+				img = Score.img;
+				graphics.drawImage(img, 307, 12, this.getWidth() /4, this.getHeight() /13, this);
 
+				img = DiamondsLeft.img;
+				graphics.drawImage(img, 20, 40, this.getWidth() /4, this.getHeight() /13, this);
+				
+				img = Timer.img;
+				graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
 
-
-
-					try {
-						img = ImageIO.read(new File("Sprites\\clockBoard.png"));
-						graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-					try {
-						img = ImageIO.read(new File("Sprites\\DiamondBoard.png"));
-						graphics.drawImage(img, 20, 40, this.getWidth() /4, this.getHeight() /13, this);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-					try {
-						img = ImageIO.read(new File("Sprites\\ScoreBoard.png"));
-						graphics.drawImage(img, 270, 10, this.getWidth() /3, this.getHeight() /13, this);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-					String diamond = String.valueOf(this.getViewFrame().getModel().getDiamond());
 					Font font = new Font("TimesRoman", Font.BOLD, 42);
 					graphics.setFont(font);
 					graphics.setColor(Color.white);
-					graphics.drawString(diamond, 132, 82);
-
-
-					String timeleft = String.valueOf(this.getViewFrame().getModel().getTimeLeft());
-					graphics.setFont(font);
-					graphics.setColor(Color.white);
-					if(this.getViewFrame().getModel().getGameWin() == false)
-					{
-						graphics.drawString(timeleft, 110, 137);
+					graphics.drawString(String.valueOf(this.getViewFrame().getModel().getDiamond()), 132, 82);
+					
+					if(GameWin.gameState == false){
+					graphics.drawString(String.valueOf(this.getViewFrame().getModel().getTimeLeft()), 110, 137);
+					}
+					
+					if(GameWin.gameState == true){
+						graphics.drawString(String.valueOf(this.getViewFrame().getModel().getFinalTime()), 110, 137);
 					}
 
-					String finalTimeLeft = String.valueOf(this.getViewFrame().getModel().getFinalTime());
-					graphics.setFont(font);
-					graphics.setColor(Color.white);
-					if(this.getViewFrame().getModel().getGameWin() == true)
-					{
-						graphics.drawString(finalTimeLeft, 110, 137);
+					if(GameWin.gameState == false){
+						graphics.drawString(String.valueOf(this.getViewFrame().getModel().getScore()), 385, 53);
 					}
 
-					String score = String.valueOf(this.getViewFrame().getModel().getScore());
-					graphics.setFont(font);
-					graphics.setColor(Color.white);
-					if(this.getViewFrame().getModel().getGameWin() == false)
-					{
-						graphics.drawString(score, 385, 53);
-					}
-
-					String finalScore = String.valueOf(this.getViewFrame().getModel().getFinalScore());
-					graphics.setFont(font);
-					graphics.setColor(Color.white);
-					if(this.getViewFrame().getModel().getGameWin() == true)
-					{
-						graphics.drawString(finalScore, 385, 53);
+					if(GameWin.gameState == true){
+						graphics.drawString(String.valueOf(this.getViewFrame().getModel().getFinalScore()), 385, 53);
 					}
 		    }
 		    i++;

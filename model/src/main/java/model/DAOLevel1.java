@@ -1,12 +1,12 @@
 package model;
 
+import entity.Level;
+import entity.RowLevel;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import entity.Level;
-import entity.RowLevel;
 
 
 /**

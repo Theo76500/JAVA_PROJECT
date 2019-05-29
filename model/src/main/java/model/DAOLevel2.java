@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 
 /**
- * The Class DAOLevel1.
+ * The Class DAOLevel2.
  *
  * @author LANGLOIS Theo
  */

@@ -1,20 +1,11 @@
 package model;
 
+import contract.IModel;
+import entity.*;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
-
-import contract.IModel;
-import entity.BorderBlock;
-import entity.Boulder;
-import entity.Diamond;
-import entity.Dirt;
-import entity.DirtAfterHero;
-import entity.Enemy;
-import entity.Entity;
-import entity.ExitDoor;
-import entity.Hero;
-import entity.Level;
 
 /**
  * The Class Model.
@@ -25,10 +16,13 @@ public final class Model extends Observable implements IModel {
 
 	private String[][] levelTab = new String[20][20];
 	private String direction;
-	public int finalScore;
-	public int finalTime;
-	public boolean gameWin = false;
-	private int score = 0;
+	private static int finalScore;
+	private static int finalTime;
+	private boolean gameWin = false;
+	private boolean gameOver = false;
+	private static int score = 0;
+	private static int diamond = 10;
+	private static int timeLeft;
 	
 	public String getDirection() {
 		return direction;
@@ -82,13 +76,6 @@ public final class Model extends Observable implements IModel {
 	}
 
 
-	/**
-     * Sets the first level.
-     *
-     * @param level1
-     *            the new first level.
-     */
-
 	
 	public int getCoordXHero() {
 		return hero.getCoordX();
@@ -106,13 +93,64 @@ public final class Model extends Observable implements IModel {
 		this.hero.setCoordY(coordY);
 	}
 	
+	public int getTimeLeft(){
+		return timeLeft;
+	}
+	
+	public void setTimeLeft(int timeLeft){
+		this.timeLeft = timeLeft;
+	}
+	
+	public boolean getGameWin() {
+		return gameWin;
+	}
+	
+	public void setGameWin(boolean gameWin) {
+		this.gameWin= gameWin;
+	}
 
-	/**
-     * Load hello world.
-     *
-     * @param code
-     *            the code
-     */
+	public int getFinalScore(){
+		return finalScore;
+	}
+
+	public void setFinalScore(int finalScore){
+		this.finalScore = finalScore;
+	}
+
+	public int getFinalTime(){
+		return finalTime;
+	}
+
+	public void setFinalTime(int finalTime){
+		this.finalTime = finalTime;
+	}
+	
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+	
+	public boolean getGameOver() {
+		return gameOver;
+	}
+	
+	public void setGameOver(boolean gameOver) {
+		this.gameOver = gameOver;
+	}
+	
+	public int getDiamond() {
+		return diamond;
+	}
+
+	public void setDiamond(int diamond) {
+		this.diamond = diamond;
+	}
+	
+
+
 	/*
 	 * (non-Javadoc)
 	 *
@@ -163,9 +201,7 @@ public final class Model extends Observable implements IModel {
 				}
 				break;
 		}
-
 	}
-
 
 	/**
      * Gets the observable.
@@ -199,7 +235,11 @@ public final class Model extends Observable implements IModel {
 
 				  if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
 					  levelTab[j][i] = "DirtAfterHero";
-					  setDiamond(getDiamond() - 1);
+					  
+					  if(this.getDiamond() != 0) {
+						  setDiamond(getDiamond() - 1);
+					  }
+					  
 					  setScore(getScore() + 15);
 				  }
 			    
@@ -216,35 +256,32 @@ public final class Model extends Observable implements IModel {
 			    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
 	                levelTab[j][i] = "DirtAfterHero";
 	            }
-
+			    
 			  //Falling boulder
-			  if(levelTab[j][i] != null && levelTab[j][i].equals("Boulder") && levelTab[j][i+1].equals("DirtAfterHero")) {
-				  //Si la boule est juste au dessus du joueur
-				  if(levelTab[j][i] != null && levelTab[j][i].equals("Boulder") && (this.getCoordXHero() == j) && (this.getCoordYHero() == i+1)) {}
-				  else {
-					  levelTab[j][i] = "DirtAfterHero";
-					  levelTab[j][i+1] = "Boulder";
-					  if(levelTab[j][i] != null && levelTab[j][i+1].equals("Boulder") && (this.getCoordXHero() == j) && (this.getCoordYHero() == i+2)) {
-					  		GameOver();
+				  if(levelTab[j][i] != null && levelTab[j][i].equals("Boulder") && levelTab[j][i+1].equals("DirtAfterHero")) {
+					  //If the boulder is above the hero
+					  if(levelTab[j][i].equals("Boulder") && (this.getCoordXHero() == j) && (this.getCoordYHero() == i+1)) {}
+					  else {
+						  levelTab[j][i] = "DirtAfterHero";
+						  levelTab[j][i+1] = "Boulder";
+						  
+						  if(levelTab[j][i+1].equals("Boulder") && (this.getCoordXHero() == j) && (this.getCoordYHero() == i+2)) {
+						  		GameOver();
+						  }
 					  }
 				  }
-			  }
 
-			    if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy"))
-				{
-					GameOver();
+			    if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy")){
+					this.GameOver();
 				}
 
-			    if (levelTab[j][i] != null && getTimeLeft() == 1)
-				{
-					GameOver();
+			    if (levelTab[j][i] != null && getTimeLeft() == 1){
+					this.GameOver();
 				}
 
-				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 0)
-				  {
-					  GameWin();
+				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 9){
+					  this.GameWin();
 				  }
-
 		     
 		    i++;
 		  }
@@ -253,6 +290,83 @@ public final class Model extends Observable implements IModel {
 		
 		return levelTab;
 	}
+	
+	public String[][] levelCamera(String[][] levelTab) {
+		
+		int frameMaxX = 16;
+		int frameMaxY = 16;
+		int frameMaxX2 = frameMaxX - 1;
+		int frameMaxY2 = frameMaxY - 1;
+		
+		String[][] levelTabCamera = new String[frameMaxX][frameMaxY];
+	
+		if(this.getCoordXHero() + 6 > frameMaxX) {
+			
+			for(int i = 0; i < frameMaxX; i++) {
+				for(int j = 0; j < frameMaxX; j++) {
+					
+					
+					levelTabCamera[j][i] = levelTab[j + 1][i];
+					}
+				}
+			}
+		
+		else {
+			for(int i = 0; i < frameMaxX; i++) {
+				for(int j = 0; j < frameMaxX; j++) {
+			levelTabCamera[j][i] = levelTab[j][i];
+			
+		}
+			}
+		}
+		
+		/*int i = 0;
+		int j = 0;
+		
+		for(String sousTab[] : levelTabCamera)
+		{
+		  i = 0;
+		  for(String str : sousTab)
+		  {     
+		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTabCamera[j][i]);
+		    i++;
+		  }
+		  j++;
+		}*/
+		  return levelTabCamera;
+}
+			  
+			 
+			 /*if(i < (this.getCoordYHero() - 6)) {
+				 
+				 //On enlève une colonne / une ligne en décalant les indices
+				 //on en affiche une autre
+			 }
+			 
+			 if(j > (this.getCoordXHero() + 6)) {
+				 
+				 //On enlève une colonne / une ligne en décalant les indices
+				 //on en affiche une autre
+			 }
+			 
+			 if((j < this.getCoordXHero() - 6)) {
+				 
+				 //On enlève une colonne / une ligne en décalant les indices
+				 //on en affiche une autre
+			 }
+			  
+			 else { 
+				 levelTabCamera[j][i] = levelTab[j][i];
+			  }
+			 i++;
+		    }
+		  j++;
+		  }
+		
+		  return levelTabCamera;
+	}*/
+	
+	  
 	
 	public void setCharacterCoords(int coordX, int coordY) {
 		
@@ -319,97 +433,65 @@ public final class Model extends Observable implements IModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private int diamond =10 ;
-	public int getDiamond() {
-		return diamond;
+		
+		try {
+			Entity gamewin = new GameWin();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity gameover = new GameOver();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity timer = new Timer();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity score = new Score();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Entity diamondsleft = new DiamondsLeft();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void setDiamond(int diamond) {
-		this.diamond = diamond;
-	}
-
-
-	private boolean timerOn = true;
-	private int timeLeft;
-	public void Timer()
-	{
-		for(timeLeft=120; timerOn && timeLeft>0; timeLeft--)
-		{
+	public void Timer(){
+		for(timeLeft = 120; Timer.timerOn && timeLeft > 0; timeLeft--){
 
 			this.setChanged();
 			this.notifyObservers();
+			
 			try {
 				Thread.sleep (1000);
 			}
 			catch (InterruptedException e) {
-				System.out.print("Erreur");
+				e.printStackTrace();
 			}
 		}
 	}
 
-	public int getTimeLeft()
-	{
-		return timeLeft;
-	}
-	public void setTimeLeft(int timeLeft)
-	{
-		this.timeLeft = timeLeft;
-	}
-
-
-	public boolean gameOver = false;
-	public void GameOver()
-	{
-		gameOver = true;
-		timerOn = false;
+	public void GameOver(){
+		GameOver.gameState = true;
+		Timer.timerOn = false;
+		timeLeft = 0;
 	}
 	
-	public boolean getGameOver() {
-		return gameOver;
-	}
-	
-	public void setGameOver(boolean gameOver) {
-		this.gameOver = gameOver;
-	}
 	
 	public void GameWin(){
-		gameWin = true;
-		timerOn = false;
+		GameWin.gameState = true;
+		Timer.timerOn = false;
 		finalScore = getScore() + getTimeLeft();
 		finalTime = 0;
 	}
-
-	public boolean getGameWin() {
-		return gameWin;
-	}
-	public void setGameWin(boolean gameWin) {
-		this.gameWin= gameWin;
-	}
-
-	public int getFinalScore()
-	{
-		return finalScore;
-	}
-	public void setFinalScore(int finalScore)
-	{
-		this.finalScore = finalScore;
-	}
-
-	public int getFinalTime()
-	{
-		return finalTime;
-	}
-	public void setFinalTime(int finalTime)
-	{
-		this.finalTime = finalTime;
-	}
 	
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
 }

@@ -34,7 +34,7 @@ public class Dirt extends Inanimated{
 	}
 	
 	public Dirt() throws IOException {
-		this("Dirt", true, 0, 0, ImageIO.read(new File("Sprites\\dirt.png")));
+		this("Dirt", true, 0, 0, ImageIO.read(new File("main\\Sprites\\dirt.png")));
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class Dirt extends Inanimated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("Sprites\\dirt.png"));
+			    	img = ImageIO.read(new File("main\\Sprites\\dirt.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
