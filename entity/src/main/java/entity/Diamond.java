@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class Diamond extends Animated{
 
-	private static BufferedImage img;
-	private static BufferedImage img2;
+	public static BufferedImage img;
+	public static BufferedImage img2;
 	
 	public static BufferedImage getImg() {
 		return img;

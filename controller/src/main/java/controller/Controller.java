@@ -5,6 +5,8 @@ import contract.IController;
 import contract.IModel;
 import contract.IView;
 import entity.GameOver;
+import entity.GameWin;
+import entity.Timer;
 
 /**
  * The Class Controller.
@@ -74,11 +76,6 @@ public final class Controller implements IController {
      * @param controllerOrder
      *            the controller order
      */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IController#orderPerform(contract.ControllerOrder)
-	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		
 		boolean isCheckGood = true;
@@ -91,7 +88,6 @@ public final class Controller implements IController {
 				if(isCheckGood) {
 					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
 					model.setDirection("left");
-					System.out.println("left");
 				}
 				break;
 				
@@ -101,7 +97,6 @@ public final class Controller implements IController {
 				if(isCheckGood) {
 					model.setCharacterCoords(model.getCoordXHero() 	+ 1, model.getCoordYHero());
 					model.setDirection("right");
-					System.out.println("right");
 				}
 				break;
 				
@@ -111,7 +106,6 @@ public final class Controller implements IController {
 				if(isCheckGood) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
 					model.setDirection("up");
-					System.out.println("up");
 				}
 				break;
 				
@@ -121,23 +115,21 @@ public final class Controller implements IController {
 				if(isCheckGood) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
 					model.setDirection("down");
-					System.out.println("down");
 				}
 				break;
 
 			case RETRY:
 				GameOver.gameState = false;
-				GameOver.gameState = false;
+				GameWin.gameState = false;
+				Timer.timerOn = true;
 				model.loadLevel(1);
 				view.printLevel();
 				model.setScore(0);
 
 
 
-
 			default:
 				model.setDirection("nothing");
-				System.out.println("nothing");
 				break;
 		}
 	}

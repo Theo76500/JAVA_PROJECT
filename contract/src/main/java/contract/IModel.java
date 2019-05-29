@@ -65,4 +65,8 @@ public interface IModel {
 	void Timer();
 
     public void setScore(int score);
+
+    public boolean isDiamondSprite();
+
+	boolean isEnemySprite();
 }

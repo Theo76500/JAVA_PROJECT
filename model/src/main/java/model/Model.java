@@ -23,6 +23,8 @@ public final class Model extends Observable implements IModel {
 	private static int score = 0;
 	private static int diamond = 10;
 	private static int timeLeft;
+	private static boolean diamondSprite;
+	private static boolean enemySprite;
 	
 	public String getDirection() {
 		return direction;
@@ -98,7 +100,7 @@ public final class Model extends Observable implements IModel {
 	}
 	
 	public void setTimeLeft(int timeLeft){
-		this.timeLeft = timeLeft;
+		Model.timeLeft = timeLeft;
 	}
 	
 	public boolean getGameWin() {
@@ -114,7 +116,7 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setFinalScore(int finalScore){
-		this.finalScore = finalScore;
+		Model.finalScore = finalScore;
 	}
 
 	public int getFinalTime(){
@@ -122,7 +124,7 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setFinalTime(int finalTime){
-		this.finalTime = finalTime;
+		Model.finalTime = finalTime;
 	}
 	
 	public int getScore() {
@@ -130,9 +132,9 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setScore(int score) {
-		this.score = score;
+		Model.score = score;
 	}
-	
+
 	public boolean getGameOver() {
 		return gameOver;
 	}
@@ -146,10 +148,12 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setDiamond(int diamond) {
-		this.diamond = diamond;
+		Model.diamond = diamond;
 	}
 	
+	public boolean isDiamondSprite() {return diamondSprite;}
 
+	public boolean isEnemySprite() {return enemySprite;}
 
 	/*
 	 * (non-Javadoc)
@@ -158,7 +162,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	public void loadLevel(int lvl) {
 		diamond = 10;
-		timeLeft = 120;
+		timeLeft = 360;
 		switch (lvl){
 			case 1:
 				try {
@@ -222,7 +226,7 @@ public final class Model extends Observable implements IModel {
 		int i = 0;
 		int j = 0;
 		 
-		for(String subTab[] : levelTab)
+		for(String[] subTab : levelTab)
 		{
 		  i = 0;
 		  for(String str : subTab)
@@ -235,16 +239,19 @@ public final class Model extends Observable implements IModel {
 
 				  if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
 					  levelTab[j][i] = "DirtAfterHero";
-					  
-					  if(this.getDiamond() != 0) {
+
+					  if (this.getDiamond() != 0) {
 						  setDiamond(getDiamond() - 1);
+						  setScore(getScore() + 15);
 					  }
-					  
-					  setScore(getScore() + 15);
+
+					  else if (getDiamond() == 0)
+					  {
+						  setScore(getScore() + 30);
+					  }
 				  }
 			    
 			    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && levelTab[j][i+1].equals("DirtAfterHero")) {
-			    	
 			    	levelTab[j][i] = "DirtAfterHero";
 			    	levelTab[j][i+1] = "Diamond";
 			    }
@@ -279,7 +286,7 @@ public final class Model extends Observable implements IModel {
 					this.GameOver();
 				}
 
-				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 9){
+				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 0){
 					  this.GameWin();
 				  }
 		     
@@ -378,16 +385,11 @@ public final class Model extends Observable implements IModel {
 	}
 	
 	public boolean checkCollision(int coordX, int coordY) {
-		
-		String levelTab[][] = this.getLevelTab();
-		
-		if(levelTab[coordX][coordY].equals("Boulder") || levelTab[coordX][coordY].equals("BorderBlock")) {
-			
-			return false;
-		}
-			
-			return true;
-		
+
+		String[][] levelTab = this.getLevelTab();
+
+		return !levelTab[coordX][coordY].equals("Boulder") && !levelTab[coordX][coordY].equals("BorderBlock");
+
 	}
 	
 	public void avoidLatency() {
@@ -466,24 +468,27 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void Timer(){
-		for(timeLeft = 120; Timer.timerOn && timeLeft > 0; timeLeft--){
 
-			this.setChanged();
-			this.notifyObservers();
-			
-			try {
-				Thread.sleep (1000);
-			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
+			for(timeLeft = 360; Timer.timerOn && timeLeft > 0; timeLeft--){
+				diamondSprite = !diamondSprite;
+				enemySprite = !enemySprite;
+				this.setChanged();
+				this.notifyObservers();
+
+				try {
+					Thread.sleep (333);
+				}
+				catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-	}
+
 
 	public void GameOver(){
 		GameOver.gameState = true;
 		Timer.timerOn = false;
-		timeLeft = 0;
+		timeLeft = 1;
 	}
 	
 	
