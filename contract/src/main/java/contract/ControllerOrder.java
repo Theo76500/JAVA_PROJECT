@@ -18,5 +18,7 @@ public enum ControllerOrder {
 	/** The down. */
 	DOWN,
     /** RETRY */
-    RETRY;
+    RETRY,
+    /** NEXT Lvl */
+    NEXT;
 }

@@ -40,8 +40,13 @@ public final class Controller implements IController {
 	 *
 	 * @see contract.IController#control()
 	 */
+
+	public static int level;
+
+	public int getLevel() {return level;}
+	public void setLevel(int level) { this.level = level;}
+
 	public void control() {
-		
 		model.loadLevel(1);
 		view.printLevel();
 	}
@@ -122,11 +127,20 @@ public final class Controller implements IController {
 				GameOver.gameState = false;
 				GameWin.gameState = false;
 				Timer.timerOn = true;
+				level = 1;
 				model.loadLevel(1);
 				view.printLevel();
 				model.setScore(0);
+				break;
 
-
+			case NEXT:
+				GameOver.gameState = false;
+				GameWin.gameState = false;
+				Timer.timerOn = true;
+				level = level + 1;
+				model.loadLevel(level + 1);
+				view.printLevel();
+				break;
 
 			default:
 				model.setDirection("nothing");

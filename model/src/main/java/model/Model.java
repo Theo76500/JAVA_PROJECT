@@ -1,6 +1,7 @@
 package model;
 
 import contract.IModel;
+import contract.IView;
 import entity.*;
 
 import java.io.IOException;
@@ -36,6 +37,8 @@ public final class Model extends Observable implements IModel {
 
 	/** The levels. */
 	private Level level;
+
+	private IView	view;
 	
 	/** The character */
 	private Hero hero = new Hero();
@@ -286,8 +289,9 @@ public final class Model extends Observable implements IModel {
 					this.GameOver();
 				}
 
-				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 0){
+				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor")  && getDiamond() == 0){
 					  this.GameWin();
+
 				  }
 		     
 		    i++;
@@ -469,19 +473,29 @@ public final class Model extends Observable implements IModel {
 
 	public void Timer(){
 
-			for(timeLeft = 360; Timer.timerOn && timeLeft > 0; timeLeft--){
-				diamondSprite = !diamondSprite;
-				enemySprite = !enemySprite;
-				this.setChanged();
-				this.notifyObservers();
+		while (Timer.timerOn || !Timer.timerOn)
+			if (Timer.timerOn)
+			{
+				for(timeLeft = 360;  timeLeft > 0; timeLeft--){
+					diamondSprite = !diamondSprite;
+					enemySprite = !enemySprite;
+					this.setChanged();
+					this.notifyObservers();
 
-				try {
-					Thread.sleep (333);
-				}
-				catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+					try {
+						Thread.sleep (333);
+					}
+					catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 			}
+
+			} else
+			{
+				System.out.println("TIMER OFF");
+			}
+
+
 		}
 
 
@@ -495,7 +509,7 @@ public final class Model extends Observable implements IModel {
 	public void GameWin(){
 		GameWin.gameState = true;
 		Timer.timerOn = false;
-		finalScore = getScore() + getTimeLeft();
+		finalScore = getScore() + getTimeLeft()/3;
 		finalTime = 0;
 	}
 	

@@ -6,7 +6,7 @@ package contract;
  * @author Jean-Aymeric Diet
  */
 public interface IView {
-	
+
 	/**
 	 * Prints the message.
 	 *
