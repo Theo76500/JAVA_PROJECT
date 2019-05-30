@@ -1,22 +1,21 @@
 package entity;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Hero extends Animated{
 
 	public Hero(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Hero";
 		this.move = true;
-		this.coordX = 8;
-		this.coordY = 3;
+		this.coordX = 4;
+		this.coordY = 6;
 	}
 	
 	public Hero() {
-		this("Hero", true, 8, 3);
+		this("Hero", true, 4, 6);
 	}
 	
 	@Override
@@ -27,7 +26,7 @@ public class Hero extends Animated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("C:\\Users\\Perso Pierre\\Desktop\\Sprites\\hero.png"));
+			    	img = ImageIO.read(new File("Sprites\\hero.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

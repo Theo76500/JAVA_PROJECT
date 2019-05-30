@@ -6,7 +6,6 @@ package main;
 
 import contract.ControllerOrder;
 import controller.Controller;
-import entity.BorderBlock;
 import model.Model;
 import view.View;
 
@@ -28,6 +27,7 @@ public abstract class Main {
         final Model model = new Model();
         final View view = new View(model);
         final Controller controller = new Controller(view, model);
+        
         model.avoidLatency();
         
         view.setController(controller);

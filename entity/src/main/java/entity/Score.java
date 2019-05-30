@@ -1,97 +1,45 @@
 package entity;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
 public class Score extends Inanimated{
 
+	public static BufferedImage img;
+	
 	public Score(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Score";
 		this.move = false;
 		this.coordX = 0;
 		this.coordY = 0;
 	}
-	
-	public Score() {
-		this("Score", false, 0, 0);
+
+	public Score(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
+		this.stringCode = "Score";
+		this.move = false;
+		this.coordX = 0;
+		this.coordY = 0;
+		Score.img = this.loadImage(1);
 	}
 	
+	public Score() throws IOException {
+		this("Score", true, 0, 0, ImageIO.read(new File("Sprites\\score.png")));
+	}
+
 	@Override
 	public BufferedImage loadImage(int levelNumber) {
-		try {
-			BufferedImage img = null;
-			
-			switch(levelNumber) {
-			case 1 :
-			    img = ImageIO.read(new File(""));
-				break;
-			
-			case 2 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(""));
-				break;
-			
-			case 4 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(""));
-				break;
-			
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
 		
-	}
-	
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		
-		try {
-			BufferedImage img = null;
-			
-			switch(levelNumber) {
-			case 1 :
-			    img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 2 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 4 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		BufferedImage img = null;
+		    
+		    try {
+		    	img = ImageIO.read(new File("Sprites\\score.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		    
+		return img;
 	}
 	
 	@Override
@@ -128,5 +76,11 @@ public class Score extends Inanimated{
 	public void setMove(boolean move) {
 		
 		this.move = move;
+	}
+
+	@Override
+	public BufferedImage loadImage(int levelNumber, String fileName) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
