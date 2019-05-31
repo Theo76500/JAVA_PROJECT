@@ -82,13 +82,15 @@ public final class Controller implements IController {
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		
 		boolean isCheckGood = true;
+		boolean isCheckInteraction = true;
 		
 		switch (controllerOrder) {
 		
 			case LEFT:
 				isCheckGood = model.checkCollision(model.getCoordXHero() - 1, model.getCoordYHero());
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero() - 1, model.getCoordYHero());
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
 					model.setDirection("left");
 					System.out.println("left");
@@ -97,8 +99,9 @@ public final class Controller implements IController {
 				
 			case RIGHT:
 				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero() + 1, model.getCoordYHero());
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.levelCamera(model.getLevelTab());
 					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
 					model.setDirection("right");
@@ -108,8 +111,9 @@ public final class Controller implements IController {
 				
 			case UP:
 				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() - 1);
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
 					model.setDirection("up");
 					System.out.println("up");
@@ -118,8 +122,9 @@ public final class Controller implements IController {
 				
 			case DOWN:
 				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() + 1);
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
 					model.setDirection("down");
 					System.out.println("down");

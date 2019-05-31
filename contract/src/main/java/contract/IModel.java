@@ -40,7 +40,7 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
-	String[][] levelBehavior(String[][] levelTab);
+	String[][] levelBehavior(String[][] levelTab, int coordX, int coordY);
 	
 	void setCharacterCoords(int coordX, int coordY);
 	
@@ -90,5 +90,5 @@ public interface IModel {
 	
 	public void setStartLevel();
 	
-	public boolean checkCamera(int coordX, int coordY);
+	public boolean checkInteraction(int coordX, int coordY);
 }
