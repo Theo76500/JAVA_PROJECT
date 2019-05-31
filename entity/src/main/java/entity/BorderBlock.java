@@ -34,7 +34,7 @@ public class BorderBlock extends Inanimated{
 	}
 	
 	public BorderBlock() throws IOException {
-		this("BorderBlock", true, 0, 0, ImageIO.read(new File("main\\Sprites\\borderblock.png")));
+		this("BorderBlock", true, 0, 0, ImageIO.read(new File("Sprites\\borderblock.png")));
 	}
 	
 	@Override
@@ -46,7 +46,7 @@ public class BorderBlock extends Inanimated{
 			case 1 :
 			    
 			    try {
-			    	img = ImageIO.read(new File("main\\Sprites\\borderblock.png"));
+			    	img = ImageIO.read(new File("Sprites\\borderblock.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

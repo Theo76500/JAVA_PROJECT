@@ -65,8 +65,32 @@ public interface IModel {
 	void Timer();
 
     public void setScore(int score);
+    
+	public boolean isDiamondSprite();
 
-    public boolean isDiamondSprite();
+	public void setDiamondSprite(boolean diamondSprite);
+	
+	public boolean isEnemySprite();
+	
+	public boolean isHeroleft();
 
-	boolean isEnemySprite();
+	public void setHeroleft(boolean heroleft);
+
+	public boolean isHeroright();
+
+	public void setHeroright(boolean heroright);
+
+	public boolean isHerodown();
+
+	public void setHerodown(boolean herodown);
+
+	public boolean isHeroup();
+	
+	public String[][] getLevelCamera();
+
+	public void setLevelCamera(String[][] levelCamera);
+	
+	public void setStartLevel();
+	
+	public boolean checkCamera(int coordX, int coordY);
 }

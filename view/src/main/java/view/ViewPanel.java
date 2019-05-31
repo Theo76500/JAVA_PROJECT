@@ -1,34 +1,79 @@
 package view;
 
-import entity.Timer;
-import entity.*;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.Observable;
 import java.util.Observer;
+
+import javax.swing.JPanel;
+
+import entity.BorderBlock;
+import entity.Boulder;
+import entity.Diamond;
+import entity.DiamondsLeft;
+import entity.Dirt;
+import entity.DirtAfterHero;
+import entity.Enemy;
+import entity.Entity;
+import entity.ExitDoor;
+import entity.GameOver;
+import entity.GameWin;
+import entity.Hero;
+import entity.Score;
+import entity.Timer;
 
 /**
  * The Class ViewPanel.
  *
  * @author Jean-Aymeric Diet
  */
-class ViewPanel extends JPanel implements Observer {
+class ViewPanel extends JPanel implements Observer{
+	
+	public int getDimensionX() {
+		return dimensionX;
+	}
 
-	/**
-	 * The view frame.
-	 */
+	public void setDimensionX(int dimensionX) {
+		this.dimensionX = dimensionX;
+	}
+
+	public int getDimensionY() {
+		return dimensionY;
+	}
+
+	public void setDimensionY(int dimensionY) {
+		this.dimensionY = dimensionY;
+	}
+
+	public BufferedImage getImg() {
+		return img;
+	}
+
+	public void setImg(BufferedImage img) {
+		this.img = img;
+	}
+
+	/** The view frame. */
 	private ViewFrame viewFrame;
-	/**
-	 * The Constant serialVersionUID.
-	 */
-	private static final long serialVersionUID = -998294702363713521L;
-
+	/** The Constant serialVersionUID. */
+	private static final long	serialVersionUID	= -998294702363713521L;
+	
+	
+	
+	Entity hero = new Hero();
+	public int dimensionX = this.getWidth() / 16;
+	public int dimensionY = this.getHeight() / 16;
+	
+	public BufferedImage img = null;
+	
 	/**
 	 * Instantiates a new view panel.
 	 *
-	 * @param viewFrame the view frame
+	 * @param viewFrame
+	 *          the view frame
 	 */
 	public ViewPanel(final ViewFrame viewFrame) {
 		this.setViewFrame(viewFrame);
@@ -47,7 +92,8 @@ class ViewPanel extends JPanel implements Observer {
 	/**
 	 * Sets the view frame.
 	 *
-	 * @param viewFrame the new view frame
+	 * @param viewFrame
+	 *          the new view frame
 	 */
 	private void setViewFrame(final ViewFrame viewFrame) {
 		this.viewFrame = viewFrame;
@@ -60,133 +106,221 @@ class ViewPanel extends JPanel implements Observer {
 	 */
 	public void update(final Observable arg0, final Object arg1) {
 		this.repaint();
-	}
-
-	boolean diamondSprite = true;
-
-	@Override
-	protected void paintComponent(final Graphics graphics) {
-
 		Toolkit.getDefaultToolkit().sync();
 
-		String[][] levelTab = this.getViewFrame().getModel().levelBehavior(this.getViewFrame().getModel().getLevelTab());
-		levelTab = this.getViewFrame().getModel().levelCamera(levelTab);
+	}
 
-
-		BufferedImage img = null;
-		BufferedImage img2 = null;
-
+	@Override
+	protected void paintComponent(final Graphics graphics) {		
+		//this.getViewFrame().getModel().setLevelTab(this.getViewFrame().getModel().levelBehavior(this.getViewFrame().getModel().getLevelTab()));
+		//this.getViewFrame().getModel().setLevelCamera(this.getViewFrame().getModel().getLevelTab());s
+		
 		int i = 0;
 		int j = 0;
+		
+		this.setDimensionX(this.getWidth() / 16);
+		this.setDimensionY(this.getHeight() / 16);
+		
+		for(String subTab[] : this.getViewFrame().getModel().getLevelCamera()){
+		  i = 0;
+		  for(String str : subTab) {     
+		    //System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + [j][i]);
+		   if(this.getViewFrame().getModel().getLevelCamera()[j][i] != null) {
+			   
+		    	printBorderBlock(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printDirt(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printDiamond(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printDirtAfterHero(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printBoulder(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printExitDoor(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printEnemy(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	
+		    	printHeroNothing(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printHeroRight(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printHeroLeft(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printHeroDown(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	printHeroUp(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
+		    	
+		    	printScore(graphics);
+		    	printDiamondsLeft(graphics);
+		    	printTimer(graphics);
+		    	
+		    	printGameOver(graphics);
+		    	printGameWin(graphics);
 
-		int dimensionX = this.getWidth() / 16;
-		int dimensionY = this.getHeight() / 16;
-
-		for (String subTab[] : levelTab) {
-			i = 0;
-			for (String str : subTab) {
-				//System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTab[j][i]);
-				if(levelTab[j][i] != null) {
-
-					if(levelTab[j][i].equals("BorderBlock")){
-						img = BorderBlock.getImg();
-						graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+					Font font = new Font("TimesRoman", Font.BOLD, 42);
+					graphics.setFont(font);
+					graphics.setColor(Color.white);
+					graphics.drawString(String.valueOf(this.getViewFrame().getModel().getDiamond()), 132, 82);
+					
+					if(GameWin.gameState == false){
+					graphics.drawString(String.valueOf(this.getViewFrame().getModel().getTimeLeft()/3), 110, 137);
+					}
+					
+					if(GameWin.gameState == true){
+						graphics.drawString(String.valueOf(this.getViewFrame().getModel().getFinalTime()/3), 110, 137);
 					}
 
-					if(levelTab[j][i].equals("Diamond")) {
-						if (this.getViewFrame().getModel().isDiamondSprite() == true){
-							img = Diamond.img;
-							graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-						}
-
-						if (this.getViewFrame().getModel().isDiamondSprite() == false){
-							img = Diamond.img2;
-							graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-						}
-						}
-
-							if (levelTab[j][i].equals("Dirt")) {
-							img = Dirt.getImg();
-							graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-						}
-
-						if (levelTab[j][i].equals("DirtAfterHero")) {
-							img = DirtAfterHero.getImg();
-							graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-						}
-
-						if (levelTab[j][i].equals("Boulder")) {
-							img = Boulder.getImg();
-							graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-						}
-
-						if (levelTab[j][i].equals("ExitDoor")) {
-							img = ExitDoor.getImg();
-							graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-						}
-
-						if (levelTab[j][i].equals("Enemy")) {
-							if (this.getViewFrame().getModel().isEnemySprite() == true){
-								img = Enemy.img;
-								graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-							}
-
-							if (this.getViewFrame().getModel().isEnemySprite() == false){
-								img = Enemy.img2;
-								graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
-							}
-
-						}
-
-
-						Entity hero = new Hero();
-						img = hero.loadImage(1);
-						graphics.drawImage(img, this.getViewFrame().getModel().getCoordXHero() * dimensionX, this.getViewFrame().getModel().getCoordYHero() * dimensionY, this.getWidth() / 16, this.getHeight() / 16, this);
-
-
-						if (GameOver.gameState == true) {
-							img = GameOver.img;
-							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-						}
-
-						if (GameWin.gameState == true) {
-							img = GameWin.img;
-							graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-						}
-
-						img = Score.img;
-						graphics.drawImage(img, 307, 12, this.getWidth() / 4, this.getHeight() / 13, this);
-
-						img = DiamondsLeft.img;
-						graphics.drawImage(img, 20, 40, this.getWidth() / 4, this.getHeight() / 13, this);
-
-						img = Timer.img;
-						graphics.drawImage(img, 20, 95, this.getWidth() / 4, this.getHeight() / 13, this);
-
-						Font font = new Font("TimesRoman", Font.BOLD, 42);
-						graphics.setFont(font);
-						graphics.setColor(Color.white);
-						graphics.drawString(String.valueOf(this.getViewFrame().getModel().getDiamond()), 132, 82);
-
-						if (GameWin.gameState == false) {
-							graphics.drawString(String.valueOf(this.getViewFrame().getModel().getTimeLeft()/3), 110, 137);
-						}
-
-						if (GameWin.gameState == true) {
-							graphics.drawString(String.valueOf(this.getViewFrame().getModel().getFinalTime()/3), 110, 137);
-						}
-
-						if (GameWin.gameState == false) {
-							graphics.drawString(String.valueOf(this.getViewFrame().getModel().getScore()), 385, 53);
-						}
-
-						if (GameWin.gameState == true) {
-							graphics.drawString(String.valueOf(this.getViewFrame().getModel().getFinalScore()), 385, 53);
-						}
+					if(GameWin.gameState == false){
+						graphics.drawString(String.valueOf(this.getViewFrame().getModel().getScore()), 385, 53);
 					}
-					i++;
-				}
-				j++;
-			}
+
+					if(GameWin.gameState == true){
+						graphics.drawString(String.valueOf(this.getViewFrame().getModel().getFinalScore()), 385, 53);
+					}
+					
+					//Thread t = new Thread(new ViewPanel2(this.getViewFrame()));
+					//t.start();
+		    }
+		    i++;
+		  }
+		  j++;
 		}
 	}
+	
+	public void printBorderBlock(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		 if(levelCamera[j][i].equals("BorderBlock")){
+			  this.setImg(BorderBlock.getImg());
+		      graphics.drawImage(this.getImg(), j * this.getDimensionX(), i * this.getDimensionY(), this.getDimensionX(), this.getDimensionY(), this);
+		  }
+	}
+	
+	public void printDirt(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		 if(levelCamera[j][i].equals("Dirt")){
+			  img = Dirt.getImg();
+		      graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+		  }
+	}
+	
+	public void printDiamond(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		if(levelCamera[j][i].equals("Diamond")) {
+	  		if (this.getViewFrame().getModel().isDiamondSprite() == true){
+				img = Diamond.img;
+				graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+			}
+	  		
+	  		if (this.getViewFrame().getModel().isDiamondSprite() == false){
+				img = Diamond.img2;
+				graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+			}
+	    }
+	}
+	
+	public void printDirtAfterHero(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		  if(levelCamera[j][i].equals("DirtAfterHero")) {
+			    img = DirtAfterHero.getImg();
+		    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+		  }
+	    }
+	
+	public void printBoulder(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		  if(levelCamera[j][i].equals("Boulder")) {
+			    img = Boulder.getImg();
+		    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+		  }
+	    }
+	
+	public void printExitDoor(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		  if(levelCamera[j][i].equals("ExitDoor")) {
+			    img = ExitDoor.getImg();
+		    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+		  }
+	    }
+	
+	public void printEnemy(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		  if(levelCamera[j][i].equals("Enemy")) {
+			  if (this.getViewFrame().getModel().isDiamondSprite() == true){
+					img = Enemy.img;
+					graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+				}
+		  		
+		  		if (this.getViewFrame().getModel().isDiamondSprite() == false){
+					img = Enemy.img2;
+					graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+				}
+		  }
+	    }
+	
+	public void printHeroNothing(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		  if(this.getViewFrame().getModel().getDirection().equals("nothing") && levelCamera[j][i].equals("Hero")) {
+			  img = hero.loadImage(1);
+			  graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+		    }
+	    }
+	
+	public void printHeroRight(Graphics graphics, int i, int j, String[][] levelCamera) {
+		
+		 if(this.getViewFrame().getModel().getDirection().equals("right") && levelCamera[j][i].equals("Hero")) {
+			  img = hero.loadImage(2);
+			  graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+		    }
+	}
+		 
+		 public void printHeroLeft(Graphics graphics, int i, int j, String[][] levelCamera) {
+
+			 if(this.getViewFrame().getModel().getDirection().equals("left") && levelCamera[j][i].equals("Hero")) {
+				  img = hero.loadImage(3);
+				  graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+			    }
+		 }
+		 
+		 public void printHeroDown(Graphics graphics, int i, int j, String[][] levelCamera) {
+
+			 if(this.getViewFrame().getModel().getDirection().equals("down") && levelCamera[j][i].equals("Hero")) {
+				  img = hero.loadImage(4);
+				  graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+			    }
+		 }
+		 
+		 public void printHeroUp(Graphics graphics, int i, int j, String[][] levelCamera) {
+
+			 if(this.getViewFrame().getModel().getDirection().equals("up") && levelCamera[j][i].equals("Hero")) {
+				  img = hero.loadImage(5);
+				  graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
+			    }
+		 }
+		 
+		 
+		 public void printScore(Graphics graphics) {
+				
+				img = Score.img;
+				graphics.drawImage(img, 307, 12, this.getWidth() /4, this.getHeight() /13, this);
+		 }
+		 
+		 public void printDiamondsLeft(Graphics graphics) {
+				
+				img = DiamondsLeft.img;
+				graphics.drawImage(img, 20, 40, this.getWidth() /4, this.getHeight() /13, this);
+		 }
+		 
+		 public void printTimer(Graphics graphics) {
+				
+				img = Timer.img;
+				graphics.drawImage(img, 20, 95, this.getWidth() /4, this.getHeight() /13, this);
+		 }
+		 
+		 public void printGameOver(Graphics graphics) {
+				
+				 if (GameOver.gameState == true){
+			      	  img = GameOver.img;
+			    	  graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			    	}
+		 }
+		 
+		 public void printGameWin(Graphics graphics) {
+				
+				 if (GameWin.gameState == true){
+			      	  img = GameWin.img;
+			    	  graphics.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+			    	}
+		 }
+	
+}

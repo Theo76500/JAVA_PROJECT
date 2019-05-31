@@ -14,10 +14,16 @@ import entity.Timer;
 public final class Controller implements IController {
 
 	/** The view. */
-	private IView		view;
+	private IView view;
 
 	/** The model. */
-	private IModel	model;
+	private IModel model;
+	
+	/** The level */
+	public static int level;
+	
+	public int getLevel() {return level;}
+	public void setLevel(int level) {Controller.level = level;}
 
 	/**
 	 * Instantiates a new controller.
@@ -40,13 +46,8 @@ public final class Controller implements IController {
 	 *
 	 * @see contract.IController#control()
 	 */
-
-	public static int level;
-
-	public int getLevel() {return level;}
-	public void setLevel(int level) { this.level = level;}
-
 	public void control() {
+		
 		model.loadLevel(1);
 		view.printLevel();
 	}
@@ -81,6 +82,11 @@ public final class Controller implements IController {
      * @param controllerOrder
      *            the controller order
      */
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see contract.IController#orderPerform(contract.ControllerOrder)
+	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		
 		boolean isCheckGood = true;
@@ -100,7 +106,8 @@ public final class Controller implements IController {
 				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
 				
 				if(isCheckGood) {
-					model.setCharacterCoords(model.getCoordXHero() 	+ 1, model.getCoordYHero());
+					model.levelCamera(model.getLevelTab());
+					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
 					model.setDirection("right");
 				}
 				break;
@@ -120,7 +127,7 @@ public final class Controller implements IController {
 				if(isCheckGood) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
 					model.setDirection("down");
-				}
+					}
 				break;
 
 			case RETRY:
@@ -138,11 +145,12 @@ public final class Controller implements IController {
 				GameWin.gameState = false;
 				Timer.timerOn = true;
 				level = level + 1;
-				model.loadLevel(level + 1);
+				model.loadLevel(level +1);
 				view.printLevel();
 				break;
-
+				
 			default:
+				model.setStartLevel();
 				model.setDirection("nothing");
 				break;
 		}

@@ -25,7 +25,7 @@ public class Score extends Inanimated{
 	}
 	
 	public Score() throws IOException {
-		this("Score", true, 0, 0, ImageIO.read(new File("main\\Sprites\\score.png")));
+		this("Score", true, 0, 0, ImageIO.read(new File("Sprites\\score.png")));
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class Score extends Inanimated{
 		BufferedImage img = null;
 		    
 		    try {
-		    	img = ImageIO.read(new File("main\\Sprites\\score.png"));
+		    	img = ImageIO.read(new File("Sprites\\score.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

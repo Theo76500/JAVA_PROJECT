@@ -1,9 +1,10 @@
 package entity;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Enemy extends Animated{
 
@@ -17,6 +18,9 @@ public class Enemy extends Animated{
 	public static void setImg(BufferedImage img) {
 		Enemy.img = img;
 	}
+	
+	public static BufferedImage getImg2() {return img2;}
+	public static void setImg2(BufferedImage img2) {Enemy.img2 = img2;} 
 	
 	public Enemy(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Enemy";
@@ -35,7 +39,7 @@ public class Enemy extends Animated{
 	}
 	
 	public Enemy() throws IOException {
-		this("Enemy", true, 0, 0, ImageIO.read(new File("main\\Sprites\\enemy.png")), ImageIO.read(new File("main\\Sprites\\enemy2.png")));
+		this("Enemy", true, 0, 0, ImageIO.read(new File("Sprites\\enemy.png")), ImageIO.read(new File("main\\Sprites\\enemy2.png")));
 	}
 	
 	@Override
@@ -54,12 +58,12 @@ public class Enemy extends Animated{
 			
 			case 2 :
 				try {
-					img = ImageIO.read(new File("main\\Sprites\\enemy2.png"));
+			    	img = ImageIO.read(new File("main\\Sprites\\enemy.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
-
+				
 			case 3 :
 				img = ImageIO.read(new File(""));
 				break;

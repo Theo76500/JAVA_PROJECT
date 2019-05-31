@@ -28,7 +28,7 @@ public class GameOver extends Inanimated{
 	}
 	
 	public GameOver() throws IOException {
-		this("GameOver", true, 0, 0, ImageIO.read(new File("main\\Sprites\\gameover.png")), false);
+		this("GameOver", true, 0, 0, ImageIO.read(new File("Sprites\\gameover.png")), false);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class GameOver extends Inanimated{
 		BufferedImage img = null;
 		    
 		    try {
-		    	img = ImageIO.read(new File("main\\Sprites\\gameover.png"));
+		    	img = ImageIO.read(new File("Sprites\\gameover.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
