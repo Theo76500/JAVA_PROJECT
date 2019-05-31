@@ -1,9 +1,8 @@
 package contract;
 
-import java.util.Observable;
-
 import entity.Level;
-import entity.RowLevel;
+
+import java.util.Observable;
 
 /**
  * The Interface IModel.
@@ -16,7 +15,7 @@ public interface IModel {
 
 	public void setLevel(Level level);
 
-	void loadLevel();
+	void loadLevel(int lvl);
 	
 	public String[][] getLevelTab();
 
@@ -63,4 +62,33 @@ public interface IModel {
     
     public String[][] levelCamera(String[][] levelTab);
 
+	void Timer();
+
+    public void setScore(int score);
+    
+	public boolean isDiamondSprite();
+
+	public void setDiamondSprite(boolean diamondSprite);
+	
+	public boolean isHeroleft();
+
+	public void setHeroleft(boolean heroleft);
+
+	public boolean isHeroright();
+
+	public void setHeroright(boolean heroright);
+
+	public boolean isHerodown();
+
+	public void setHerodown(boolean herodown);
+
+	public boolean isHeroup();
+	
+	public String[][] getLevelCamera();
+
+	public void setLevelCamera(String[][] levelCamera);
+	
+	public void setStartLevel();
+	
+	public boolean checkCamera(int coordX, int coordY);
 }

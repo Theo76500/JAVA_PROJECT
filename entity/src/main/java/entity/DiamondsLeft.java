@@ -26,7 +26,7 @@ public class DiamondsLeft extends Inanimated{
 	}
 	
 	public DiamondsLeft() throws IOException {
-		this("DiamondsLeft", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\diamondsleft.png")));
+		this("DiamondsLeft", true, 0, 0, ImageIO.read(new File("Sprites\\diamondsleft.png")));
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class DiamondsLeft extends Inanimated{
 		BufferedImage img = null;
 		    
 		    try {
-		    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\diamondsleft.png"));
+		    	img = ImageIO.read(new File("Sprites\\diamondsleft.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

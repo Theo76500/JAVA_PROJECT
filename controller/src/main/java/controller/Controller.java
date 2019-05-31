@@ -4,6 +4,7 @@ import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
+import entity.GameOver;
 
 /**
  * The Class Controller.
@@ -11,10 +12,10 @@ import contract.IView;
 public final class Controller implements IController {
 
 	/** The view. */
-	private IView		view;
+	private IView view;
 
 	/** The model. */
-	private IModel	model;
+	private IModel model;
 
 	/**
 	 * Instantiates a new controller.
@@ -39,7 +40,7 @@ public final class Controller implements IController {
 	 */
 	public void control() {
 		
-		model.loadLevel();
+		model.loadLevel(1);
 		view.printLevel();
 	}
 
@@ -98,7 +99,8 @@ public final class Controller implements IController {
 				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
 				
 				if(isCheckGood) {
-					model.setCharacterCoords(model.getCoordXHero() 	+ 1, model.getCoordYHero());
+					model.levelCamera(model.getLevelTab());
+					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
 					model.setDirection("right");
 					System.out.println("right");
 				}
@@ -123,8 +125,16 @@ public final class Controller implements IController {
 					System.out.println("down");
 				}
 				break;
-				
+
+			case RETRY:
+				GameOver.gameState = false;
+				model.loadLevel(1);
+				view.printLevel();
+				model.setScore(0);
+				break;
+
 			default:
+				model.setStartLevel();
 				model.setDirection("nothing");
 				System.out.println("nothing");
 				break;

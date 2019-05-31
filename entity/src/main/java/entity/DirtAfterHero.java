@@ -34,7 +34,7 @@ public class DirtAfterHero extends Inanimated{
 	}
 	
 	public DirtAfterHero() throws IOException {
-		this("DirtAfterHero", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\dirtafterhero.png")));
+		this("DirtAfterHero", true, 0, 0, ImageIO.read(new File("Sprites\\dirtafterhero.png")));
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class DirtAfterHero extends Inanimated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\dirtafterhero.png"));
+			    	img = ImageIO.read(new File("Sprites\\dirtafterhero.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

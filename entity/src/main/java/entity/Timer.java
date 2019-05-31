@@ -29,7 +29,7 @@ public class Timer extends Inanimated{
 	}
 	
 	public Timer() throws IOException {
-		this("Timer", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\timer.png")), true);
+		this("Timer", true, 0, 0, ImageIO.read(new File("Sprites\\timer.png")), true);
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class Timer extends Inanimated{
 		BufferedImage img = null;
 		    
 		    try {
-		    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\timer.png"));
+		    	img = ImageIO.read(new File("Sprites\\timer.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -1,10 +1,9 @@
 package entity;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Score extends Inanimated{
 
@@ -26,7 +25,7 @@ public class Score extends Inanimated{
 	}
 	
 	public Score() throws IOException {
-		this("Score", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\score.png")));
+		this("Score", true, 0, 0, ImageIO.read(new File("Sprites\\score.png")));
 	}
 
 	@Override
@@ -35,7 +34,7 @@ public class Score extends Inanimated{
 		BufferedImage img = null;
 		    
 		    try {
-		    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\score.png"));
+		    	img = ImageIO.read(new File("Sprites\\score.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

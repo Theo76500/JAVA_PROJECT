@@ -1,22 +1,14 @@
 package entity;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
 public class Diamond extends Animated{
 
-	private static BufferedImage img;
-	
-	public static BufferedImage getImg() {
-		return img;
-	}
-
-	public static void setImg(BufferedImage img) {
-		Diamond.img = img;
-	}
+	public static BufferedImage img;
+	public static BufferedImage img2;
 	
 	public Diamond(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Diamond";
@@ -25,16 +17,17 @@ public class Diamond extends Animated{
 		this.coordY = 0;
 	}
 	
-	public Diamond(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
+	public Diamond(String stringCode, boolean move, int coordX, int coordY, BufferedImage img, BufferedImage img2) {
 		this.stringCode = "Diamond";
 		this.move = true;
 		this.coordX = 0;
 		this.coordY = 0;
 		Diamond.img = this.loadImage(1);
+		Diamond.img2 = this.loadImage(2);
 	}
 	
 	public Diamond() throws IOException {
-		this("Diamond", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\diamond.png")));
+		this("Diamond", true, 0, 0, ImageIO.read(new File("Sprites\\diamond.png")), ImageIO.read(new File("Sprites\\diamond2.png")));
 	}
 	
 	@Override
@@ -45,14 +38,14 @@ public class Diamond extends Animated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\diamond.png"));
+			    	img = ImageIO.read(new File("Sprites\\diamond.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				break;
 			
 			case 2 :
-				img = ImageIO.read(new File(""));
+				img = ImageIO.read(new File("Sprites\\diamond2.png"));
 				break;
 				
 			case 3 :

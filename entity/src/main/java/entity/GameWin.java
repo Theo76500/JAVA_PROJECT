@@ -1,10 +1,9 @@
 package entity;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 	public class GameWin extends Inanimated{
 
@@ -29,7 +28,7 @@ import javax.imageio.ImageIO;
 		}
 		
 		public GameWin() throws IOException {
-			this("GameWin", true, 0, 0, ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\gamewin.png")), false);
+			this("GameWin", true, 0, 0, ImageIO.read(new File("Sprites\\gamewin.png")), false);
 		}
 
 		@Override
@@ -38,7 +37,7 @@ import javax.imageio.ImageIO;
 			BufferedImage img = null;
 			    
 			    try {
-			    	img = ImageIO.read(new File("C:\\Users\\valen\\OneDrive\\Bureau\\Sprites\\gamewin.png"));
+			    	img = ImageIO.read(new File("Sprites\\gamewin.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
