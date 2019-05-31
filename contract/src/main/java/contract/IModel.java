@@ -91,4 +91,17 @@ public interface IModel {
 	public void setStartLevel();
 	
 	public boolean checkInteraction(int coordX, int coordY);
+	
+	public int getCoordXEnemy();
+	public void setCoordXEnemy(int coordX);
+	
+	public int getCoordYEnemy();
+	
+	public void setCoordYEnemy(int coordY);
+	
+	public boolean checkCollisionBoulder(int coordX, int coordY);
+
+	public void setBoulderLeft(boolean b);
+
+	public void setBoulderRight(boolean b);
 }

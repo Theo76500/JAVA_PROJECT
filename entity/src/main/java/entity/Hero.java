@@ -18,7 +18,7 @@ public class Hero extends Animated{
 		this.coordY = 7;
 	}
 	
-	public Hero(String stringCode, boolean move, int coordX, int coordY, BufferedImage heroNothing, BufferedImage heroRight, BufferedImage heroleft, BufferedImage herodown, BufferedImage heroup) {
+	public Hero(String stringCode, boolean move, int coordX, int coordY, BufferedImage heroNothing, BufferedImage heroRight, BufferedImage heroleft, BufferedImage herodown, BufferedImage heroup, BufferedImage heroRight1, BufferedImage heroleft2, BufferedImage herodown2, BufferedImage heroup2) {
 		this.stringCode = "Hero";
 		this.move = true;
 		this.coordX = 7;
@@ -28,6 +28,10 @@ public class Hero extends Animated{
 		Hero.heroSprites.add(this.loadImage(3));
 		Hero.heroSprites.add(this.loadImage(4));
 		Hero.heroSprites.add(this.loadImage(5));
+		Hero.heroSprites.add(this.loadImage(6));
+		Hero.heroSprites.add(this.loadImage(7));
+		Hero.heroSprites.add(this.loadImage(8));
+		Hero.heroSprites.add(this.loadImage(9));
 	}
 	
 	public Hero() {
@@ -78,7 +82,7 @@ public class Hero extends Animated{
 				e.printStackTrace();
 			}
 			
-		/*case 6 :
+		case 6 :
 			try {
 		    	img = ImageIO.read(new File("Sprites\\heroright2.png"));
 			} catch (IOException e) {
@@ -104,7 +108,7 @@ public class Hero extends Animated{
 		    	img = ImageIO.read(new File("Sprites\\heroup1.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
-			}*/
+			}
 		
 		default :
 			break;

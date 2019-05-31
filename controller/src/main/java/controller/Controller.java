@@ -82,12 +82,14 @@ public final class Controller implements IController {
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		
 		boolean isCheckGood = true;
+		boolean isCheckGoodMovingBoulder;
 		boolean isCheckInteraction = true;
 		
 		switch (controllerOrder) {
 		
 			case LEFT:
 				isCheckGood = model.checkCollision(model.getCoordXHero() - 1, model.getCoordYHero());
+				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() - 1, model.getCoordYHero());
 				isCheckInteraction = model.checkInteraction(model.getCoordXHero() - 1, model.getCoordYHero());
 				
 				if(isCheckGood && isCheckInteraction) {
@@ -95,10 +97,18 @@ public final class Controller implements IController {
 					model.setDirection("left");
 					System.out.println("left");
 				}
+				if(isCheckGoodMovingBoulder == false) {
+					model.setBoulderLeft(true);
+				}else {
+					model.setBoulderLeft(false);
+					model.setBoulderRight(false);
+
+				}
 				break;
 				
 			case RIGHT:
 				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
+				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() + 1, model.getCoordYHero());
 				isCheckInteraction = model.checkInteraction(model.getCoordXHero() + 1, model.getCoordYHero());
 				
 				if(isCheckGood && isCheckInteraction) {
@@ -106,6 +116,14 @@ public final class Controller implements IController {
 					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
 					model.setDirection("right");
 					System.out.println("right");
+				}
+				if(isCheckGoodMovingBoulder == false) {
+					model.setBoulderRight(true);
+				}
+				else {
+					model.setBoulderRight(false);
+					model.setBoulderLeft(false);
+
 				}
 				break;
 				
