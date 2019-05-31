@@ -64,8 +64,6 @@ public final class View implements IView, Runnable {
 				return ControllerOrder.DOWN;
 			case KeyEvent.VK_R:
 				return ControllerOrder.RETRY;
-			case KeyEvent.VK_N:
-				return ControllerOrder.NEXT;
 
 			default:
 				return ControllerOrder.NOTHING;

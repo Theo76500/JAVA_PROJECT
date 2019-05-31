@@ -2,7 +2,6 @@ package view;
 
 import contract.IController;
 import contract.IModel;
-import controller.Controller;
 import entity.Level;
 import entity.RowLevel;
 
@@ -153,7 +152,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 1;
 				model.loadLevel(1);
 				printLevel();
 			}
@@ -163,7 +161,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 2;
 				model.loadLevel(2);
 				printLevel();
 			}
@@ -173,7 +170,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 3;
 				model.loadLevel(3);
 				printLevel();
 			}
@@ -183,7 +179,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 4;
 				model.loadLevel(4);
 				printLevel();
 			}
@@ -193,7 +188,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 5;
 				model.loadLevel(5);
 				printLevel();
 			}

@@ -1,12 +1,27 @@
 package model;
 
-import contract.IModel;
-import contract.IView;
-import entity.*;
-
+import java.awt.Color;
+import java.awt.Font;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
+
+import contract.IModel;
+import entity.BorderBlock;
+import entity.Boulder;
+import entity.Diamond;
+import entity.DiamondsLeft;
+import entity.Dirt;
+import entity.DirtAfterHero;
+import entity.Enemy;
+import entity.Entity;
+import entity.ExitDoor;
+import entity.GameOver;
+import entity.GameWin;
+import entity.Hero;
+import entity.Level;
+import entity.Score;
+import entity.Timer;
 
 /**
  * The Class Model.
@@ -21,11 +36,14 @@ public final class Model extends Observable implements IModel {
 	private static int finalTime;
 	private boolean gameWin = false;
 	private boolean gameOver = false;
+	boolean diamondSprite = false;
+	boolean heroleft = false;
+	boolean heroright = false;
+	boolean herodown = false;
+	boolean heroup = false;
 	private static int score = 0;
 	private static int diamond = 10;
 	private static int timeLeft;
-	private static boolean diamondSprite;
-	private static boolean enemySprite;
 	
 	public String getDirection() {
 		return direction;
@@ -37,12 +55,20 @@ public final class Model extends Observable implements IModel {
 
 	/** The levels. */
 	private Level level;
-
-	private IView	view;
 	
 	/** The character */
 	private Hero hero = new Hero();
+	
+	private String[][] levelCamera = new String[16][16];
 
+
+	public String[][] getLevelCamera() {
+		return levelCamera;
+	}
+
+	public void setLevelCamera(String[][] levelCamera) {
+		this.levelCamera = levelCamera;
+	}
 
 	/**
 	 * Instantiates a new model.
@@ -103,7 +129,7 @@ public final class Model extends Observable implements IModel {
 	}
 	
 	public void setTimeLeft(int timeLeft){
-		Model.timeLeft = timeLeft;
+		this.timeLeft = timeLeft;
 	}
 	
 	public boolean getGameWin() {
@@ -119,7 +145,7 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setFinalScore(int finalScore){
-		Model.finalScore = finalScore;
+		this.finalScore = finalScore;
 	}
 
 	public int getFinalTime(){
@@ -127,7 +153,7 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setFinalTime(int finalTime){
-		Model.finalTime = finalTime;
+		this.finalTime = finalTime;
 	}
 	
 	public int getScore() {
@@ -135,9 +161,9 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setScore(int score) {
-		Model.score = score;
+		this.score = score;
 	}
-
+	
 	public boolean getGameOver() {
 		return gameOver;
 	}
@@ -151,12 +177,10 @@ public final class Model extends Observable implements IModel {
 	}
 
 	public void setDiamond(int diamond) {
-		Model.diamond = diamond;
+		this.diamond = diamond;
 	}
 	
-	public boolean isDiamondSprite() {return diamondSprite;}
 
-	public boolean isEnemySprite() {return enemySprite;}
 
 	/*
 	 * (non-Javadoc)
@@ -165,7 +189,7 @@ public final class Model extends Observable implements IModel {
 	 */
 	public void loadLevel(int lvl) {
 		diamond = 10;
-		timeLeft = 360;
+		timeLeft = 120;
 		switch (lvl){
 			case 1:
 				try {
@@ -229,7 +253,7 @@ public final class Model extends Observable implements IModel {
 		int i = 0;
 		int j = 0;
 		 
-		for(String[] subTab : levelTab)
+		for(String subTab[] : levelTab)
 		{
 		  i = 0;
 		  for(String str : subTab)
@@ -242,19 +266,16 @@ public final class Model extends Observable implements IModel {
 
 				  if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
 					  levelTab[j][i] = "DirtAfterHero";
-
-					  if (this.getDiamond() != 0) {
+					  
+					  if(this.getDiamond() != 0) {
 						  setDiamond(getDiamond() - 1);
-						  setScore(getScore() + 15);
 					  }
-
-					  else if (getDiamond() == 0)
-					  {
-						  setScore(getScore() + 30);
-					  }
+					  
+					  setScore(getScore() + 15);
 				  }
 			    
 			    if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && levelTab[j][i+1].equals("DirtAfterHero")) {
+			    	
 			    	levelTab[j][i] = "DirtAfterHero";
 			    	levelTab[j][i+1] = "Diamond";
 			    }
@@ -281,7 +302,7 @@ public final class Model extends Observable implements IModel {
 					  }
 				  }
 
-			    if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy")){
+			    if(levelTab[j][i] != null && (this.getCoordXHero() == j) && (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy")){
 					this.GameOver();
 				}
 
@@ -289,9 +310,8 @@ public final class Model extends Observable implements IModel {
 					this.GameOver();
 				}
 
-				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor")  && getDiamond() == 0){
+				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 9){
 					  this.GameWin();
-
 				  }
 		     
 		    i++;
@@ -304,99 +324,105 @@ public final class Model extends Observable implements IModel {
 	
 	public String[][] levelCamera(String[][] levelTab) {
 		
-		int frameMaxX = 16;
-		int frameMaxY = 16;
-		int frameMaxX2 = frameMaxX - 1;
-		int frameMaxY2 = frameMaxY - 1;
-		
-		String[][] levelTabCamera = new String[frameMaxX][frameMaxY];
+	int offsetMaxX = 20 - 16;
+	int offsetMaxY = 20 - 16;
+	int offsetMinX = 0;
+	int offsetMinY = 0;
 	
-		if(this.getCoordXHero() + 6 > frameMaxX) {
-			
-			for(int i = 0; i < frameMaxX; i++) {
-				for(int j = 0; j < frameMaxX; j++) {
-					
-					
-					levelTabCamera[j][i] = levelTab[j + 1][i];
-					}
-				}
-			}
-		
-		else {
-			for(int i = 0; i < frameMaxX; i++) {
-				for(int j = 0; j < frameMaxX; j++) {
-			levelTabCamera[j][i] = levelTab[j][i];
-			
-		}
-			}
-		}
-		
-		/*int i = 0;
-		int j = 0;
-		
-		for(String sousTab[] : levelTabCamera)
-		{
-		  i = 0;
-		  for(String str : sousTab)
-		  {     
-		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTabCamera[j][i]);
-		    i++;
-		  }
-		  j++;
-		}*/
-		  return levelTabCamera;
-}
-			  
-			 
-			 /*if(i < (this.getCoordYHero() - 6)) {
-				 
-				 //On enlève une colonne / une ligne en décalant les indices
-				 //on en affiche une autre
-			 }
-			 
-			 if(j > (this.getCoordXHero() + 6)) {
-				 
-				 //On enlève une colonne / une ligne en décalant les indices
-				 //on en affiche une autre
-			 }
-			 
-			 if((j < this.getCoordXHero() - 6)) {
-				 
-				 //On enlève une colonne / une ligne en décalant les indices
-				 //on en affiche une autre
-			 }
-			  
-			 else { 
-				 levelTabCamera[j][i] = levelTab[j][i];
-			  }
-			 i++;
-		    }
-		  j++;
-		  }
-		
-		  return levelTabCamera;
-	}*/
+	int camX = this.getCoordXHero() - (16 / 2);
+	int camY = this.getCoordYHero() - (16 / 2);
 	
+	if (camX > offsetMaxX) {
+		camX = offsetMaxX;
+	}
+	else if(camX < offsetMinX) {
+		camX = offsetMinX;
+	}
+	if(camY > offsetMaxY) {
+		camY = offsetMaxY;
+	}
+	else if (camY < offsetMinY) {
+		 camY = offsetMinY;
+	}
+	
+	int i = 0;
+	int j = 0;
+	
+	for(String subTab[] : levelCamera)
+	{
+	  i = 0;
+	  camY = this.getCoordYHero() - (16 / 2);
+	  
+		if(camY > offsetMaxY) {
+			camY = offsetMaxY;
+		}
+		else if (camY < offsetMinY) {
+			 camY = offsetMinY;
+		}
+		
+	  for(String str : subTab)
+	  {     
+		    levelCamera[j][i] = levelTab[j + camX][i + camY];
+		    
+		    System.out.println("Perso à x = " +this.getCoordXHero());
+		    System.out.println("Perso à y = " +this.getCoordYHero());
+		    
+		    System.out.println("offsetMaxX = " +offsetMaxX);
+		    System.out.println("offsetMaxY = " +offsetMaxY);
+		    System.out.println("offsetMinX = " +offsetMinX);
+		    System.out.println("offsetMinY = " +offsetMinY);
+		    
+		    System.out.println("camX = " +camX);
+		    System.out.println("camY = " +camY);
+		    
+		    System.out.println("j = " +j);
+		    System.out.println("i = " +i);
+		    
+		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelCamera[j][i]);
+		    System.out.println(" ");
+		    System.out.println(" ");
+		    
+		  i++;
+	  }
+	  j++;
+	}
+	return levelCamera;
+	}
 	  
 	
 	public void setCharacterCoords(int coordX, int coordY) {
 		
-		this.setCoordXHero(coordX);
-		this.setCoordYHero(coordY);
+		this.diamondSprite = !this.diamondSprite;
+		
+		//if(this.checkCamera(coordX, coordY)) {
+		
+			this.levelTab[this.getCoordXHero()][this.getCoordYHero()] = "DirtAfterHero";
+			this.setCoordXHero(coordX);
+			this.setCoordYHero(coordY);
+			this.levelTab[coordX][coordY] = "Hero";
+		//}
+		
+		this.setLevelTab(this.levelBehavior(this.getLevelTab()));
+		this.setLevelCamera(this.levelCamera(this.getLevelTab()));
 		
 		this.setChanged();
 		this.notifyObservers();
 	}
 	
 	public boolean checkCollision(int coordX, int coordY) {
-
-		String[][] levelTab = this.getLevelTab();
-
-		return !levelTab[coordX][coordY].equals("Boulder") && !levelTab[coordX][coordY].equals("BorderBlock");
-
+		
+		String levelTab[][] = this.getLevelTab();
+		
+		if(levelTab[coordX][coordY].equals("Boulder") || levelTab[coordX][coordY].equals("BorderBlock")) {
+			
+			return false;
+		}
+			
+			return true;
+		
 	}
 	
-	public void avoidLatency() {
+	public void avoidLatency() throws IOException {
 		
 		try {
 			Entity borderBlock = new BorderBlock();
@@ -469,48 +495,118 @@ public final class Model extends Observable implements IModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//final Entity hero = new Hero();
 	}
 
 	public void Timer(){
+		for(timeLeft = 120; Timer.timerOn && timeLeft > 0; timeLeft--){
 
-		while (Timer.timerOn || !Timer.timerOn)
-			if (Timer.timerOn)
-			{
-				for(timeLeft = 360;  timeLeft > 0; timeLeft--){
-					diamondSprite = !diamondSprite;
-					enemySprite = !enemySprite;
-					this.setChanged();
-					this.notifyObservers();
-
-					try {
-						Thread.sleep (333);
-					}
-					catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+			
+			
+			this.diamondSprite = !this.diamondSprite;
+			//this.heroleft = !this.heroleft;
+			//this.heroright = !this.heroright;		
+			//this.herodown = !this.herodown;
+			//this.heroup = !this.heroup;
+			
+			this.setChanged();
+			this.notifyObservers();
+			
+			try {
+				Thread.sleep (1000);
 			}
-
-			} else
-			{
-				System.out.println("TIMER OFF");
+			catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-
-
 		}
+	}
 
+	public boolean isHeroleft() {
+		return heroleft;
+	}
+
+	public void setHeroleft(boolean heroleft) {
+		this.heroleft = heroleft;
+	}
+
+	public boolean isHeroright() {
+		return heroright;
+	}
+
+	public void setHeroright(boolean heroright) {
+		this.heroright = heroright;
+	}
+
+	public boolean isHerodown() {
+		return herodown;
+	}
+
+	public void setHerodown(boolean herodown) {
+		this.herodown = herodown;
+	}
+
+	public boolean isHeroup() {
+		return heroup;
+	}
+
+	public void setHeroup(boolean heroup) {
+		this.heroup = heroup;
+	}
+
+	public boolean isDiamondSprite() {
+		return diamondSprite;
+	}
+
+	public void setDiamondSprite(boolean diamondSprite) {
+		this.diamondSprite = diamondSprite;
+	}
 
 	public void GameOver(){
 		GameOver.gameState = true;
 		Timer.timerOn = false;
-		timeLeft = 1;
+		timeLeft = 0;
 	}
 	
 	
 	public void GameWin(){
 		GameWin.gameState = true;
 		Timer.timerOn = false;
-		finalScore = getScore() + getTimeLeft()/3;
+		finalScore = getScore() + getTimeLeft();
 		finalTime = 0;
 	}
 	
+	public void setStartLevel() {
+		this.setLevelTab(this.levelBehavior(this.getLevelTab()));
+		this.setLevelCamera(this.levelCamera(this.getLevelTab()));
+	}
+
+	@Override
+	public boolean checkCamera(int coordX, int coordY) {
+		int offsetMaxX = 20 - 16;
+		int offsetMaxY = 20 - 16;
+		int offsetMinX = 0;
+		int offsetMinY = 0;
+		
+		int camX = coordX - (16 / 2);
+		int camY = coordY - (16 / 2);
+		
+		if(coordX + 1 > 15) {
+			return false;
+		}
+		
+		if(coordX - 1 < 0) {
+			return false;
+		}
+		
+		if(coordY + 1 > 15) {
+			return false;
+		}
+		
+		if(coordY - 1 < 0) {
+			return false;
+		}
+		
+		return true;
+	}
 }
