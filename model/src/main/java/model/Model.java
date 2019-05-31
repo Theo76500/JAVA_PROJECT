@@ -248,7 +248,7 @@ public final class Model extends Observable implements IModel {
 		return this;
 	}
 	
-	public String[][] levelBehavior(String[][] levelTab) {
+	public String[][] levelBehavior(String[][] levelTab, int coordX, int coordY) {
 		
 		int i = 0;
 		int j = 0;
@@ -264,7 +264,7 @@ public final class Model extends Observable implements IModel {
 			    	levelTab[j][i+1] = "Boulder";
 			    }
 
-				  if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)) {
+				  if(levelTab[j][i] != null && levelTab[j][i].equals("Diamond") && (coordX == j) &&  (coordY == i)) {
 					  levelTab[j][i] = "DirtAfterHero";
 					  
 					  if(this.getDiamond() != 0) {
@@ -280,7 +280,7 @@ public final class Model extends Observable implements IModel {
 			    	levelTab[j][i+1] = "Diamond";
 			    }
 			    
-			    if(levelTab[j][i] != null && levelTab[j][i].equals("Dirt") && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i)){
+			    if(levelTab[j][i] != null && levelTab[j][i].equals("Dirt") && (coordX == j) &&  (coordY == i)){
 	                levelTab[j][i] = "DirtAfterHero";
 	            }
 			    
@@ -296,13 +296,13 @@ public final class Model extends Observable implements IModel {
 						  levelTab[j][i] = "DirtAfterHero";
 						  levelTab[j][i+1] = "Boulder";
 						  
-						  if(levelTab[j][i+1].equals("Boulder") && (this.getCoordXHero() == j) && (this.getCoordYHero() == i+2)) {
+						  if(levelTab[j][i+1].equals("Boulder") && (coordX == j) && (coordY == i+2)) {
 						  		GameOver();
 						  }
 					  }
 				  }
 
-			    if(levelTab[j][i] != null && (this.getCoordXHero() == j) && (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy")){
+			    if(levelTab[j][i] != null && (coordX == j) && (coordY == i) && levelTab[j][i].equals("Enemy")){
 					this.GameOver();
 				}
 
@@ -310,7 +310,7 @@ public final class Model extends Observable implements IModel {
 					this.GameOver();
 				}
 
-				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 9){
+				  if(levelTab[j][i] != null && (coordX == j) &&  (coordY == i) && levelTab[j][i].equals("ExitDoor")){
 					  this.GameWin();
 				  }
 		     
@@ -363,25 +363,6 @@ public final class Model extends Observable implements IModel {
 	  for(String str : subTab)
 	  {     
 		    levelCamera[j][i] = levelTab[j + camX][i + camY];
-		    
-		    System.out.println("Perso à x = " +this.getCoordXHero());
-		    System.out.println("Perso à y = " +this.getCoordYHero());
-		    
-		    System.out.println("offsetMaxX = " +offsetMaxX);
-		    System.out.println("offsetMaxY = " +offsetMaxY);
-		    System.out.println("offsetMinX = " +offsetMinX);
-		    System.out.println("offsetMinY = " +offsetMinY);
-		    
-		    System.out.println("camX = " +camX);
-		    System.out.println("camY = " +camY);
-		    
-		    System.out.println("j = " +j);
-		    System.out.println("i = " +i);
-		    
-		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelCamera[j][i]);
-		    System.out.println(" ");
-		    System.out.println(" ");
-		    
 		  i++;
 	  }
 	  j++;
@@ -394,7 +375,7 @@ public final class Model extends Observable implements IModel {
 		
 		this.diamondSprite = !this.diamondSprite;
 		
-		//if(this.checkCamera(coordX, coordY)) {
+			this.setLevelTab(this.levelBehavior(this.getLevelTab(), coordX, coordY));
 		
 			this.levelTab[this.getCoordXHero()][this.getCoordYHero()] = "DirtAfterHero";
 			this.setCoordXHero(coordX);
@@ -402,7 +383,7 @@ public final class Model extends Observable implements IModel {
 			this.levelTab[coordX][coordY] = "Hero";
 		//}
 		
-		this.setLevelTab(this.levelBehavior(this.getLevelTab()));
+		//this.setLevelTab(this.levelBehavior(this.getLevelTab()));
 		this.setLevelCamera(this.levelCamera(this.getLevelTab()));
 		
 		this.setChanged();
@@ -419,7 +400,23 @@ public final class Model extends Observable implements IModel {
 		}
 			
 			return true;
+	}
+	
+	public boolean checkInteraction(int coordX, int coordY) {
 		
+		String levelTab[][] = this.getLevelTab();
+		
+		if(levelTab[coordX][coordY].equals("ExitDoor")){
+			this.GameWin();
+			return false;
+		}
+				
+		if(levelTab[coordX][coordY].equals("Ennemy")) {
+			this.GameOver();
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public void avoidLatency() throws IOException {
@@ -564,6 +561,7 @@ public final class Model extends Observable implements IModel {
 
 	public void GameOver(){
 		GameOver.gameState = true;
+		System.out.print("ok");
 		Timer.timerOn = false;
 		timeLeft = 0;
 	}
@@ -577,36 +575,7 @@ public final class Model extends Observable implements IModel {
 	}
 	
 	public void setStartLevel() {
-		this.setLevelTab(this.levelBehavior(this.getLevelTab()));
+		this.setLevelTab(this.levelBehavior(this.getLevelTab(), this.getCoordXHero(), this.getCoordYHero()));
 		this.setLevelCamera(this.levelCamera(this.getLevelTab()));
-	}
-
-	@Override
-	public boolean checkCamera(int coordX, int coordY) {
-		int offsetMaxX = 20 - 16;
-		int offsetMaxY = 20 - 16;
-		int offsetMinX = 0;
-		int offsetMinY = 0;
-		
-		int camX = coordX - (16 / 2);
-		int camY = coordY - (16 / 2);
-		
-		if(coordX + 1 > 15) {
-			return false;
-		}
-		
-		if(coordX - 1 < 0) {
-			return false;
-		}
-		
-		if(coordY + 1 > 15) {
-			return false;
-		}
-		
-		if(coordY - 1 < 0) {
-			return false;
-		}
-		
-		return true;
 	}
 }

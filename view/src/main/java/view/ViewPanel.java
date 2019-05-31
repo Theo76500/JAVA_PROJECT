@@ -127,6 +127,8 @@ class ViewPanel extends JPanel implements Observer{
 		    //System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + [j][i]);
 		   if(this.getViewFrame().getModel().getLevelCamera()[j][i] != null) {
 			   
+			  // System.out.println("nombre de diamants : " + this.getViewFrame().getModel().getDiamond());
+			   
 		    	printBorderBlock(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
 		    	printDirt(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
 		    	printDiamond(graphics, i, j, this.getViewFrame().getModel().getLevelCamera());
@@ -227,7 +229,7 @@ class ViewPanel extends JPanel implements Observer{
 	
 	public void printExitDoor(Graphics graphics, int i, int j, String[][] levelCamera) {
 		
-		  if(levelCamera[j][i].equals("ExitDoor")) {
+		  if(levelCamera[j][i].equals("ExitDoor") && this.getViewFrame().getModel().getDiamond() == 0) {
 			    img = ExitDoor.getImg();
 		    	graphics.drawImage(img, j * dimensionX, i * dimensionY, dimensionX, dimensionY, this);
 		  }
