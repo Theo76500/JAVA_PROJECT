@@ -28,7 +28,7 @@ import java.io.IOException;
 		}
 		
 		public GameWin() throws IOException {
-			this("GameWin", true, 0, 0, ImageIO.read(new File("main\\Sprites\\gamewin.png")), false);
+			this("GameWin", true, 0, 0, ImageIO.read(new File("Sprites\\gamewin.png")), false);
 		}
 
 		@Override
@@ -37,7 +37,7 @@ import java.io.IOException;
 			BufferedImage img = null;
 			    
 			    try {
-			    	img = ImageIO.read(new File("main\\Sprites\\gamewin.png"));
+			    	img = ImageIO.read(new File("Sprites\\gamewin.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

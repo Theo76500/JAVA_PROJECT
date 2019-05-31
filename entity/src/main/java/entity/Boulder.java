@@ -34,7 +34,7 @@ public class Boulder extends Animated{
 	}
 	
 	public Boulder() throws IOException {
-		this("Boulder", true, 0, 0, ImageIO.read(new File("main\\Sprites\\boulder.png")));
+		this("Boulder", true, 0, 0, ImageIO.read(new File("Sprites\\boulder.png")));
 	}
 	
 	@Override
@@ -45,7 +45,7 @@ public class Boulder extends Animated{
 			switch(levelNumber) {
 			case 1 :
 				try {
-			    	img = ImageIO.read(new File("main\\Sprites\\boulder.png"));
+			    	img = ImageIO.read(new File("Sprites\\boulder.png"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
