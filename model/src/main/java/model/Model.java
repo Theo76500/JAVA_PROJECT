@@ -2,7 +2,6 @@ package model;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Observable;
@@ -33,13 +32,18 @@ public final class Model extends Observable implements IModel {
 
 	private String[][] levelTab = new String[20][20];
 	private String direction;
-	public int finalScore;
-	public int finalTime;
-	public boolean gameWin = false;
-	public boolean gameOver = false;
-	private int score = 0;
-	private int diamond = 10;
-	private int timeLeft;
+	private static int finalScore;
+	private static int finalTime;
+	private boolean gameWin = false;
+	private boolean gameOver = false;
+	boolean diamondSprite = false;
+	boolean heroleft = false;
+	boolean heroright = false;
+	boolean herodown = false;
+	boolean heroup = false;
+	private static int score = 0;
+	private static int diamond = 10;
+	private static int timeLeft;
 	
 	public String getDirection() {
 		return direction;
@@ -54,7 +58,17 @@ public final class Model extends Observable implements IModel {
 	
 	/** The character */
 	private Hero hero = new Hero();
+	
+	private String[][] levelCamera = new String[16][16];
 
+
+	public String[][] getLevelCamera() {
+		return levelCamera;
+	}
+
+	public void setLevelCamera(String[][] levelCamera) {
+		this.levelCamera = levelCamera;
+	}
 
 	/**
 	 * Instantiates a new model.
@@ -92,13 +106,6 @@ public final class Model extends Observable implements IModel {
 		this.notifyObservers();
 	}
 
-
-	/**
-     * Sets the first level.
-     *
-     * @param level1
-     *            the new first level.
-     */
 
 	
 	public int getCoordXHero() {
@@ -174,23 +181,56 @@ public final class Model extends Observable implements IModel {
 	}
 	
 
-	/**
-     * Load hello world.
-     *
-     * @param code
-     *            the code
-     */
+
 	/*
 	 * (non-Javadoc)
 	 *
 	 * @see contract.IModel#getMessage(java.lang.String)
 	 */
-	public void loadLevel() {
-		try {
-			final DAOHelloWorld daoHelloWorld = new DAOHelloWorld(DBConnection.getInstance().getConnection());
-			this.setLevel(daoHelloWorld.find());
-		} catch (final SQLException e) {
-			e.printStackTrace();
+	public void loadLevel(int lvl) {
+		diamond = 10;
+		timeLeft = 120;
+		switch (lvl){
+			case 1:
+				try {
+					final DAOLevel1 daoLevel1 = new DAOLevel1(DBConnection.getInstance().getConnection());
+					this.setLevel(daoLevel1.find());
+				} catch (final SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			case 2:
+				try {
+					final DAOLevel2 daoLevel2 = new DAOLevel2(DBConnection.getInstance().getConnection());
+					this.setLevel(daoLevel2.find());
+				} catch (final SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			case 3:
+				try {
+					final DAOLevel3 daoLevel3 = new DAOLevel3(DBConnection.getInstance().getConnection());
+					this.setLevel(daoLevel3.find());
+				} catch (final SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			case 4:
+				try {
+					final DAOLevel4 daoLevel4 = new DAOLevel4(DBConnection.getInstance().getConnection());
+					this.setLevel(daoLevel4.find());
+				} catch (final SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			case 5:
+				try {
+					final DAOLevel5 daoLevel5 = new DAOLevel5(DBConnection.getInstance().getConnection());
+					this.setLevel(daoLevel5.find());
+				} catch (final SQLException e) {
+					e.printStackTrace();
+				}
+				break;
 		}
 	}
 
@@ -262,7 +302,7 @@ public final class Model extends Observable implements IModel {
 					  }
 				  }
 
-			    if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy")){
+			    if(levelTab[j][i] != null && (this.getCoordXHero() == j) && (this.getCoordYHero() == i) && levelTab[j][i].equals("Enemy")){
 					this.GameOver();
 				}
 
@@ -270,7 +310,7 @@ public final class Model extends Observable implements IModel {
 					this.GameOver();
 				}
 
-				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor")){
+				  if(levelTab[j][i] != null && (this.getCoordXHero() == j) &&  (this.getCoordYHero() == i) && levelTab[j][i].equals("ExitDoor") && getDiamond() == 9){
 					  this.GameWin();
 				  }
 		     
@@ -284,81 +324,86 @@ public final class Model extends Observable implements IModel {
 	
 	public String[][] levelCamera(String[][] levelTab) {
 		
-		int frameMaxX = 16;
-		int frameMaxY = 16;
-		
-		String[][] levelTabCamera = new String[frameMaxX][frameMaxY];
+	int offsetMaxX = 20 - 16;
+	int offsetMaxY = 20 - 16;
+	int offsetMinX = 0;
+	int offsetMinY = 0;
 	
-		if(this.getCoordXHero() + 6 > frameMaxX) {
-			
-			for(int i = 0; i < frameMaxX; i++) {
-				for(int j = 0; j < frameMaxX; j++) {
-					
-					levelTabCamera[j][i] = levelTab[j + 1][i];
-					}
-				}
-			}
-		else {
-			for(int i = 0; i < frameMaxX; i++) {
-				for(int j = 0; j < frameMaxX; j++) {
-			levelTabCamera[j][i] = levelTab[j][i];
-			
-		}
-			}
-		}
-		
-		int i = 0;
-		int j = 0;
-		
-		for(String sousTab[] : levelTabCamera)
-		{
-		  i = 0;
-		  for(String str : sousTab)
-		  {     
-		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelTabCamera[j][i]);
-		    i++;
-		  }
-		  j++;
-		}
-		  return levelTabCamera;
-}
-			  
-			 
-			 /*if(i < (this.getCoordYHero() - 6)) {
-				 
-				 //On enlève une colonne / une ligne en décalant les indices
-				 //on en affiche une autre
-			 }
-			 
-			 if(j > (this.getCoordXHero() + 6)) {
-				 
-				 //On enlève une colonne / une ligne en décalant les indices
-				 //on en affiche une autre
-			 }
-			 
-			 if((j < this.getCoordXHero() - 6)) {
-				 
-				 //On enlève une colonne / une ligne en décalant les indices
-				 //on en affiche une autre
-			 }
-			  
-			 else { 
-				 levelTabCamera[j][i] = levelTab[j][i];
-			  }
-			 i++;
-		    }
-		  j++;
-		  }
-		
-		  return levelTabCamera;
-	}*/
+	int camX = this.getCoordXHero() - (16 / 2);
+	int camY = this.getCoordYHero() - (16 / 2);
 	
+	if (camX > offsetMaxX) {
+		camX = offsetMaxX;
+	}
+	else if(camX < offsetMinX) {
+		camX = offsetMinX;
+	}
+	if(camY > offsetMaxY) {
+		camY = offsetMaxY;
+	}
+	else if (camY < offsetMinY) {
+		 camY = offsetMinY;
+	}
+	
+	int i = 0;
+	int j = 0;
+	
+	for(String subTab[] : levelCamera)
+	{
+	  i = 0;
+	  camY = this.getCoordYHero() - (16 / 2);
+	  
+		if(camY > offsetMaxY) {
+			camY = offsetMaxY;
+		}
+		else if (camY < offsetMinY) {
+			 camY = offsetMinY;
+		}
+		
+	  for(String str : subTab)
+	  {     
+		    levelCamera[j][i] = levelTab[j + camX][i + camY];
+		    
+		    System.out.println("Perso à x = " +this.getCoordXHero());
+		    System.out.println("Perso à y = " +this.getCoordYHero());
+		    
+		    System.out.println("offsetMaxX = " +offsetMaxX);
+		    System.out.println("offsetMaxY = " +offsetMaxY);
+		    System.out.println("offsetMinX = " +offsetMinX);
+		    System.out.println("offsetMinY = " +offsetMinY);
+		    
+		    System.out.println("camX = " +camX);
+		    System.out.println("camY = " +camY);
+		    
+		    System.out.println("j = " +j);
+		    System.out.println("i = " +i);
+		    
+		    System.out.println("La valeur du tableau à l'indice ["+j+"]["+i+"] est : " + levelCamera[j][i]);
+		    System.out.println(" ");
+		    System.out.println(" ");
+		    
+		  i++;
+	  }
+	  j++;
+	}
+	return levelCamera;
+	}
 	  
 	
 	public void setCharacterCoords(int coordX, int coordY) {
 		
-		this.setCoordXHero(coordX);
-		this.setCoordYHero(coordY);
+		this.diamondSprite = !this.diamondSprite;
+		
+		//if(this.checkCamera(coordX, coordY)) {
+		
+			this.levelTab[this.getCoordXHero()][this.getCoordYHero()] = "DirtAfterHero";
+			this.setCoordXHero(coordX);
+			this.setCoordYHero(coordY);
+			this.levelTab[coordX][coordY] = "Hero";
+		//}
+		
+		this.setLevelTab(this.levelBehavior(this.getLevelTab()));
+		this.setLevelCamera(this.levelCamera(this.getLevelTab()));
 		
 		this.setChanged();
 		this.notifyObservers();
@@ -377,7 +422,7 @@ public final class Model extends Observable implements IModel {
 		
 	}
 	
-	public void avoidLatency() {
+	public void avoidLatency() throws IOException {
 		
 		try {
 			Entity borderBlock = new BorderBlock();
@@ -450,11 +495,21 @@ public final class Model extends Observable implements IModel {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		//final Entity hero = new Hero();
 	}
 
 	public void Timer(){
 		for(timeLeft = 120; Timer.timerOn && timeLeft > 0; timeLeft--){
 
+			
+			
+			this.diamondSprite = !this.diamondSprite;
+			//this.heroleft = !this.heroleft;
+			//this.heroright = !this.heroright;		
+			//this.herodown = !this.herodown;
+			//this.heroup = !this.heroup;
+			
 			this.setChanged();
 			this.notifyObservers();
 			
@@ -467,9 +522,50 @@ public final class Model extends Observable implements IModel {
 		}
 	}
 
+	public boolean isHeroleft() {
+		return heroleft;
+	}
+
+	public void setHeroleft(boolean heroleft) {
+		this.heroleft = heroleft;
+	}
+
+	public boolean isHeroright() {
+		return heroright;
+	}
+
+	public void setHeroright(boolean heroright) {
+		this.heroright = heroright;
+	}
+
+	public boolean isHerodown() {
+		return herodown;
+	}
+
+	public void setHerodown(boolean herodown) {
+		this.herodown = herodown;
+	}
+
+	public boolean isHeroup() {
+		return heroup;
+	}
+
+	public void setHeroup(boolean heroup) {
+		this.heroup = heroup;
+	}
+
+	public boolean isDiamondSprite() {
+		return diamondSprite;
+	}
+
+	public void setDiamondSprite(boolean diamondSprite) {
+		this.diamondSprite = diamondSprite;
+	}
+
 	public void GameOver(){
 		GameOver.gameState = true;
 		Timer.timerOn = false;
+		timeLeft = 0;
 	}
 	
 	
@@ -480,4 +576,37 @@ public final class Model extends Observable implements IModel {
 		finalTime = 0;
 	}
 	
+	public void setStartLevel() {
+		this.setLevelTab(this.levelBehavior(this.getLevelTab()));
+		this.setLevelCamera(this.levelCamera(this.getLevelTab()));
+	}
+
+	@Override
+	public boolean checkCamera(int coordX, int coordY) {
+		int offsetMaxX = 20 - 16;
+		int offsetMaxY = 20 - 16;
+		int offsetMinX = 0;
+		int offsetMinY = 0;
+		
+		int camX = coordX - (16 / 2);
+		int camY = coordY - (16 / 2);
+		
+		if(coordX + 1 > 15) {
+			return false;
+		}
+		
+		if(coordX - 1 < 0) {
+			return false;
+		}
+		
+		if(coordY + 1 > 15) {
+			return false;
+		}
+		
+		if(coordY - 1 < 0) {
+			return false;
+		}
+		
+		return true;
+	}
 }
