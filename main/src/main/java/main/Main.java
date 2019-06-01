@@ -31,9 +31,9 @@ public abstract class Main {
         final View view = new View(model);
         final Controller controller = new Controller(view, model);
         
-        model.avoidLatency();
-        
         view.setController(controller);
+        
+        model.avoidLatency();
 
         controller.control();
         controller.orderPerform(ControllerOrder.NOTHING);
