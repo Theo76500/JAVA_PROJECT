@@ -104,4 +104,21 @@ public interface IModel {
 	public void setBoulderLeft(boolean b);
 
 	public void setBoulderRight(boolean b);
+	
+	/*public int getRandomFour();
+	
+	public int getNbr();
+	
+	public int getChoice();
+	
+	public void setNbr(int nbr);
+	
+	public void checkCollisionEnemy(int coordXEnemy, int coordYEnemy);*/
+	
+	public void setEnemyCoords(int coordX, int coordY);
+	
+	public boolean isExit();
+
+	public void setExit(boolean exit);
+
 }

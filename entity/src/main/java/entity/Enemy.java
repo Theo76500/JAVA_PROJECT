@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 public class Enemy extends Animated{
 
 	private static BufferedImage img;
+	public static BufferedImage img2;
 	
 	public static BufferedImage getImg() {
 		return img;
@@ -21,20 +22,21 @@ public class Enemy extends Animated{
 	public Enemy(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Enemy";
 		this.move = true;
-		this.coordX = 0;
-		this.coordY = 0;
+		this.coordX = 7;
+		this.coordY = 14;
 	}
 	
-	public Enemy(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
+	public Enemy(String stringCode, boolean move, int coordX, int coordY, BufferedImage img, BufferedImage img2) {
 		this.stringCode = "Enemy";
 		this.move = true;
-		this.coordX = 0;
-		this.coordY = 0;
+		this.coordX = 7;
+		this.coordY = 14;
 		Enemy.img = this.loadImage(1);
+		Enemy.img2 = this.loadImage(2);
 	}
 	
-	public Enemy() throws IOException {
-		this("Enemy", true, 0, 0, ImageIO.read(new File("Sprites\\enemy.png")));
+	public Enemy() {
+		this("Enemy", true, 7, 14);
 	}
 	
 	@Override
@@ -52,7 +54,11 @@ public class Enemy extends Animated{
 				break;
 			
 			case 2 :
-				img = ImageIO.read(new File(""));
+				try {
+					img = ImageIO.read(new File("Sprites\\enemy2.png"));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				break;
 				
 			case 3 :
