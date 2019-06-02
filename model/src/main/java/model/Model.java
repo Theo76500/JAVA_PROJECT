@@ -501,7 +501,7 @@ public final class Model extends Observable implements IModel {
 	  j++;
 	}
 	return levelCamera;
-	}
+	}   
 	  
 	
 	public void setCharacterCoords(int coordX, int coordY) {
