@@ -95,7 +95,6 @@ public final class Controller implements IController {
 				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
 					model.setDirection("left");
-					System.out.println("left");
 				}
 				if(isCheckGoodMovingBoulder == false) {
 					model.setBoulderLeft(true);
@@ -115,7 +114,6 @@ public final class Controller implements IController {
 					model.levelCamera(model.getLevelTab());
 					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
 					model.setDirection("right");
-					System.out.println("right");
 				}
 				if(isCheckGoodMovingBoulder == false) {
 					model.setBoulderRight(true);
@@ -134,7 +132,6 @@ public final class Controller implements IController {
 				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
 					model.setDirection("up");
-					System.out.println("up");
 				}
 				break;
 				
@@ -145,7 +142,6 @@ public final class Controller implements IController {
 				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
 					model.setDirection("down");
-					System.out.println("down");
 				}
 				break;
 
@@ -159,9 +155,7 @@ public final class Controller implements IController {
 			default:
 				model.setStartLevel();
 				model.setDirection("nothing");
-				System.out.println("nothing");
 				break;
 		}
 	}
-
 }
