@@ -1,12 +1,13 @@
 package view;
 
+import java.awt.event.KeyEvent;
+
+import javax.swing.SwingUtilities;
+
 import contract.ControllerOrder;
 import contract.IController;
 import contract.IModel;
 import contract.IView;
-
-import javax.swing.*;
-import java.awt.event.KeyEvent;
 
 /**
  * The Class View.
@@ -20,7 +21,7 @@ public final class View implements IView, Runnable {
 	
 	/** The frame. */
 	private final ViewFrame viewFrame;
-	
+
 	/**
 	 * Instantiates a new view.
 	 *

@@ -21,7 +21,4 @@ public interface IController {
 	 *          the controller order
 	 */
 	public void orderPerform(ControllerOrder controllerOrder);
-	
-	public int getLevel();
-	public void setLevel(int level);
 }

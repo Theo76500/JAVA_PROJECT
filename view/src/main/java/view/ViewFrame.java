@@ -1,17 +1,24 @@
 package view;
 
-import contract.IController;
-import contract.IModel;
-import controller.Controller;
-import entity.Level;
-import entity.RowLevel;
-
-import javax.swing.*;
-import java.awt.*;
+import java.awt.GraphicsConfiguration;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+
+import contract.IController;
+import contract.IModel;
+import entity.Level;
+import entity.RowLevel;
 
 /**
  * The Class ViewFrame.
@@ -32,6 +39,8 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 
 	/** The model. */
 	private IModel model;
+	
+	private ViewMusic viewMusic;
 
 	/** The controller. */
 	private IController controller;
@@ -142,18 +151,21 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		this.setTitle("Boulder Dash");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
+		
+		Thread music = new Thread(new ViewMusic(this));
+		music.start();
+		
 		this.addKeyListener(this);
 		this.setContentPane(new ViewPanel(this));
 		this.setSize(700 + this.getInsets().left + this.getInsets().right, 750 + this.getInsets().top + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
-
+		
 		menuBar.add(menu1);
 
 		menu1.add(map1);
 		map1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 1;
 				model.loadLevel(1);
 				printLevel();
 			}
@@ -163,7 +175,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 2;
 				model.loadLevel(2);
 				printLevel();
 			}
@@ -173,7 +184,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 3;
 				model.loadLevel(3);
 				printLevel();
 			}
@@ -183,7 +193,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map4.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 4;
 				model.loadLevel(4);
 				printLevel();
 			}
@@ -193,7 +202,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		map5.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Controller.level = 5;
 				model.loadLevel(5);
 				printLevel();
 			}
@@ -201,11 +209,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 
 		setJMenuBar(menuBar);
 	}
-
-
-
-
-
 
 	/**
 	 * Prints the message.
@@ -256,5 +259,15 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
+	}
+	
+	public void playBackGroundMusic(File sound){
+		try {
+			Clip clip = AudioSystem.getClip();
+			clip.open(AudioSystem.getAudioInputStream(sound));
+			clip.start();
+			
+			Thread.sleep(clip.getMicrosecondLength());
+		}catch(Exception e){}
 	}
 }

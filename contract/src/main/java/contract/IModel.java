@@ -40,7 +40,7 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
-	String[][] levelBehavior(String[][] levelTab);
+	String[][] levelBehavior(String[][] levelTab, int coordX, int coordY);
 	
 	void setCharacterCoords(int coordX, int coordY);
 	
@@ -49,6 +49,8 @@ public interface IModel {
 	public int getDiamond();
 
 	public int getTimeLeft();
+	
+	public void setTimeLeft(int timeLeft);
 
 	public boolean getGameOver();
 
@@ -70,8 +72,6 @@ public interface IModel {
 
 	public void setDiamondSprite(boolean diamondSprite);
 	
-	public boolean isEnemySprite();
-	
 	public boolean isHeroleft();
 
 	public void setHeroleft(boolean heroleft);
@@ -92,5 +92,43 @@ public interface IModel {
 	
 	public void setStartLevel();
 	
-	public boolean checkCamera(int coordX, int coordY);
+	public boolean checkInteraction(int coordX, int coordY);
+	
+	public int getCoordXEnemy();
+	public void setCoordXEnemy(int coordX);
+	
+	public int getCoordYEnemy();
+	
+	public void setCoordYEnemy(int coordY);
+	
+	public boolean checkCollisionBoulder(int coordX, int coordY);
+
+	public void setBoulderLeft(boolean b);
+
+	public void setBoulderRight(boolean b);
+	
+	/*public int getRandomFour();
+	
+	public int getNbr();
+	
+	public int getChoice();
+	
+	public void setNbr(int nbr);
+	
+	public void checkCollisionEnemy(int coordXEnemy, int coordYEnemy);*/
+	
+	public void setEnemyCoords(int coordX, int coordY);
+	
+	public boolean isExit();
+
+	public void setExit(boolean exit);
+	
+	public int getLevelNumber();
+
+	public void setLevelNumber(int levelNumber);
+	
+	public boolean isReadyToLeave();
+
+	public void setReadyToLeave(boolean readyToLeave);
+
 }

@@ -18,12 +18,6 @@ public final class Controller implements IController {
 
 	/** The model. */
 	private IModel model;
-	
-	/** The level */
-	public static int level;
-	
-	public int getLevel() {return level;}
-	public void setLevel(int level) {Controller.level = level;}
 
 	/**
 	 * Instantiates a new controller.
@@ -90,32 +84,54 @@ public final class Controller implements IController {
 	public void orderPerform(final ControllerOrder controllerOrder) {
 		
 		boolean isCheckGood = true;
+		boolean isCheckGoodMovingBoulder;
+		boolean isCheckInteraction = true;
 		
 		switch (controllerOrder) {
 		
 			case LEFT:
 				isCheckGood = model.checkCollision(model.getCoordXHero() - 1, model.getCoordYHero());
+				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() - 1, model.getCoordYHero());
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero() - 1, model.getCoordYHero());
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
 					model.setDirection("left");
+				}
+				if(isCheckGoodMovingBoulder == false) {
+					model.setBoulderLeft(true);
+				}else {
+					model.setBoulderLeft(false);
+					model.setBoulderRight(false);
+
 				}
 				break;
 				
 			case RIGHT:
 				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
+				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() + 1, model.getCoordYHero());
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero() + 1, model.getCoordYHero());
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.levelCamera(model.getLevelTab());
 					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
 					model.setDirection("right");
+				}
+				if(isCheckGoodMovingBoulder == false) {
+					model.setBoulderRight(true);
+				}
+				else {
+					model.setBoulderRight(false);
+					model.setBoulderLeft(false);
+
 				}
 				break;
 				
 			case UP:
 				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() - 1);
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
 					model.setDirection("up");
 				}
@@ -123,37 +139,45 @@ public final class Controller implements IController {
 				
 			case DOWN:
 				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
+				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() + 1);
 				
-				if(isCheckGood) {
+				if(isCheckGood && isCheckInteraction) {
 					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
 					model.setDirection("down");
-					}
-				break;
-
-			case RETRY:
-				GameOver.gameState = false;
-				GameWin.gameState = false;
-				Timer.timerOn = true;
-				level = 1;
-				model.loadLevel(1);
-				view.printLevel();
-				model.setScore(0);
+				}
 				break;
 
 			case NEXT:
 				GameOver.gameState = false;
 				GameWin.gameState = false;
-				Timer.timerOn = true;
-				level = level + 1;
-				model.loadLevel(level +1);
+				//Timer.timerOn = true;
+				model.setLevelNumber(model.getLevelNumber() + 1);
+				model.loadLevel(model.getLevelNumber());
 				view.printLevel();
+				model.setStartLevel();
 				break;
 				
+			case RETRY:
+				GameOver.gameState = false;
+				GameWin.gameState = false;
+				Timer.timerOn = true;
+				model.setLevelNumber(1);
+				model.loadLevel(model.getLevelNumber());
+				view.printLevel();
+				model.setCoordXHero(4);
+				model.setCoordYHero(4);
+				model.setCoordXEnemy(7);
+				model.setCoordYEnemy(14);
+				model.setScore(0);
+				model.setTimeLeft(360);
+				//model.Timer();
+				model.setStartLevel();
+				break;
+
 			default:
 				model.setStartLevel();
 				model.setDirection("nothing");
 				break;
 		}
 	}
-
 }
