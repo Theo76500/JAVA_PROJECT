@@ -12,7 +12,7 @@ import contract.IView;
 /**
  * The Class View.
  *
- * @author Jean-Aymeric Diet
+ * @author Pierre Forques
  */
 public final class View implements IView, Runnable {
 
@@ -78,8 +78,8 @@ public final class View implements IView, Runnable {
 	 *
 	 * @see contract.IView#printMessage(java.lang.String)
 	 */
-	public void printLevel() {
-		this.viewFrame.printLevel();
+	public void loadLevelInTab() {
+		this.viewFrame.loadLevelInTab();
 	}
 
 	/*

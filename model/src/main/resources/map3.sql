@@ -1,8 +1,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-CREATE DATABASE `boulderdash` ;
-
 USE `boulderdash` ;
 
 DELIMITER $$
@@ -170,15 +168,15 @@ INSERT INTO `level3` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('Dirt', 6, 4, NULL, 3),
 ('Dirt', 6, 5, NULL, 3),
 ('Dirt', 6, 6, NULL, 3),
-('Enemy', 6, 7, 'FrontEnemy', 3),
+('Dirt', 6, 7, NULL, 3),
 ('Dirt', 6, 8, NULL, 3),
 ('BorderBlock', 6, 9, NULL, 3),
 ('Dirt', 6, 10, NULL, 3),
 ('Dirt', 6, 11, NULL, 3),
 ('Dirt', 6, 12, NULL, 3),
-('Dirt', 6, 13, NULL, 3),
-('Dirt', 6, 14, NULL, 3),
-('Dirt', 6, 15, NULL, 3),
+('DirtAfterHero', 6, 13, NULL, 3),
+('DirtAfterHero', 6, 14, NULL, 3),
+('DirtAfterHero', 6, 15, NULL, 3),
 ('Dirt', 6, 16, NULL, 3),
 ('Dirt', 6, 17, NULL, 3),
 ('Dirt', 6, 18, NULL, 3),
@@ -199,9 +197,9 @@ INSERT INTO `level3` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('Diamond', 7, 10, NULL, 3),
 ('Diamond', 7, 11, NULL, 3),
 ('Diamond', 7, 12, NULL, 3),
-('Dirt', 7, 13, NULL, 3),
-('Dirt', 7, 14, NULL, 3),
-('Dirt', 7, 15, NULL, 3),
+('DirtAfterHero', 7, 13, NULL, 3),
+('Enemy', 7, 14, 'FrontEnemy', 3),
+('DirtAfterHero', 7, 15, NULL, 3),
 ('Dirt', 7, 16, NULL, 3),
 ('Dirt', 7, 17, NULL, 3),
 ('Dirt', 7, 18, NULL, 3),
@@ -222,8 +220,8 @@ INSERT INTO `level3` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('Dirt', 8, 10, NULL, 3),
 ('Dirt', 8, 11, NULL, 3),
 ('Dirt', 8, 12, NULL, 3),
-('Dirt', 8, 13, NULL, 3),
-('Dirt', 8, 14, NULL, 3),
+('DirtAfterHero', 8, 13, NULL, 3),
+('DirtAfterHero', 8, 14, NULL, 3),
 ('Dirt', 8, 15, NULL, 3),
 ('Dirt', 8, 16, NULL, 3),
 ('Dirt', 8, 17, NULL, 3),

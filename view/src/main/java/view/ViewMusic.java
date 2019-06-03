@@ -2,63 +2,50 @@ package view;
 
 import java.io.File;
 
-import contract.IModel;
-import entity.GameOver;
-
 /**
  * The Class ViewFrame.
  *
- * @author Jean-Aymeric Diet
+ * @author Valentin pain
  */
 class ViewMusic implements Runnable{
-
+	
+	/** Instanciate new File **/
 	File backgroundMusic = new File("Songs\\boulderDashTheme.wav");
 	
+	/** The viewFrame **/
 	private ViewFrame viewFrame;
 	
-	/** The model. */
-	//private IModel model;
+	/**
+	 * Constructor ViewFrame
+	 * @param viewFrame
+	 */
+	public ViewMusic(ViewFrame viewFrame) {
+		this.viewFrame = viewFrame;
+	}
 	
+	/**
+	 * 
+	 * Play the music
+	 */
 	@Override
 	public void run() {
 			this.getViewFrame().playBackGroundMusic(backgroundMusic);
 	}
 	
+	/**
+	 * get the ViewFrame
+	 * @return viewFrame
+	 */
 	public ViewFrame getViewFrame() {
 		return viewFrame;
 	}
 
+	/**
+	 * 
+	 * set the viewFrame
+	 * @param viewFrame
+	 */
 	public void setViewFrame(ViewFrame viewFrame) {
 		this.viewFrame = viewFrame;
 	}
-
-	/*public ViewMusic(
-			//final IModel model, 
-			ViewFrame viewFrame){
-		//this.setModel(model);
-		this.viewFrame = viewFrame;
-	}*/
-
-	public ViewMusic(ViewFrame viewFrame) {
-		this.viewFrame = viewFrame;
-	}
-
-	/**
-	 * Gets the model.
-	 *
-	 * @return the model
-	 */
-	/*protected IModel getModel() {
-		return this.model;
-	}
-
-	/**
-	 * Sets the model.
-	 *
-	 * @param model
-	 *          the new model
-	 */
-	/*private void setModel(final IModel model) {
-		this.model = model;
-	}*/
 }

@@ -13,7 +13,6 @@ public interface IView {
 	 * @param message
 	 *          the message
 	 */
-	void printLevel();
 
-	//ViewFrame getViewFrame();
+	void loadLevelInTab();
 }

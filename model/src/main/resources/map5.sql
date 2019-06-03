@@ -1,8 +1,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-CREATE DATABASE `boulderdash` ;
-
 USE `boulderdash` ;
 
 DELIMITER $$
@@ -75,7 +73,7 @@ INSERT INTO `level5` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('Dirt', 2, 1, NULL, 5),
 ('Dirt', 2, 2, NULL, 5),
 ('Dirt', 2, 3, NULL, 5),
-('Enemy', 2, 4, 'FrontEnemy', 5),
+('Dirt', 2, 4, NULL, 5),
 ('Dirt', 2, 5, NULL, 5),
 ('Dirt', 2, 6, NULL, 5),
 ('Dirt', 2, 7, NULL, 5),
@@ -83,7 +81,7 @@ INSERT INTO `level5` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('Dirt', 2, 9, NULL, 5),
 ('Dirt', 2, 10, NULL, 5),
 ('Dirt', 2, 11, NULL, 5),
-('Enemy', 2, 12, 'FrontEnemy', 5),
+('Dirt', 2, 12, NULL, 5),
 ('Dirt', 2, 13, NULL, 5),
 ('Dirt', 2, 14, NULL, 5),
 ('Dirt', 2, 15, NULL, 5),
@@ -176,12 +174,12 @@ INSERT INTO `level5` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('BorderBlock', 6, 10, NULL, 5),
 ('Dirt', 6, 11, NULL, 5),
 ('Dirt', 6, 12, NULL, 5),
-('BorderBlock', 6, 13, NULL, 5),
-('Diamond', 6, 14, NULL, 5),
-('Diamond', 6, 15, NULL, 5),
+('DirtAfterHero', 6, 13, NULL, 5),
+('DirtAfterHero', 6, 14, NULL, 5),
+('DirtAfterHero', 6, 15, NULL, 5),
 ('Dirt', 6, 16, NULL, 5),
-('Dirt', 6, 17, NULL, 5),
-('Dirt', 6, 18, NULL, 5),
+('Diamond', 6, 17, NULL, 5),
+('Diamond', 6, 18, NULL, 5),
 ('BorderBlock', 6, 19, NULL, 5),
 
 
@@ -199,9 +197,9 @@ INSERT INTO `level5` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('BorderBlock', 7, 10, NULL, 5),
 ('Dirt', 7, 11, NULL, 5),
 ('Dirt', 7, 12, NULL, 5),
-('BorderBlock', 7, 13, NULL, 5),
-('Dirt', 7, 14, NULL, 5),
-('Dirt', 7, 15, NULL, 5),
+('DirtAfterHero', 7, 13, NULL, 5),
+('Enemy', 7, 14, 'FrontEnemy', 5),
+('DirtAfterHero', 7, 15, NULL, 5),
 ('Dirt', 7, 16, NULL, 5),
 ('Dirt', 7, 17, NULL, 5),
 ('Dirt', 7, 18, NULL, 5),
@@ -222,8 +220,8 @@ INSERT INTO `level5` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('BorderBlock', 8, 10, NULL, 5),
 ('Dirt', 8, 11, NULL, 5),
 ('Dirt', 8, 12, NULL, 5),
-('BorderBlock', 8, 13, NULL, 5),
-('BorderBlock', 8, 14, NULL, 5),
+('DirtAfterHero', 8, 13, NULL, 5),
+('DirtAfterHero', 8, 14, NULL, 5),
 ('BorderBlock', 8, 15, NULL, 5),
 ('Dirt', 8, 16, NULL, 5),
 ('Dirt', 8, 17, NULL, 5),
@@ -421,14 +419,14 @@ INSERT INTO `level5` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('Dirt', 17, 2, NULL, 5),
 ('Dirt', 17, 3, NULL, 5),
 ('Dirt', 17, 4, NULL, 5),
-('Enemy', 17, 5, 'FrontEnemy', 5),
+('Dirt', 17, 5, NULL, 5),
 ('Dirt', 17, 6, NULL, 5),
 ('Dirt', 17, 7, NULL, 5),
 ('Dirt', 17, 8, NULL, 5),
 ('Dirt', 17, 9, NULL, 5),
 ('Dirt', 17, 10, NULL, 5),
 ('Dirt', 17, 11, NULL, 5),
-('Enemy', 17, 12, 'FrontEnemy', 5),
+('Dirt', 17, 12, NULL, 5),
 ('Dirt', 17, 13, NULL, 5),
 ('Dirt', 17, 14, NULL, 5),
 ('Dirt', 17, 15, NULL, 5),
@@ -481,4 +479,4 @@ INSERT INTO `level5` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('BorderBlock', 19, 16, NULL, 5),
 ('BorderBlock', 19, 17, NULL, 5),
 ('BorderBlock', 19, 18, NULL, 5),
-('BorderBlock', 19, 19, NULL, 5),
+('BorderBlock', 19, 19, NULL, 5);

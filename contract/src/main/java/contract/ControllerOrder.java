@@ -3,7 +3,7 @@ package contract;
 /**
  * The Enum ControllerOrder.
  *
- * @author Jean-Aymeric Diet
+ * @author Valentin Pain, Adrien Lalisse & Théo Lnaglois
  */
 public enum ControllerOrder {
 
@@ -17,8 +17,8 @@ public enum ControllerOrder {
 	UP,
 	/** The down. */
 	DOWN,
-    /** RETRY */
+    /** The retry */
     RETRY,
-    /** NEXT Lvl */
+    /** The next level */
     NEXT;
 }

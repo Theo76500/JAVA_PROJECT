@@ -7,18 +7,74 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
+/**
+ * The class Hero
+ * @author PAIN Valentin
+ */
 public class Hero extends Animated{
 
+	/**
+	 * The class Hero
+	 * @author PAIN Valentin
+	 */
+	/**
+	 * The heroSprite
+	 */
 	public static ArrayList<BufferedImage> heroSprites = new ArrayList<BufferedImage>();
 	
-	public Hero(String stringCode, boolean move, int coordX, int coordY) {
-		this.stringCode = "Hero";
-		this.move = true;
-		this.coordX = 7;
-		this.coordY = 7;
-	}
+	/**
+	 * Sets the string code
+	 * @param stringCode
+	 * The string code
+	 */
+	public void setStringCode(String stringCode) {this.stringCode = stringCode;}
+	/**
+	 * Gets the coordX
+	 * @return coordX
+	 */
+	public int getCoordX() {return coordX;}
+	/**
+	 * Sets the coordX
+	 * @param coordX
+	 * The coordX
+	 */
+	public void setCoordX(int coordX) {this.coordX = coordX;}
+	/**
+	 * The coordY
+	 * @return coordY
+	 */
+	public int getCoordY() {return coordY;}
+	/**
+	 * Sets the coordY
+	 * @param coordY
+	 * The coordY
+	 */
+	public void setCoordY(int coordY) {this.coordY = coordY;}
+	/**
+	 * Gets the move
+	 * @return move
+	 */
+	public boolean getMove() {return this.move;}
+	/**
+	 * Sets the move
+	 * @param move
+	 * the move
+	 */
+	public void setMove(boolean move) {this.move = move;}
 	
-	public Hero(String stringCode, boolean move, int coordX, int coordY, BufferedImage heroNothing, BufferedImage heroRight, BufferedImage heroleft, BufferedImage herodown, BufferedImage heroup, BufferedImage heroRight1, BufferedImage heroleft2, BufferedImage herodown2, BufferedImage heroup2) {
+	
+	/**
+	 * The method that put the Hero
+	 * @param stringCode
+	 * The string code
+	 * @param move
+	 * The move
+	 * @param coordX
+	 * The coordX
+	 * @param coordY
+	 * The coordY
+	 */
+	public Hero(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Hero";
 		this.move = true;
 		this.coordX = 7;
@@ -34,10 +90,19 @@ public class Hero extends Animated{
 		Hero.heroSprites.add(this.loadImage(9));
 	}
 	
+	/**
+	 * Hero
+	 */
 	public Hero() {
 		this("Hero", true, 7, 7);
 	}
 	
+	/**
+	 * The method that load the image
+	 * @param levelNumber
+	 * The level number
+	 * @return null
+	 */
 	@Override
 	public BufferedImage loadImage(int levelNumber) {
 		BufferedImage img = null;
@@ -112,103 +177,8 @@ public class Hero extends Animated{
 		
 		default :
 			break;
-}
+		}
 		return img;
 		
 	}
-	
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		
-		try {
-			BufferedImage img = null;
-			
-			switch(levelNumber) {
-			case 1 :
-			    img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 2 :
-				img= ImageIO.read(new File(fileName));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 4 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 6 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 7 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 8 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 9 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 10 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	@Override
-	public BufferedImage loadImage(String direction) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setStringCode(String stringCode) {
-		this.stringCode = stringCode;
-	}
-
-	public int getCoordX() {
-		return coordX;
-	}
-
-	public void setCoordX(int coordX) {
-		this.coordX = coordX;
-	}
-
-	public int getCoordY() {
-		return coordY;
-	}
-
-	public void setCoordY(int coordY) {
-		this.coordY = coordY;
-	}
-
-	public boolean getMove() {
-		
-		return this.move;
-	}
-	
-	public void setMove(boolean move) {
-		
-		this.move = move;
-	}
-	
 }

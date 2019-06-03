@@ -1,8 +1,6 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-CREATE DATABASE `boulderdash` ;
-
 USE `boulderdash` ;
 
 DELIMITER $$
@@ -193,17 +191,17 @@ INSERT INTO `level4` (`blocksType`, `blocksX`, `blocksY`, `blocksDirection`, `le
 ('DirtAfterHero', 7, 4, NULL, 4),
 ('DirtAfterHero', 7, 5, NULL, 4),
 ('DirtAfterHero', 7, 6, NULL, 4),
-('Enemy', 7, 7, 'FrontEnemy', 4),
+('DirtAfterHero', 7, 7, NULL, 4),
 ('DirtAfterHero', 7, 8, NULL, 4),
 ('DirtAfterHero', 7, 9, NULL, 4),
 ('DirtAfterHero', 7, 10, NULL, 4),
 ('DirtAfterHero', 7, 11, NULL, 4),
 ('DirtAfterHero', 7, 12, NULL, 4),
 ('DirtAfterHero', 7, 13, NULL, 4),
-('DirtAfterHero', 7, 14, NULL, 4),
+('Enemy', 7, 14, NULL, 4),
 ('DirtAfterHero', 7, 15, NULL, 4),
 ('DirtAfterHero', 7, 16, NULL, 4),
-('Enemy', 7, 17, 'FrontEnemy', 4),
+('DirtAfterHero', 7, 17, NULL, 4),
 ('DirtAfterHero', 7, 18, NULL, 4),
 ('BorderBlock', 7, 19, NULL, 4),
 

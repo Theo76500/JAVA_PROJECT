@@ -6,20 +6,35 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * The Timer Class
+ * @author LANGLOIS Theo
+ */
 public class Timer extends Inanimated{
 
+	/**
+	 * The image
+	 */
 	public static BufferedImage img;
+	/**
+	 * The timer state
+	 */
 	public static boolean timerOn;
-
-	public Timer(String stringCode, boolean move, int coordX, int coordY, boolean timerOn) {
-		this.stringCode = "";
-		this.move = false;
-		this.coordX = 0;
-		this.coordY = 0;
-		Timer.timerOn = true;
-	}
 	
-	public Timer(String stringCode, boolean move, int coordX, int coordY, BufferedImage img, boolean gameState) {
+	/**
+	 * The method that put the sprite
+	 * @param stringCode
+	 * The string code
+	 * @param move
+	 * the move
+	 * @param coordX
+	 * The coordX
+	 * @param coordY
+	 * The coordY
+	 * @param timerOn
+	 * The timer state
+	 */
+	public Timer(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "";
 		this.move = false;
 		this.coordX = 0;
@@ -28,10 +43,21 @@ public class Timer extends Inanimated{
 		Timer.timerOn = true;
 	}
 	
+	/**
+	 *
+	 * @throws IOException
+	 * IOException
+	 */
 	public Timer() throws IOException {
-		this("Timer", true, 0, 0, ImageIO.read(new File("Sprites\\timer.png")), true);
+		this("Timer", true, 0, 0);
 	}
 
+	/**
+	 * The method that load the image
+	 * @param levelNumber
+	 * The level number
+	 * @return null
+	 */
 	@Override
 	public BufferedImage loadImage(int levelNumber) {
 		
@@ -45,37 +71,49 @@ public class Timer extends Inanimated{
 		    
 		return img;
 	}
-	
-	@Override
-	public BufferedImage loadImage(String direction) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
+	/**
+	 * Stes the string code
+	 * @param stringCode
+	 * The string code
+	 */
 	public void setStringCode(String stringCode) {
 		this.stringCode = stringCode;
 	}
 
+	/**
+	 * Gets the coordX
+	 * @return coordX
+	 */
 	public int getCoordX() {
 		return coordX;
 	}
 
+	/**
+	 * Sets the CoordX
+	 * @param coordX
+	 * The coordX
+	 */
 	public void setCoordX(int coordX) {
 		this.coordX = coordX;
 	}
+	
+	/**
+	 * Gets the coordY
+	 * @return coordY
+	 */
 
 	public int getCoordY() {
 		return coordY;
 	}
 
+	/**
+	 * Sets the coordY
+	 * @param coordY
+	 * The coordY
+	 */
 	public void setCoordY(int coordY) {
 		this.coordY = coordY;
-	}
-
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

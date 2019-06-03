@@ -6,18 +6,29 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * The class DiamondLeft
+ * @author PAIN Valentin
+ */
 public class DiamondsLeft extends Inanimated{
 
+	/**
+	 * The image
+	 */
 	public static BufferedImage img;
 	
+	/**
+	 * The method that put the sprite
+	 * @param stringCode
+	 * The string code
+	 * @param move
+	 * The move
+	 * @param coordX
+	 * The coordX
+	 * @param coordY
+	 * The coordY
+	 */
 	public DiamondsLeft(String stringCode, boolean move, int coordX, int coordY) {
-		this.stringCode = "DiamondsLeft";
-		this.move = false;
-		this.coordX = 0;
-		this.coordY = 0;
-	}
-	
-	public DiamondsLeft(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
 		this.stringCode = "DiamondsLeft";
 		this.move = false;
 		this.coordX = 0;
@@ -25,10 +36,21 @@ public class DiamondsLeft extends Inanimated{
 		DiamondsLeft.img = this.loadImage(1);
 	}
 	
+	/**
+	 *
+	 * @throws IOException
+	 * IOException
+	 */
 	public DiamondsLeft() throws IOException {
-		this("DiamondsLeft", true, 0, 0, ImageIO.read(new File("Sprites\\diamondsleft.png")));
+		this("DiamondsLeft", true, 0, 0);
 	}
 
+	/**
+	 * The method that load the image
+	 * @param levelNumber
+	 * The level number
+	 * @return null
+	 */
 	@Override
 	public BufferedImage loadImage(int levelNumber) {
 		
@@ -42,79 +64,4 @@ public class DiamondsLeft extends Inanimated{
 		    
 		return img;
 	}
-	
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		
-		try {
-			BufferedImage img = null;
-			
-			switch(levelNumber) {
-			case 1 :
-			    img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 2 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			case 4 :
-				img = ImageIO.read(new File(fileName));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(fileName));
-				break;
-			
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-	@Override
-	public BufferedImage loadImage(String direction) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public void setStringCode(String stringCode) {
-		this.stringCode = stringCode;
-	}
-
-	public int getCoordX() {
-		return coordX;
-	}
-
-	public void setCoordX(int coordX) {
-		this.coordX = coordX;
-	}
-
-	public int getCoordY() {
-		return coordY;
-	}
-
-	public void setCoordY(int coordY) {
-		this.coordY = coordY;
-	}
-
-	public boolean getMove() {
-		
-		return this.move;
-	}
-	
-	public void setMove(boolean move) {
-		
-		this.move = move;
-	}
-
 }

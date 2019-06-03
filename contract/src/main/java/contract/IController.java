@@ -1,11 +1,9 @@
 package contract;
 
-import entity.RowLevel;
-
 /**
  * The Interface IController.
  *
- * @author Jean-Aymeric Diet
+ * @author Valentin Pain
  */
 public interface IController {
 

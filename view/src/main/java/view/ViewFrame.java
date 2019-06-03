@@ -23,7 +23,7 @@ import entity.RowLevel;
 /**
  * The Class ViewFrame.
  *
- * @author Jean-Aymeric Diet
+ * @author PAIN Valentin, LANGLOIS Theo
  */
 class ViewFrame extends JFrame implements KeyListener, ActionListener{
 
@@ -40,8 +40,6 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 	/** The model. */
 	private IModel model;
 	
-	private ViewMusic viewMusic;
-
 	/** The controller. */
 	private IController controller;
 	/** The Constant serialVersionUID. */
@@ -146,7 +144,7 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 	 * @param model
 	 *          the model
 	 */
-	private void buildViewFrame(final IModel model) {
+	void buildViewFrame(final IModel model) {
 		this.setModel(model);	
 		this.setTitle("Boulder Dash");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -159,53 +157,12 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 		this.setContentPane(new ViewPanel(this));
 		this.setSize(700 + this.getInsets().left + this.getInsets().right, 750 + this.getInsets().top + this.getInsets().bottom);
 		this.setLocationRelativeTo(null);
-		
-		menuBar.add(menu1);
 
-		menu1.add(map1);
-		map1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.loadLevel(1);
-				printLevel();
-			}
-		});
-
-		menu1.add(map2);
-		map2.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.loadLevel(2);
-				printLevel();
-			}
-		});
-
-		menu1.add(map3);
-		map3.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.loadLevel(3);
-				printLevel();
-			}
-		});
-
-		menu1.add(map4);
-		map4.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.loadLevel(4);
-				printLevel();
-			}
-		});
-
-		menu1.add(map5);
-		map5.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.loadLevel(5);
-				printLevel();
-			}
-		});
+		map1Menu();
+		map2Menu();
+		map3Menu();
+		map4Menu();
+		map5Menu();
 
 		setJMenuBar(menuBar);
 	}
@@ -216,18 +173,15 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 	 * @param message
 	 *          the message
 	 */
-	public void printLevel() {
+	public void loadLevelInTab() {
 		
 		model.getLevel();
 		String[][] levelTab = model.getLevelTab();
 		
-		for(RowLevel entity: Level.getLevel()){
-	       	 
+		for(RowLevel entity: Level.getLevel()){ 
 	       	 levelTab[entity.getBlocksX()][entity.getBlocksY()] = entity.getBlocksType();
-	       	 
 	       }
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -255,12 +209,114 @@ class ViewFrame extends JFrame implements KeyListener, ActionListener{
 	public void keyReleased(final KeyEvent e) {
 
 	}
-
+	
+	/**
+	 * The action event
+	 * @param e
+	 * The event
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 	}
+	/**
+	 * (non-javadoc)
+	 * Chose the menu
+	 * of the map 1
+	 * on the side bar
+	 * 
+	 */
 	
+	public void map1Menu() {
+		menuBar.add(menu1);
+
+		menu1.add(map1);
+		map1.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(1);
+				loadLevelInTab();
+			}
+		});
+	}
+	
+	/**
+	 * (non-javadoc)
+	 * Chose the menu
+	 * of the map 2
+	 * on the side bar
+	 * 
+	 */
+	public void map2Menu() {
+		menu1.add(map2);
+		map2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(2);
+				loadLevelInTab();
+			}
+		});
+	}	
+	
+	/**
+	 * (non-javadoc)
+	 * Chose the menu
+	 * of the map 3
+	 * on the side bar
+	 * 
+	 */
+	public void map3Menu() {
+		menu1.add(map3);
+		map3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(3);
+				loadLevelInTab();
+			}
+		});
+	}
+	
+	/**
+	 * (non-javadoc)
+	 * Chose the menu
+	 * of the map 4
+	 * on the side bar
+	 * 
+	 */
+	public void map4Menu() {
+		menu1.add(map4);
+		map4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(4);
+				loadLevelInTab();
+			}
+		});
+	}
+	
+	/**
+	 * (non-javadoc)
+	 * Chose the menu
+	 * of the map 5
+	 * on the side bar
+	 * 
+	 */
+	public void map5Menu() {
+		menu1.add(map5);
+		map4.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				model.loadLevel(5);
+				loadLevelInTab();
+			}
+		});
+	}
+	
+	/**
+	 * 
+	 * Playing the sound
+	 * @param sound
+	 */
 	public void playBackGroundMusic(File sound){
 		try {
 			Clip clip = AudioSystem.getClip();

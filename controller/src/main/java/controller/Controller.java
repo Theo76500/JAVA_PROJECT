@@ -10,6 +10,7 @@ import entity.Timer;
 
 /**
  * The Class Controller.
+ * @author PAIN Valentin, LANGLOIS Theo
  */
 public final class Controller implements IController {
 
@@ -33,6 +34,14 @@ public final class Controller implements IController {
 	}
 
 	/**
+	 * Gets the model
+	 * @return model
+	 */
+	public IModel getModel() {
+		return model;
+	}
+	
+	/**
      * Control.
      */
 	/*
@@ -43,9 +52,13 @@ public final class Controller implements IController {
 	public void control() {
 		
 		model.loadLevel(1);
-		view.printLevel();
+		view.loadLevelInTab();
 	}
 
+	/**
+	 * Gets the view
+	 * @return view
+	 */
 	public IView getView() {
 		return view;
 	}
@@ -76,102 +89,32 @@ public final class Controller implements IController {
      * @param controllerOrder
      *            the controller order
      */
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see contract.IController#orderPerform(contract.ControllerOrder)
-	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
-		
-		boolean isCheckGood = true;
-		boolean isCheckGoodMovingBoulder;
-		boolean isCheckInteraction = true;
-		
+	
 		switch (controllerOrder) {
 		
 			case LEFT:
-				isCheckGood = model.checkCollision(model.getCoordXHero() - 1, model.getCoordYHero());
-				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() - 1, model.getCoordYHero());
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero() - 1, model.getCoordYHero());
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
-					model.setDirection("left");
-				}
-				if(isCheckGoodMovingBoulder == false) {
-					model.setBoulderLeft(true);
-				}else {
-					model.setBoulderLeft(false);
-					model.setBoulderRight(false);
-
-				}
+				triggerLeft();
 				break;
 				
 			case RIGHT:
-				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
-				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() + 1, model.getCoordYHero());
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero() + 1, model.getCoordYHero());
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.levelCamera(model.getLevelTab());
-					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
-					model.setDirection("right");
-				}
-				if(isCheckGoodMovingBoulder == false) {
-					model.setBoulderRight(true);
-				}
-				else {
-					model.setBoulderRight(false);
-					model.setBoulderLeft(false);
-
-				}
+				triggerRight();
 				break;
 				
 			case UP:
-				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() - 1);
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
-					model.setDirection("up");
-				}
+				triggerUp();
 				break;
 				
 			case DOWN:
-				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() + 1);
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
-					model.setDirection("down");
-				}
+				triggerDown();
 				break;
 
 			case NEXT:
-				GameOver.gameState = false;
-				GameWin.gameState = false;
-				//Timer.timerOn = true;
-				model.setLevelNumber(model.getLevelNumber() + 1);
-				model.loadLevel(model.getLevelNumber());
-				view.printLevel();
-				model.setStartLevel();
+				triggerNext();
 				break;
 				
 			case RETRY:
-				GameOver.gameState = false;
-				GameWin.gameState = false;
-				Timer.timerOn = true;
-				model.setLevelNumber(1);
-				model.loadLevel(model.getLevelNumber());
-				view.printLevel();
-				model.setCoordXHero(4);
-				model.setCoordYHero(4);
-				model.setCoordXEnemy(7);
-				model.setCoordYEnemy(14);
-				model.setScore(0);
-				model.setTimeLeft(360);
-				//model.Timer();
-				model.setStartLevel();
+				triggerRetry();
 				break;
 
 			default:
@@ -179,5 +122,131 @@ public final class Controller implements IController {
 				model.setDirection("nothing");
 				break;
 		}
+	}
+	
+	/**
+	 * The methtod that trigger the key left
+	 */
+	public void triggerLeft() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckGoodMovingBoulder;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = this.getModel().checkCollision(this.getModel().getCoordXHero() - 1, this.getModel().getCoordYHero());
+		isCheckGoodMovingBoulder = this.getModel().checkCollisionBoulder(this.getModel().getCoordXHero() - 1, this.getModel().getCoordYHero());
+		isCheckInteraction = this.getModel().checkInteraction(model.getCoordXHero() - 1, this.getModel().getCoordYHero());
+		
+		if(isCheckGood && isCheckInteraction) {
+			this.getModel().setCharacterCoords(this.getModel().getCoordXHero() - 1, this.getModel().getCoordYHero());
+			this.getModel().setDirection("left");
+		}
+		if(isCheckGoodMovingBoulder == false) {
+			this.getModel().setBoulderLeft(true);
+		}else {
+			this.getModel().setBoulderLeft(false);
+			this.getModel().setBoulderRight(false);
+		}
+	}
+	
+	/**
+	 * The methtod that trigger the key right
+	 */
+	public void triggerRight() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckGoodMovingBoulder;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
+		isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() + 1, model.getCoordYHero());
+		isCheckInteraction = model.checkInteraction(model.getCoordXHero() + 1, model.getCoordYHero());
+		
+		if(isCheckGood && isCheckInteraction) {
+			model.levelCam(model.getLevelTab());
+			model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
+			model.setDirection("right");
+		}
+		if(isCheckGoodMovingBoulder == false) {
+			model.setBoulderRight(true);
+		}
+		else {
+			model.setBoulderRight(false);
+			model.setBoulderLeft(false);
+		}
+	}
+	
+	/**
+	 * The methtod that trigger the key up
+	 */
+	public void triggerUp() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
+		isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() - 1);
+		
+		if(isCheckGood && isCheckInteraction) {
+			model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
+			model.setDirection("up");
+		}
+	}
+	
+	/**
+	 * The methtod that trigger the key down
+	 */
+	public void triggerDown() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
+		isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() + 1);
+		
+		if(isCheckGood && isCheckInteraction) {
+			model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
+			model.setDirection("down");
+		}
+	}
+	
+	/**
+	 * The methtod that trigger the key next
+	 */
+	public void triggerNext() {
+		GameOver.gameState = false;
+		GameWin.gameState = false;
+		model.setReadyToLeave(false);
+		if(model.getLevelNumber() < 5) {
+			model.setLevelNumber(model.getLevelNumber() + 1);
+		}
+		else {
+			model.setLevelNumber(1);
+		}
+		model.setCoordXEnemy(7);
+		model.setCoordYEnemy(14);
+		model.loadLevel(model.getLevelNumber());
+		view.loadLevelInTab();
+		model.setStartLevel();
+	}
+	
+	/**
+	 * The methtod that trigger the key retry
+	 */
+	public void triggerRetry() {
+		GameOver.gameState = false;
+		GameWin.gameState = false;
+		Timer.timerOn = true;
+		model.setLevelNumber(1);
+		model.setReadyToLeave(false);
+		model.loadLevel(model.getLevelNumber());
+		view.loadLevelInTab();
+		model.setCoordXHero(4);
+		model.setCoordYHero(4);
+		model.setCoordXEnemy(7);
+		model.setCoordYEnemy(14);
+		model.setScore(0);
+		model.setTimeLeft(360);
+		model.setStartLevel();
 	}
 }

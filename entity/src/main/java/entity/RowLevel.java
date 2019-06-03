@@ -56,6 +56,21 @@ public class RowLevel{
 		this.levelFinished = false;
 	}
 	
+	/**
+	 * Instantiates a new level
+	 * @param blocksId
+	 * the id
+	 * @param blocksType
+	 * the type
+	 * @param blocksX
+	 * the x
+	 * @param blocksY
+	 * the y
+	 * @param blocksDirection
+	 * the direction
+	 * @param levelNumber
+	 * the level numbers
+	 */
 	public RowLevel(int blocksId, String blocksType, int blocksX, int blocksY, String blocksDirection, int levelNumber) {
 		this.blocksId = blocksId;
 		this.blocksType = blocksType;
