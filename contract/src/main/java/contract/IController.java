@@ -1,7 +1,5 @@
 package contract;
 
-import entity.RowLevel;
-
 /**
  * The Interface IController.
  *

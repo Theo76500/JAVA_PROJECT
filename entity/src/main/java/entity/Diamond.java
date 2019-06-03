@@ -10,13 +10,6 @@ public class Diamond extends Animated{
 	public static BufferedImage img;
 	public static BufferedImage img2;
 	
-	public static BufferedImage getImg() {
-		return img;
-	}
-	public static void setImg(BufferedImage img) { Diamond.img = img; }
-
-	public static BufferedImage getImg2() {return img2;}
-	public static void setImg2(BufferedImage img2) {Diamond.img2 = img2;}
 	public Diamond(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Diamond";
 		this.move = true;

@@ -1,61 +1,119 @@
 package entity;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
 
 public class Hero extends Animated{
 
+	public static ArrayList<BufferedImage> heroSprites = new ArrayList<BufferedImage>();
+	
 	public Hero(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Hero";
 		this.move = true;
-		this.coordX = 4;
-		this.coordY = 6;
+		this.coordX = 7;
+		this.coordY = 7;
+	}
+	
+	public Hero(String stringCode, boolean move, int coordX, int coordY, BufferedImage heroNothing, BufferedImage heroRight, BufferedImage heroleft, BufferedImage herodown, BufferedImage heroup, BufferedImage heroRight1, BufferedImage heroleft2, BufferedImage herodown2, BufferedImage heroup2) {
+		this.stringCode = "Hero";
+		this.move = true;
+		this.coordX = 7;
+		this.coordY = 7;
+		Hero.heroSprites.add(this.loadImage(1));
+		Hero.heroSprites.add(this.loadImage(2));
+		Hero.heroSprites.add(this.loadImage(3));
+		Hero.heroSprites.add(this.loadImage(4));
+		Hero.heroSprites.add(this.loadImage(5));
+		Hero.heroSprites.add(this.loadImage(6));
+		Hero.heroSprites.add(this.loadImage(7));
+		Hero.heroSprites.add(this.loadImage(8));
+		Hero.heroSprites.add(this.loadImage(9));
 	}
 	
 	public Hero() {
-		this("Hero", true, 4, 6);
+		this("Hero", true, 7, 7);
 	}
 	
 	@Override
 	public BufferedImage loadImage(int levelNumber) {
-		try {
-			BufferedImage img = null;
+		BufferedImage img = null;
+		
+		switch(levelNumber) {
+		case 1 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\hero.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		
+		case 2 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\heroright1.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 			
-			switch(levelNumber) {
-			case 1 :
-				try {
-			    	img = ImageIO.read(new File("Sprites\\hero.png"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				break;
+		case 3 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\heroleft1.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
+		
+		case 4 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\herodown1.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			break;
 			
-			case 2 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 3 :
-				img = ImageIO.read(new File(""));
-				break;
+		case 5 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\heroup1.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
-			case 4 :
-				img = ImageIO.read(new File(""));
-				break;
-				
-			case 5 :
-				img = ImageIO.read(new File(""));
-				break;
+		case 6 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\heroright2.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
-			default :
-				break;
-		}
-			return img;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
+		case 7 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\heroleft2.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		case 8 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\herodown2.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		case 9 :
+			try {
+		    	img = ImageIO.read(new File("Sprites\\heroup1.png"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		
+		default :
+			break;
+}
+		return img;
 		
 	}
 	
@@ -87,6 +145,26 @@ public class Hero extends Animated{
 				img = ImageIO.read(new File(fileName));
 				break;
 			
+			case 6 :
+				img = ImageIO.read(new File(fileName));
+				break;
+			
+			case 7 :
+				img = ImageIO.read(new File(fileName));
+				break;
+				
+			case 8 :
+				img = ImageIO.read(new File(fileName));
+				break;
+			
+			case 9 :
+				img = ImageIO.read(new File(fileName));
+				break;
+				
+			case 10 :
+				img = ImageIO.read(new File(fileName));
+				break;
+				
 			default :
 				break;
 		}

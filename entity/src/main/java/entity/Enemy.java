@@ -1,13 +1,14 @@
 package entity;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
 public class Enemy extends Animated{
 
-	public static BufferedImage img;
+	private static BufferedImage img;
 	public static BufferedImage img2;
 	
 	public static BufferedImage getImg() {
@@ -59,7 +60,7 @@ public class Enemy extends Animated{
 					e.printStackTrace();
 				}
 				break;
-
+				
 			case 3 :
 				img = ImageIO.read(new File(""));
 				break;

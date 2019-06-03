@@ -1,8 +1,9 @@
 package contract;
 
-import entity.Level;
-
+import java.io.File;
 import java.util.Observable;
+
+import entity.Level;
 
 /**
  * The Interface IModel.
@@ -40,8 +41,6 @@ public interface IModel {
 	 */
 	Observable getObservable();
 	
-	String[][] levelBehavior(String[][] levelTab);
-	
 	void setCharacterCoords(int coordX, int coordY);
 	
 	boolean checkCollision(int coordX, int coordY);
@@ -49,6 +48,8 @@ public interface IModel {
 	public int getDiamond();
 
 	public int getTimeLeft();
+	
+	public void setTimeLeft(int timeLeft);
 
 	public boolean getGameOver();
 
@@ -60,19 +61,76 @@ public interface IModel {
 
     public int getFinalTime();
     
-    public String[][] levelCamera(String[][] levelTab);
+    //public String[][] levelCamera(String[][] levelTab);
 
 	void Timer();
 
     public void setScore(int score);
+    
+	public boolean isDiamondSprite();
 
-    public boolean isDiamondSprite();
+	public void setDiamondSprite(boolean diamondSprite);
+	
+	public boolean isHeroleft();
 
-	boolean isEnemySprite();
+	public void setHeroleft(boolean heroleft);
 
+	public boolean isHeroright();
+
+	public void setHeroright(boolean heroright);
+
+	public boolean isHerodown();
+
+	public void setHerodown(boolean herodown);
+
+	public boolean isHeroup();
+	
+	public String[][] getLevelCamera();
+
+	public void setLevelCamera(String[][] levelCamera);
+	
+	public boolean checkInteraction(int coordX, int coordY);
+	
 	public int getCoordXEnemy();
-
+	
+	public void setCoordXEnemy(int coordX);
+	
 	public int getCoordYEnemy();
 	
-	public void checkCollisionEnemy(int gg, int ff);
+	public void setCoordYEnemy(int coordY);
+	
+	public boolean checkCollisionBoulder(int coordX, int coordY);
+
+	public void setBoulderLeft(boolean b);
+
+	public void setBoulderRight(boolean b);
+
+	public void setEnemyCoords(int coordX, int coordY);
+	
+	public boolean isExit();
+
+	public void setExit(boolean exit);
+	
+	public int getLevelNumber();
+
+	public void setLevelNumber(int levelNumber);
+	
+	public boolean isReadyToLeave();
+
+	public void setReadyToLeave(boolean readyToLeave);
+	
+	public void playSound(File sound);
+	
+	public void setDiamond(int diamond);
+	
+	public boolean isBoulderRight();
+
+	public boolean isBoulderLeft();
+
+	public void setFinalTime(int finalTime);
+	
+	public String[][] levelCam(String[][] levelTab);
+	
+	public void setStartLevel();
+
 }

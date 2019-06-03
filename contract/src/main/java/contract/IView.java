@@ -14,6 +14,4 @@ public interface IView {
 	 *          the message
 	 */
 	void printLevel();
-
-	//ViewFrame getViewFrame();
 }
