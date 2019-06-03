@@ -10,15 +10,7 @@ import java.io.IOException;
 		public static BufferedImage img;
 		public static boolean gameState;
 		
-		public GameWin(String stringCode, boolean move, int coordX, int coordY, boolean gameState) {
-			this.stringCode = "GameWin";
-			this.move = false;
-			this.coordX = 0;
-			this.coordY = 0;
-			GameWin.gameState = false;
-		}
-
-		public GameWin(String stringCode, boolean move, int coordX, int coordY, BufferedImage img, boolean gameState) {
+		public GameWin(String stringCode, boolean move, int coordX, int coordY) {
 			this.stringCode = "GameWin";
 			this.move = false;
 			this.coordX = 0;
@@ -28,7 +20,7 @@ import java.io.IOException;
 		}
 		
 		public GameWin() throws IOException {
-			this("GameWin", true, 0, 0, ImageIO.read(new File("Sprites\\gamewin.png")), false);
+			this("GameWin", true, 0, 0);
 		}
 
 		@Override
@@ -44,17 +36,5 @@ import java.io.IOException;
 			    
 			return img;
 		}
-
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BufferedImage loadImage(String direction) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

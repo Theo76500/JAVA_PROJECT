@@ -5,6 +5,8 @@ import contract.IController;
 import contract.IModel;
 import contract.IView;
 import entity.GameOver;
+import entity.GameWin;
+import entity.Timer;
 
 /**
  * The Class Controller.
@@ -30,6 +32,10 @@ public final class Controller implements IController {
 		this.setModel(model);
 	}
 
+	public IModel getModel() {
+		return model;
+	}
+	
 	/**
      * Control.
      */
@@ -41,7 +47,7 @@ public final class Controller implements IController {
 	public void control() {
 		
 		model.loadLevel(1);
-		view.printLevel();
+		view.loadLevelInTab();
 	}
 
 	public IView getView() {
@@ -80,76 +86,31 @@ public final class Controller implements IController {
 	 * @see contract.IController#orderPerform(contract.ControllerOrder)
 	 */
 	public void orderPerform(final ControllerOrder controllerOrder) {
-		
-		boolean isCheckGood = true;
-		boolean isCheckGoodMovingBoulder;
-		boolean isCheckInteraction = true;
-		
+	
 		switch (controllerOrder) {
 		
 			case LEFT:
-				isCheckGood = model.checkCollision(model.getCoordXHero() - 1, model.getCoordYHero());
-				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() - 1, model.getCoordYHero());
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero() - 1, model.getCoordYHero());
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.setCharacterCoords(model.getCoordXHero() - 1, model.getCoordYHero());
-					model.setDirection("left");
-				}
-				if(isCheckGoodMovingBoulder == false) {
-					model.setBoulderLeft(true);
-				}else {
-					model.setBoulderLeft(false);
-					model.setBoulderRight(false);
-
-				}
+				triggerLeft();
 				break;
 				
 			case RIGHT:
-				isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
-				isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() + 1, model.getCoordYHero());
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero() + 1, model.getCoordYHero());
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.levelCamera(model.getLevelTab());
-					model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
-					model.setDirection("right");
-				}
-				if(isCheckGoodMovingBoulder == false) {
-					model.setBoulderRight(true);
-				}
-				else {
-					model.setBoulderRight(false);
-					model.setBoulderLeft(false);
-
-				}
+				triggerRight();
 				break;
 				
 			case UP:
-				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() - 1);
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
-					model.setDirection("up");
-				}
+				triggerUp();
 				break;
 				
 			case DOWN:
-				isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
-				isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() + 1);
-				
-				if(isCheckGood && isCheckInteraction) {
-					model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
-					model.setDirection("down");
-				}
+				triggerDown();
 				break;
 
+			case NEXT:
+				triggerNext();
+				break;
+				
 			case RETRY:
-				GameOver.gameState = false;
-				model.loadLevel(1);
-				view.printLevel();
-				model.setScore(0);
+				triggerRetry();
 				break;
 
 			default:
@@ -157,5 +118,113 @@ public final class Controller implements IController {
 				model.setDirection("nothing");
 				break;
 		}
+	}
+	
+	public void triggerLeft() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckGoodMovingBoulder;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = this.getModel().checkCollision(this.getModel().getCoordXHero() - 1, this.getModel().getCoordYHero());
+		isCheckGoodMovingBoulder = this.getModel().checkCollisionBoulder(this.getModel().getCoordXHero() - 1, this.getModel().getCoordYHero());
+		isCheckInteraction = this.getModel().checkInteraction(model.getCoordXHero() - 1, this.getModel().getCoordYHero());
+		
+		if(isCheckGood && isCheckInteraction) {
+			this.getModel().setCharacterCoords(this.getModel().getCoordXHero() - 1, this.getModel().getCoordYHero());
+			this.getModel().setDirection("left");
+		}
+		if(isCheckGoodMovingBoulder == false) {
+			this.getModel().setBoulderLeft(true);
+		}else {
+			this.getModel().setBoulderLeft(false);
+			this.getModel().setBoulderRight(false);
+		}
+	}
+	
+	public void triggerRight() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckGoodMovingBoulder;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = model.checkCollision(model.getCoordXHero() + 1, model.getCoordYHero());
+		isCheckGoodMovingBoulder = model.checkCollisionBoulder(model.getCoordXHero() + 1, model.getCoordYHero());
+		isCheckInteraction = model.checkInteraction(model.getCoordXHero() + 1, model.getCoordYHero());
+		
+		if(isCheckGood && isCheckInteraction) {
+			model.levelCam(model.getLevelTab());
+			model.setCharacterCoords(model.getCoordXHero() + 1, model.getCoordYHero());
+			model.setDirection("right");
+		}
+		if(isCheckGoodMovingBoulder == false) {
+			model.setBoulderRight(true);
+		}
+		else {
+			model.setBoulderRight(false);
+			model.setBoulderLeft(false);
+		}
+	}
+	
+	public void triggerUp() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() - 1);
+		isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() - 1);
+		
+		if(isCheckGood && isCheckInteraction) {
+			model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() - 1);
+			model.setDirection("up");
+		}
+	}
+	
+	public void triggerDown() {
+		
+		boolean isCheckGood = true;
+		boolean isCheckInteraction = true;
+		
+		isCheckGood = model.checkCollision(model.getCoordXHero(), model.getCoordYHero() + 1);
+		isCheckInteraction = model.checkInteraction(model.getCoordXHero(), model.getCoordYHero() + 1);
+		
+		if(isCheckGood && isCheckInteraction) {
+			model.setCharacterCoords(model.getCoordXHero(), model.getCoordYHero() + 1);
+			model.setDirection("down");
+		}
+	}
+	
+	public void triggerNext() {
+		GameOver.gameState = false;
+		GameWin.gameState = false;
+		model.setReadyToLeave(false);
+		if(model.getLevelNumber() < 5) {
+			model.setLevelNumber(model.getLevelNumber() + 1);
+		}
+		else {
+			model.setLevelNumber(1);
+		}
+		model.setCoordXEnemy(7);
+		model.setCoordYEnemy(14);
+		model.loadLevel(model.getLevelNumber());
+		view.loadLevelInTab();
+		model.setStartLevel();
+	}
+	
+	public void triggerRetry() {
+		GameOver.gameState = false;
+		GameWin.gameState = false;
+		Timer.timerOn = true;
+		model.setLevelNumber(1);
+		model.setReadyToLeave(false);
+		model.loadLevel(model.getLevelNumber());
+		view.loadLevelInTab();
+		model.setCoordXHero(4);
+		model.setCoordYHero(4);
+		model.setCoordXEnemy(7);
+		model.setCoordYEnemy(14);
+		model.setScore(0);
+		model.setTimeLeft(360);
+		model.setStartLevel();
 	}
 }

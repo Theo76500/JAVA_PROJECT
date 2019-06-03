@@ -10,16 +10,8 @@ public class Timer extends Inanimated{
 
 	public static BufferedImage img;
 	public static boolean timerOn;
-
-	public Timer(String stringCode, boolean move, int coordX, int coordY, boolean timerOn) {
-		this.stringCode = "";
-		this.move = false;
-		this.coordX = 0;
-		this.coordY = 0;
-		Timer.timerOn = true;
-	}
 	
-	public Timer(String stringCode, boolean move, int coordX, int coordY, BufferedImage img, boolean gameState) {
+	public Timer(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "";
 		this.move = false;
 		this.coordX = 0;
@@ -29,7 +21,7 @@ public class Timer extends Inanimated{
 	}
 	
 	public Timer() throws IOException {
-		this("Timer", true, 0, 0, ImageIO.read(new File("Sprites\\timer.png")), true);
+		this("Timer", true, 0, 0);
 	}
 
 	@Override
@@ -44,12 +36,6 @@ public class Timer extends Inanimated{
 			}
 		    
 		return img;
-	}
-	
-	@Override
-	public BufferedImage loadImage(String direction) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public void setStringCode(String stringCode) {
@@ -70,12 +56,6 @@ public class Timer extends Inanimated{
 
 	public void setCoordY(int coordY) {
 		this.coordY = coordY;
-	}
-
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

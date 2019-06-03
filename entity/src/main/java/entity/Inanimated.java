@@ -16,9 +16,6 @@ public abstract class Inanimated extends Entity{
 	}
 	
 	public abstract BufferedImage loadImage(int levelNumber);
-	public abstract BufferedImage loadImage(int levelNumber, String fileName);
-	public abstract BufferedImage loadImage(String direction);
-	
 	public void setStringCode(String stringCode) {
 		this.stringCode = stringCode;
 	}

@@ -10,15 +10,7 @@ public class GameOver extends Inanimated{
 	public static BufferedImage img;
 	public static boolean gameState;
 	
-	public GameOver(String stringCode, boolean move, int coordX, int coordY, boolean gameState) {
-		this.stringCode = "Game";
-		this.move = false;
-		this.coordX = 0;
-		this.coordY = 0;
-		GameOver.gameState = false;
-	}
-	
-	public GameOver(String stringCode, boolean move, int coordX, int coordY, BufferedImage img, boolean gameState) {
+	public GameOver(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "GameOver";
 		this.move = false;
 		this.coordX = 0;
@@ -28,7 +20,7 @@ public class GameOver extends Inanimated{
 	}
 	
 	public GameOver() throws IOException {
-		this("GameOver", true, 0, 0, ImageIO.read(new File("Sprites\\gameover.png")), false);
+		this("GameOver", true, 0, 0);
 	}
 
 	@Override
@@ -43,18 +35,6 @@ public class GameOver extends Inanimated{
 			}
 		    
 		return img;
-	}
-
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public BufferedImage loadImage(String direction) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

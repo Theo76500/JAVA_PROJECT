@@ -8,15 +8,8 @@ import java.io.IOException;
 public class Score extends Inanimated{
 
 	public static BufferedImage img;
-	
-	public Score(String stringCode, boolean move, int coordX, int coordY) {
-		this.stringCode = "Score";
-		this.move = false;
-		this.coordX = 0;
-		this.coordY = 0;
-	}
 
-	public Score(String stringCode, boolean move, int coordX, int coordY, BufferedImage img) {
+	public Score(String stringCode, boolean move, int coordX, int coordY) {
 		this.stringCode = "Score";
 		this.move = false;
 		this.coordX = 0;
@@ -25,7 +18,7 @@ public class Score extends Inanimated{
 	}
 	
 	public Score() throws IOException {
-		this("Score", true, 0, 0, ImageIO.read(new File("Sprites\\score.png")));
+		this("Score", true, 0, 0);
 	}
 
 	@Override
@@ -40,12 +33,6 @@ public class Score extends Inanimated{
 			}
 		    
 		return img;
-	}
-	
-	@Override
-	public BufferedImage loadImage(String direction) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public void setStringCode(String stringCode) {
@@ -78,9 +65,4 @@ public class Score extends Inanimated{
 		this.move = move;
 	}
 
-	@Override
-	public BufferedImage loadImage(int levelNumber, String fileName) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
