@@ -1,5 +1,5 @@
 /**
- * @author Jean-Aymeric DIET jadiet@cesi.fr
+ * @author Adrien Lalisse, Valentin Pain, Théo Langlois & Pierre Forques
  * @version 1.0
  */
 package main;
@@ -14,7 +14,7 @@ import view.View;
 /**
  * The Class Main.
  *
- * @author Jean-Aymeric Diet
+ * @author Valentin Pain & Théo Langlois
  */
 public abstract class Main {
 

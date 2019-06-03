@@ -65,6 +65,8 @@ public final class View implements IView, Runnable {
 				return ControllerOrder.DOWN;
 			case KeyEvent.VK_R:
 				return ControllerOrder.RETRY;
+			case KeyEvent.VK_N:
+				return ControllerOrder.NEXT;
 
 			default:
 				return ControllerOrder.NOTHING;
@@ -76,8 +78,8 @@ public final class View implements IView, Runnable {
 	 *
 	 * @see contract.IView#printMessage(java.lang.String)
 	 */
-	public void printLevel() {
-		this.viewFrame.printLevel();
+	public void loadLevelInTab() {
+		this.viewFrame.loadLevelInTab();
 	}
 
 	/*
